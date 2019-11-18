@@ -1,0 +1,14 @@
+@import "../../../theme/my-colors.scss";
+.redirect{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    span{
+        padding: 0.2rem;
+        a{
+            text-decoration: none;
+            color: color(blue, base);
+            cursor: pointer;
+        }
+    }
+}

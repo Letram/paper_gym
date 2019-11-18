@@ -1,0 +1,61 @@
+$palette: (
+    blue: (
+        base: #34ace0,
+        darker: #227093
+    ),
+    green: (
+        base: #33d9b2,
+        darker: #218c74
+    ),
+    yellow: (
+        base: #ffb142,
+        darker: #cc8e35
+    ),
+    orange: (
+        base: #ff793f,
+        darker: #cd6133
+    ),
+    red: (
+        base: #ff5252,
+        darker: #b33939
+    ),
+    gray: (
+        base: #d1ccc0,
+        darker: #84817a
+    ),
+    beige:(
+        base: #f7f1e3,
+        darker: #aaa69d
+    ),
+    sand:(
+        base: #ffda79,
+        darker: #ccae62
+    ),
+    violet:(
+        base: #706fd3,
+        darker: #474787
+    ),
+    purple: (
+        base: #40407a,
+        darker: #2c2c54
+    )
+);
+
+@function color($color,$tone){
+
+    @if map-has-key($palette,$color){
+        $color: map-get($palette,$color);
+
+            @if map-has-key($color,$tone){
+                $tone: map-get($color,$tone);
+                @return $tone;
+            }
+
+            @warn "unknown tone `#{$tone}` in color";
+            @return null;        
+    }
+
+    @warn "unknown color `#{$color}` in palette";
+    @return null;
+   
+}

@@ -1,7 +1,10 @@
 @import "../../../theme/my-colors.scss";
+.header{
+    background: color(blue, darker);
+}
 .redirect{
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     span{
         padding: 0.2rem;
@@ -10,5 +13,8 @@
             color: color(blue, base);
             cursor: pointer;
         }
+    }
+    ion-button{
+        background: color(blue, darker);
     }
 }

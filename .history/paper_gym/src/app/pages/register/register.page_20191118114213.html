@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col offset="3" size="6">
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+        <ion-item-divider>
+          <ion-button (click)="register()">Register</ion-button>
+          <ion-button href="/login">Login</ion-button>
+        </ion-item-divider>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

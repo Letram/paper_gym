@@ -22,7 +22,6 @@ export class HomePage implements OnInit {
     this._exerciseService.getExercises(this.currentUser.uid).subscribe(
       response => {
         console.log(response);
-        if(!response)console.log("No exercises available yet...");
       },
       error => {
         console.log(`[HOME PAGE ERR] => ${error}`);

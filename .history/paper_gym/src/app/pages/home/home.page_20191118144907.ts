@@ -19,10 +19,10 @@ export class HomePage implements OnInit {
   ngOnInit() {
     console.log("Home page init...");
     this.currentUser = this._authService.isLogged;
+    console.log(this.currentUser);
     this._exerciseService.getExercises(this.currentUser.uid).subscribe(
       response => {
-        console.log(response);
-        if(!response)console.log("No exercises available yet...");
+
       },
       error => {
         console.log(`[HOME PAGE ERR] => ${error}`);
