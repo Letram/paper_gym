@@ -7,15 +7,6 @@ export class Exercise {
   private _images: string[];
   private _muscleGroups: string[];
 
-constructor(){
-  this._id = "";
-  this._name = "";
-  this._description = "";
-  this._machine = "";
-  this.images = [];
-  this.muscleGroups = [];
-}
-
   public get name(): string {
     return this._name;
   }

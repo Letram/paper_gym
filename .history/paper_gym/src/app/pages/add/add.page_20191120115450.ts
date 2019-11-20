@@ -28,11 +28,6 @@ export class AddPage implements OnInit {
     this.muscleGroup = "";
   }
 
-  addMuscleGroup(){
-    this.newExercise.muscleGroups.push(this.muscleGroup);
-    this.muscleGroup= "";
-  }
-
   pickImages() {
     this._imagePickerOptions = {
       // quality of resized image, defaults to 100
@@ -53,11 +48,5 @@ export class AddPage implements OnInit {
       },
       (error) => console.log(error)
     );
-  }
-
-  onAddExercise(form: NgForm){
-    console.log(this.newExercise);
-    form.form.reset();
-    //this._exerciseService.uploadExercise();
   }
 }

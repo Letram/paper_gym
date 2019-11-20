@@ -8,6 +8,7 @@ export class AuthService {
   constructor(private _afAuth: AngularFireAuth) {
     _afAuth.authState.subscribe(user => {
       this.isLogged = user;
+      console.log(user);
     });
   }
 
@@ -17,13 +18,24 @@ export class AuthService {
         user.email,
         user.password
       );
-      let success = false;
-      await this.saveUserData(loggedUser).then(
-        (response) => {
-          success = response;
-        }
-      );
-      return success;
+      let token: any;
+      await loggedUser.user.getIdTokenResult().then(response => {
+        console.log({
+          createdAt: Date.now(),
+          expires: Date.parse(response.expirationTime)
+        });
+        if (response.token) token = true;
+        else token = false;
+        localStorage.setItem(
+          "userToken",
+          JSON.stringify({
+            token: response.token,
+            expiresAt: Date.parse(response.expirationTime)
+          })
+        );
+        localStorage.setItem("userStored", JSON.stringify(loggedUser.user));
+      });
+      return token;
     } catch (error) {
       console.log(`[LOGIN ERR SERVICE] => ${error}`);
     }
@@ -31,41 +43,13 @@ export class AuthService {
 
   async register(user) {
     try {
-      let registeredUser = await this._afAuth.auth.createUserWithEmailAndPassword(
+      return await this._afAuth.auth.createUserWithEmailAndPassword(
         user.email,
         user.password
       );
-      let success = false;
-      await this.saveUserData(registeredUser).then(
-        (response) => {
-          success = response
-        }
-      );
-      return success;
     } catch (error) {
       console.log(`[REGISTER ERR SERVICE] => ${error}`);
     }
-  }
-
-  private async saveUserData(userToSave: firebase.auth.UserCredential): Promise<boolean>{
-    let success = false;
-    await userToSave.user.getIdTokenResult().then(
-      (tokenResult) => {
-        if(tokenResult) success = true;
-        localStorage.setItem(
-          "userToken",
-          JSON.stringify({
-            token: tokenResult.token,
-            expiresAt: Date.parse(tokenResult.expirationTime)
-          })
-        );
-        localStorage.setItem("userStored", JSON.stringify(userToSave.user));
-      }
-    )
-    .catch(
-      (error) => console.log(`[SAVE USER DATA ERR] => ${error}`)
-    );
-    return success;
   }
 
   async logout() {

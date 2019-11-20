@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>add</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form #addExerciseForm="ngForm" action="" (ngSubmit)="onAddExercise(addExerciseForm)">
+  <input type="text" placeholder="Exercise name..." [(ngModel)]="newExercise.name">
+  <textarea type="text" placeholder="Exercise description..." [(ngModel)]="newExercise.description">
+  <input type="text" placeholder="Exercise name..." [(ngModel)]="newExercise.name">
+  <input type="text" placeholder="Muscle group..." [(ngModel)]="muscleGroup">
+  <button (click)="addMuscularGroup()" type="button" [disabled]="muscleGroup.length > 0"></button>
+
+  <div *ngIf="newExercise.muscleGroups.length > 0">
+    <ul>
+      <li *ngFor="let muscle of newExercise.muscleGroups">
+        {{muscle}}
+      </li>
+    </ul>
+  </div>
+  <input type="submit" value="Add exercise" [disabled]="!addExerciseForm.form.valid">
+</form>
+</ion-content>

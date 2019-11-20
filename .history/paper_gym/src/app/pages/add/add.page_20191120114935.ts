@@ -11,8 +11,8 @@ import { ImagePicker } from "@ionic-native/image-picker/ngx";
 export class AddPage implements OnInit {
   public muscleGroup: string;
   public newExercise: Exercise;
-  public imagesPicked: string[];
 
+  private _imagesPicked: any;
   private _imagePickerOptions: any;
   constructor(
     private _exerciseService: ExerciseService,
@@ -28,11 +28,6 @@ export class AddPage implements OnInit {
     this.muscleGroup = "";
   }
 
-  addMuscleGroup(){
-    this.newExercise.muscleGroups.push(this.muscleGroup);
-    this.muscleGroup= "";
-  }
-
   pickImages() {
     this._imagePickerOptions = {
       // quality of resized image, defaults to 100
@@ -43,21 +38,12 @@ export class AddPage implements OnInit {
       // window.imagePicker.OutputType.BASE64_STRING (1)
       outputType: 0
     };
-    this.imagesPicked = [];
+    this._imagesPicked = [];
     this._imagePicker.getPictures(this._imagePickerOptions).then(
       (results) => {
-        console.log(results);
-        for(let imageUri in results){
-          this.imagesPicked.push(imageUri);
-        }
+        console.log(results)
       },
       (error) => console.log(error)
     );
-  }
-
-  onAddExercise(form: NgForm){
-    console.log(this.newExercise);
-    form.form.reset();
-    //this._exerciseService.uploadExercise();
   }
 }

@@ -11,7 +11,7 @@ import { ImagePicker } from "@ionic-native/image-picker/ngx";
 export class AddPage implements OnInit {
   public muscleGroup: string;
   public newExercise: Exercise;
-  public imagesPicked: string[];
+  public imagesPicked: any;
 
   private _imagePickerOptions: any;
   constructor(
@@ -26,11 +26,6 @@ export class AddPage implements OnInit {
     console.log("Add exercise page init...");
     this.newExercise = new Exercise();
     this.muscleGroup = "";
-  }
-
-  addMuscleGroup(){
-    this.newExercise.muscleGroups.push(this.muscleGroup);
-    this.muscleGroup= "";
   }
 
   pickImages() {
@@ -53,11 +48,5 @@ export class AddPage implements OnInit {
       },
       (error) => console.log(error)
     );
-  }
-
-  onAddExercise(form: NgForm){
-    console.log(this.newExercise);
-    form.form.reset();
-    //this._exerciseService.uploadExercise();
   }
 }

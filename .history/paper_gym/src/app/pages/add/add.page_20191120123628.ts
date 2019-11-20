@@ -55,9 +55,7 @@ export class AddPage implements OnInit {
     );
   }
 
-  onAddExercise(form: NgForm){
+  onAddExercise(){
     console.log(this.newExercise);
-    form.form.reset();
-    //this._exerciseService.uploadExercise();
   }
 }

@@ -14,10 +14,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     console.log("Login page init...");
     this.user = new User();
-    if(this._authService.checkUser()){
-      console.log("Token found! Redirecting to home...");
-      this._router.navigate(["/home"]);
-    }
   }
 
   async login() {

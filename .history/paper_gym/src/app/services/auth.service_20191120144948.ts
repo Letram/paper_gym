@@ -8,6 +8,7 @@ export class AuthService {
   constructor(private _afAuth: AngularFireAuth) {
     _afAuth.authState.subscribe(user => {
       this.isLogged = user;
+      console.log(user);
     });
   }
 
@@ -35,6 +36,7 @@ export class AuthService {
         user.email,
         user.password
       );
+      return await this.saveUserData(registeredUser);
       let success = false;
       await this.saveUserData(registeredUser).then(
         (response) => {

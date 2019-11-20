@@ -10,29 +10,24 @@
   <!--     FORM     -->
   <!-- ──────────── -->
 
-  <form #addExerciseForm="ngForm" (ngSubmit)="onAddExercise(addExerciseForm)">
+  <form #addExerciseForm="ngForm" action="" (ngSubmit)="onAddExercise(addExerciseForm)">
     
     <input    type="text" placeholder="Exercise name..."        [(ngModel)]="newExercise.name"        name="nombre"     >
-    <textarea type="text" placeholder="Exercise description..." [(ngModel)]="newExercise.description" name="descripcion"></textarea>
+    <textarea type="text" placeholder="Exercise description..." [(ngModel)]="newExercise.description" name="descripcion">
     <input    type="text" placeholder="Machine name..."         [(ngModel)]="newExercise.machine"     name="maquina"    >
     <input    type="text" placeholder="Muscle group..."         [(ngModel)]="muscleGroup"             name="grupo"      >
 
-    <button type="button" [disabled]="muscleGroup.length <= 0" (click)="addMuscleGroup(addExerciseForm)">Add muscle group</button>
+    <button (click)="addMuscularGroup()" type="button" [disabled]="muscleGroup.length > 0"></button>
 
     <div *ngIf="newExercise.muscleGroups.length > 0">
       <ul>
         <li *ngFor="let muscle of newExercise.muscleGroups">
-          {{ muscle }}
+          {{muscle}}
         </li>
       </ul>
     </div>
-    <button type="button" (click)="pickImages()">Select images</button>
-    <div class="images">
-      <div class="one-image" *ngFor="let img of imageResponse">
-        <img src="{{img}}" alt="" srcset="">
-      </div>
-    </div>
-    <input type="submit" value="Add exercise" [disabled]="!addExerciseForm.form.valid"/>
+
+    <input type="submit" value="Add exercise"/>
     
   </form>
 </ion-content>

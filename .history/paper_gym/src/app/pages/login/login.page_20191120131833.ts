@@ -14,21 +14,14 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     console.log("Login page init...");
     this.user = new User();
-    if(this._authService.checkUser()){
-      console.log("Token found! Redirecting to home...");
-      this._router.navigate(["/home"]);
-    }
   }
 
   async login() {
-    this._authService.login(this.user).then(
-      (response) => {
-        console.log(response);
-        this._router.navigate(["/home"]);
-      }
-    ).catch(
-      (error) => {
-        console.log(`[LOGIN ERR] => ${error}`)
-      });
+    const loggedUser = await this._authService.login(this.user);
+    console.log(loggedUser);
+    if (loggedUser) {
+      console.log("User logged!");
+      this._router.navigate(["/home"]);
+    }
   }
 }
