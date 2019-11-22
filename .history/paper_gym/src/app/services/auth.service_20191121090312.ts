@@ -84,7 +84,7 @@ export class AuthService {
     return JSON.parse(localStorage.getItem("userToken"));
   }
 
-  public getUserStored(): firebase.User {
+  public getUserStored(): firebase.auth.UserCredential {
     return JSON.parse(localStorage.getItem("userStored"));
   }
 

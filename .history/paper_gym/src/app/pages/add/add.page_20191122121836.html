@@ -46,11 +46,11 @@
     <ion-button type="button" (click)="pickImages()">Select images</ion-button>
     <!-- <ion-input type="file" accept="image/*" (change) = "imagePicked($event)">Select images</ion-input> -->
     <ion-item>  
-      <ion-row *ngIf="imagesPicked">  
-          <ion-col style="padding:10px;" col-4 *ngFor="let image of imagesPicked; let imageIndex = index">  
+      <ion-row *ngIf="imagesPicked.length>0">  
+          <ion-col style="padding:10px;" col-3 *ngFor="let image of imageLists;">  
               <ion-card>  
-                  <ion-thumbnail item-start (click)="removeImage(imageIndex)">  
-                      <img src={{image}} alt="Sample Image">  
+                  <ion-thumbnail item-start>  
+                      <img [src]="{{image}}" alt="Sample Image">  
                   </ion-thumbnail>  
               </ion-card>  
           </ion-col>  

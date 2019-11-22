@@ -20,20 +20,13 @@ export class ExerciseService {
     return this._afs
       .collection("USERS")
       .doc(currentUser.uid)
-      .collection("EXERCISES")
       .snapshotChanges();
   }
 
-  async createExercise(exerciseToAdd: Exercise, exerciseImages: any[]) {
+  async createExercise(exerciseToAdd: Exercise, exerciseImage: File) {
     let currentUser = this._authService.getUserStored();
-    
-    /**
-     * 1.- Upload exercise without images
-     * 2.- Upload images and get their downloadURL
-     * 3.- Update the exercise images with the download url provided
-     */
 
-    //Step 1.
+    //exerciseToAdd.images.push(url);
     let exercisePathId: any = await this._afs
       .collection(`USERS`)
       .doc(currentUser.uid)
@@ -44,23 +37,17 @@ export class ExerciseService {
       })
       .catch(error => console.log(`[UPLOAD EXERCISE ERROR] => ${error}`));
     console.log(exercisePathId);
-
-    //Step 2.
-    for (let index = 0; index < exerciseImages.length; index++) {
-      const exerciseImage = exerciseImages[index];
-      let imagePath = `IMAGES/${currentUser.uid}/${exercisePathId.exerciseId}/${exerciseImage.name}`;
-      let url: string = await this._afStorage
-        .ref(imagePath)
-        .put(exerciseImage.blob as Blob)
-        .then(fileSnapshot => {
-          return fileSnapshot.ref.getDownloadURL().then(url => url);
-        })
-        .catch(error => console.log(`[UPLOAD IMG ERROR] => ${error}`));
-        console.log(`Upload image url => ${url}`);
-      exerciseToAdd.images.push(url);
-    }
-
-    //Step 3.
+    //this._afs.collection(`USERS/${currentUser.uid}`).add(exerciseToAdd);
+    //this._afs.firestore.collection(`IMAGES/${currentUser.user.uid}`).add()
+    let imagePath = `IMAGES/${currentUser.uid}/${exercisePathId.exerciseId}/${exerciseImage.name}`;
+    let url: string = await this._afStorage
+      .ref(imagePath)
+      .put(exerciseImage)
+      .then(fileSnapshot => {
+        return fileSnapshot.ref.getDownloadURL().then(url => url);
+      })
+      .catch(error => console.log(`[UPLOAD IMG ERROR] => ${error}`));
+    exerciseToAdd.images.push(url);
     return this._afs
       .collection("USERS")
       .doc(currentUser.uid)

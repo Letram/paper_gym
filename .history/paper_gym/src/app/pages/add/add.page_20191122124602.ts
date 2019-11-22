@@ -15,7 +15,6 @@ export class AddPage implements OnInit {
   public imagesPicked: string[];
 
   private _imagePicked: File;
-  private _imagesPicked: any[];
   private _imagePickerOptions: any;
   constructor(
     private _exerciseService: ExerciseService,
@@ -37,18 +36,7 @@ export class AddPage implements OnInit {
     this.muscleGroup = "";
   }
 
-
-  //https://stackoverflow.com/questions/55853879/convert-image-uri-to-file-or-blob/55858622#55858622
-
-  /**
-   * To upload images:
-   *  1.- Get the base64 encoded img from ImagePicker
-   *  2.- Convert the base64 img into Blob file and give it a name.
-   *  3.- Save those objects of {name, blob} in an array of data to be uploaded to Firebase Storage as it accepts blob files.
-   */
   pickImages() {
-    this.imagesPicked = [];
-    this._imagesPicked = [];
     this._imagePickerOptions = {
       //only works on android => maximum pictures to be picked
       maximumImagesCount: 4,
@@ -58,58 +46,29 @@ export class AddPage implements OnInit {
       // available options are
       // window.imagePicker.OutputType.FILE_URI (0) or
       // window.imagePicker.OutputType.BASE64_STRING (1)
-      outputType: 1
+      outputType: 0
     };
     this.imagesPicked = [];
-
-    // Step 1.
     this._imagePicker.getPictures(this._imagePickerOptions).then(
       results => {
         console.log(results);
         for (let i = 0; i < results.length; i++) {
-          this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
-
-          // Step 2.
-          let blob = this.getBlob(results[i], ".jpg");
-          
-          // Step 3.
-          this._imagesPicked.push({name: `image${i}.jpg`, blob})
+          console.log(results[i]);
+          //this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
         }
-        console.log(this._imagesPicked);
       },
       error => console.log(error)
     );
   }
 
-  private getBlob(b64Data:string, contentType:string, sliceSize:number= 512) {
-    contentType = contentType || '';
-    sliceSize = sliceSize || 512;
-    let byteCharacters = atob(b64Data);
-    let byteArrays = [];
-
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-        let slice = byteCharacters.slice(offset, offset + sliceSize);
-
-        let byteNumbers = new Array(slice.length);
-        for (let i = 0; i < slice.length; i++) {
-            byteNumbers[i] = slice.charCodeAt(i);
-        }
-
-        let byteArray = new Uint8Array(byteNumbers);
-
-        byteArrays.push(byteArray);
-    }
-    let blob = new Blob(byteArrays, {type: contentType});
-    return blob;
-}
-
   removeImage(imageIndex) {
+    console.log(`${imageIndex}`);
     this.imagesPicked.splice(imageIndex, 1);
   }
 
   onAddExercise(form: NgForm) {
     this._exerciseService
-      .createExercise(this.newExercise, this._imagesPicked)
+      .createExercise(this.newExercise, this._imagePicked)
       .then(() => {
         this.muscleGroup = "";
         this.newExercise = new Exercise();

@@ -51,7 +51,7 @@ export class ExerciseService {
       let imagePath = `IMAGES/${currentUser.uid}/${exercisePathId.exerciseId}/${exerciseImage.name}`;
       let url: string = await this._afStorage
         .ref(imagePath)
-        .put(exerciseImage.blob as Blob)
+        .put(exerciseImage.blob)
         .then(fileSnapshot => {
           return fileSnapshot.ref.getDownloadURL().then(url => url);
         })

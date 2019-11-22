@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
       response => {
         this.userExercises = []
         for(let i = 0; i < response.length; i++){
-          this.userExercises.push((response[i].payload.doc.data()) as Exercise)
+          this.userExercises.push((response.payload.doc.data()) as Exercise)
           console.log({
             exId: response[i].payload.doc.id,
             exData: response[i].payload.doc.data()

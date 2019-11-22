@@ -20,15 +20,7 @@ export class HomePage implements OnInit {
     console.log("Home page init...");
     this._exerciseService.getExercises().subscribe(
       response => {
-        this.userExercises = []
-        for(let i = 0; i < response.length; i++){
-          this.userExercises.push((response[i].payload.doc.data()) as Exercise)
-          console.log({
-            exId: response[i].payload.doc.id,
-            exData: response[i].payload.doc.data()
-          });
-        }
-        console.log(this.userExercises);
+        console.log(response[0].payload);
         if(!response)console.log("No exercises available yet...");
       },
       error => {
