@@ -1,12 +1,14 @@
 import { MuscleGroup } from "./MuscleGroup";
 export class Exercise {
+  private _id: string;
   private _name: string;
   private _description: string;
   private _machine: string;
-  private _images: any[];
+  private _images: string[];
   private _muscleGroups: string[];
 
   constructor() {
+    this.id = "";
     this.name = "";
     this.description = "";
     this.machine = "";
@@ -14,6 +16,12 @@ export class Exercise {
     this.muscleGroups = [];
   }
 
+  public get id(): string {
+    return this._id;
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
   public get name(): string {
     return this._name;
   }
@@ -32,10 +40,10 @@ export class Exercise {
   public set machine(value: string) {
     this._machine = value;
   }
-  public get images(): any[] {
+  public get images(): string[] {
     return this._images;
   }
-  public set images(value: any[]) {
+  public set images(value: string[]) {
     this._images = value;
   }
   public get muscleGroups(): string[] {

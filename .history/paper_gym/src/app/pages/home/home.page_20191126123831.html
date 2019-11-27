@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="logout()">logout</ion-button>
+  <ion-button [routerLink]="'/add'">Add exercise</ion-button>
+  <ul>
+    <li *ngFor="let exercise of userExercises">
+      <img src="{{exercise._images[0]}}" alt="" style="width: 50px; height: auto;">
+      {{exercise._name}}
+    </li>
+  </ul>
+  <ion-card *ngFor="let exercise of userExercises">
+    <img src="https://picsum.photos/200/300" alt="Placeholder" *ngIf="!exercise._images">
+    <img [src]=exercise._images[0] alt="Placeholder" *ngIf="exercise._images">
+    <ion-card-header>
+        <ion-card-subtitle>{{ exercise._muscleGroups.join(",") }}</ion-card-subtitle>
+        <ion-card-title>Madison, WI</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

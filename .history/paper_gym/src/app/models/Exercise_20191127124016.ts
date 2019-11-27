@@ -3,7 +3,7 @@ export class Exercise {
   private _name: string;
   private _description: string;
   private _machine: string;
-  private _images: any[];
+  private _images: string[];
   private _muscleGroups: string[];
 
   constructor() {
@@ -32,10 +32,10 @@ export class Exercise {
   public set machine(value: string) {
     this._machine = value;
   }
-  public get images(): any[] {
+  public get images(): string[] {
     return this._images;
   }
-  public set images(value: any[]) {
+  public set images(value: string[]) {
     this._images = value;
   }
   public get muscleGroups(): string[] {

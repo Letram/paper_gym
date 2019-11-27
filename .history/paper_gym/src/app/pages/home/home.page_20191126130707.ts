@@ -26,6 +26,10 @@ export class HomePage implements OnInit {
           exerciseAux.id = response[i].payload.doc.id; 
           console.log({exerciseAux, id: response[i].payload.doc.id});
           this.userExercises.push(exerciseAux);
+/*           console.log({
+            exId: response[i].payload.doc.id,
+            exData: response[i].payload.doc.data()
+          }); */
         }
         console.log(this.userExercises);
         if(!response)console.log("No exercises available yet...");

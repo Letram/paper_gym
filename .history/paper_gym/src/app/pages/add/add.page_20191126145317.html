@@ -35,7 +35,7 @@
         -->
     <ion-button type="button" [disabled]="muscleGroup.length <= 0" (click)="addMuscleGroup(addExerciseForm)">Add muscle group</ion-button>
 
-    <div *ngIf="newExercise.muscleGroups.length > 0">
+    <div *ngIf="newExercise._muscleGroups.length > 0">
       <ul>
         <li *ngFor="let muscle of newExercise.muscleGroups">
           {{ muscle }}
@@ -46,11 +46,11 @@
     <ion-button type="button" (click)="pickImages()">Select images</ion-button>
     <!-- <ion-input type="file" accept="image/*" (change) = "imagePicked($event)">Select images</ion-input> -->
     <ion-item>  
-      <ion-row *ngIf="newExercise.images">  
-          <ion-col style="padding:10px;" col-4 *ngFor="let image of newExercise.images; let imageIndex = index">  
+      <ion-row *ngIf="imagesPicked">  
+          <ion-col style="padding:10px;" col-4 *ngFor="let image of imagesPicked; let imageIndex = index">  
               <ion-card>  
                   <ion-thumbnail item-start (click)="removeImage(imageIndex)">  
-                      <img src={{image.url}} alt="Sample Image">  
+                      <img src={{image}} alt="Sample Image">  
                   </ion-thumbnail>  
               </ion-card>  
           </ion-col>  

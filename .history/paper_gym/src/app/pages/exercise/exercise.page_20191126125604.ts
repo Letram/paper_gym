@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Exercise } from 'src/app/models/Exercise';
 
 @Component({
@@ -10,10 +10,7 @@ import { Exercise } from 'src/app/models/Exercise';
 export class ExercisePage implements OnInit {
 
   exercise: Exercise;
-  sliderOptions: any = {
-    initialSlide: 1,
-    speed: 400
-  };
+  
   constructor(private _route: ActivatedRoute, private _router: Router) {
     this.exercise = new Exercise();
   }
@@ -21,24 +18,13 @@ export class ExercisePage implements OnInit {
   ngOnInit() {
     console.log("Exercise details page init...");
     this._route.queryParams.subscribe(
-      (_) => {
+      (params) => {
         if(this._router.getCurrentNavigation().extras.state){
           this.exercise = this._router.getCurrentNavigation().extras.state.exercise;
           console.log(this.exercise);
         }
       }
     );
-  }
-
-  editExercise(){
-    let navigationExtras: NavigationExtras = {
-      state: {
-        exercise: this.exercise,
-        edit: true
-      }
-    };
-
-    this._router.navigate(["add"], navigationExtras);
   }
 
 }

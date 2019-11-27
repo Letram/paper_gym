@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Exercise } from 'src/app/models/Exercise';
 
 @Component({
@@ -28,17 +28,6 @@ export class ExercisePage implements OnInit {
         }
       }
     );
-  }
-
-  editExercise(){
-    let navigationExtras: NavigationExtras = {
-      state: {
-        exercise: this.exercise,
-        edit: true
-      }
-    };
-
-    this._router.navigate(["add"], navigationExtras);
   }
 
 }

@@ -9,7 +9,7 @@
   <ion-button [routerLink]="'/add'">Add exercise</ion-button>
   <ion-card *ngFor="let exercise of userExercises" (click) = "openExercise(exercise)">
     <img src="https://www.picsum.photos/300/200" alt="Placeholder" *ngIf="exercise._images.length === 0">
-    <img [src]=exercise._images[0].url alt="Placeholder2" *ngIf="exercise._images.length !== 0">
+    <img [src]=exercise._images[0] alt="Placeholder2" *ngIf="exercise._images.length !== 0">
     <ion-card-header>
         <ion-card-subtitle>{{ exercise._muscleGroups.join(", ") }}</ion-card-subtitle>
         <ion-card-title>{{ exercise._name }}</ion-card-title>

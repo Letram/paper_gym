@@ -148,12 +148,7 @@ export class AddPage implements OnInit {
 }
 
   removeImage(imageIndex) {
-    let imageId = this.newExercise.images[imageIndex].id;
-    this._imageService.removeImage(imageId).then(
-      () => {
-        this.newExercise.images.splice(imageIndex, 1)
-      }
-    );
+    this.imagesPicked.splice(imageIndex, 1);
   }
 
   onAddExercise(form: NgForm) {

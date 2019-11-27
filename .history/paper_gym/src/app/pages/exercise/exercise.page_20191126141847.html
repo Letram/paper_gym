@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>exercise</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="true" paginationType="progress" [options]="sliderOptions" *ngIf="exercise._images.length > 0">
+    <ion-slide *ngFor="let img of exercise._images">
+      <img [src]="img" alt="">
+    </ion-slide>
+  </ion-slides>
+</ion-content>

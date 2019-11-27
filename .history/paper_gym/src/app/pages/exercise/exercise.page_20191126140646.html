@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>exercise</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="true" [options] = "sliderOptions" *ngIf="exercise._images.count > 0">
+    <ion-slide *ngFor="let img of exercise._images">
+      <img src="{{img}}" alt="">
+      dflkjgh
+    </ion-slide>
+  </ion-slides>
+</ion-content>

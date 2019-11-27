@@ -1,11 +1,10 @@
-import { Component, OnInit, ɵclearResolutionOfComponentResourcesQueue } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ExerciseService } from "src/app/services/exercise.service";
 import { Exercise } from "src/app/models/Exercise";
 import { NgForm } from "@angular/forms";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TypeModifier } from '@angular/compiler/src/output/output_ast';
-import { ImageServiceService } from 'src/app/services/image-service.service';
 @Component({
   selector: "app-add",
   templateUrl: "./add.page.html",
@@ -24,7 +23,6 @@ export class AddPage implements OnInit {
   private _imagePickerOptions: any;
   constructor(
     private _exerciseService: ExerciseService,
-    private _imageService: ImageServiceService,
     private _imagePicker: ImagePicker,
     private _router: Router,
     private _route: ActivatedRoute
@@ -102,22 +100,17 @@ export class AddPage implements OnInit {
     // Step 1.
     this._imagePicker.getPictures(this._imagePickerOptions).then(
       results => {
+        console.log(results);
         for (let i = 0; i < results.length; i++) {
-          //this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
+          this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
 
           // Step 2.
-          let blob: Blob = this.getBlob(results[i], ".jpg");
+          let blob = this.getBlob(results[i], ".jpg");
+          console.log(typeof blob);
           // Step 3a.
           //this._imagesPicked.push({name: `image${i}.jpg`, blob})
           //Step 3b
-          this._imageService.uploadImage(blob).then(
-            (response) => {
-              //response is an object with a download_url and an image_id attributes
-              console.log(response);
-
-              this.newExercise.images.push({url: response.download_url, id: response.image_id})
-            }
-          );
+          //this._imageService.uploadImage(blob)
         }
         console.log(this._imagesPicked);
       },
@@ -125,7 +118,7 @@ export class AddPage implements OnInit {
     );
   }
 
-  private getBlob(b64Data:string, contentType:string, sliceSize:number= 512): Blob {
+  private getBlob(b64Data:string, contentType:string, sliceSize:number= 512) {
     contentType = contentType || '';
     sliceSize = sliceSize || 512;
     let byteCharacters = atob(b64Data);
@@ -148,12 +141,7 @@ export class AddPage implements OnInit {
 }
 
   removeImage(imageIndex) {
-    let imageId = this.newExercise.images[imageIndex].id;
-    this._imageService.removeImage(imageId).then(
-      () => {
-        this.newExercise.images.splice(imageIndex, 1)
-      }
-    );
+    this.imagesPicked.splice(imageIndex, 1);
   }
 
   onAddExercise(form: NgForm) {

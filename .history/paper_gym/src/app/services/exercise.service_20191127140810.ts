@@ -4,7 +4,6 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { Exercise } from "../models/Exercise";
 import { AuthService } from "./auth.service";
-import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 @Injectable({
   providedIn: "root"
@@ -71,8 +70,6 @@ export class ExerciseService {
   }
 
   async updateExercise(exerciseToUpdate: Exercise, exerciseId: string){
-    let currentUser = this._authService.getUserStored();
-    let exerciseRef = `USERS/${currentUser.uid}/EXERCISES/${exerciseId}`;
-    return this._afs.doc(exerciseRef).set({ ...exerciseToUpdate });
+    
   }
 }

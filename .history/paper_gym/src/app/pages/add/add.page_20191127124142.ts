@@ -1,11 +1,9 @@
-import { Component, OnInit, ɵclearResolutionOfComponentResourcesQueue } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ExerciseService } from "src/app/services/exercise.service";
 import { Exercise } from "src/app/models/Exercise";
 import { NgForm } from "@angular/forms";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 import { Router, ActivatedRoute } from "@angular/router";
-import { TypeModifier } from '@angular/compiler/src/output/output_ast';
-import { ImageServiceService } from 'src/app/services/image-service.service';
 @Component({
   selector: "app-add",
   templateUrl: "./add.page.html",
@@ -16,15 +14,11 @@ export class AddPage implements OnInit {
   public newExercise: Exercise;
   public imagesPicked: string[];
 
-  private _isEdited: boolean = false;
-  private _editingId: string = "";
-
   private _imagePicked: File;
   private _imagesPicked: any[];
   private _imagePickerOptions: any;
   constructor(
     private _exerciseService: ExerciseService,
-    private _imageService: ImageServiceService,
     private _imagePicker: ImagePicker,
     private _router: Router,
     private _route: ActivatedRoute
@@ -41,24 +35,16 @@ export class AddPage implements OnInit {
     this._route.queryParams.subscribe(
       (_) => {
         if(this._router.getCurrentNavigation().extras.state && this._router.getCurrentNavigation().extras.state.edit){
-
           let navigationExercise = this._router.getCurrentNavigation().extras.state.exercise;
-
-          this._isEdited = this._router.getCurrentNavigation().extras.state.edit;
-          this._editingId = navigationExercise.id;
-          
-          this.newExercise = new Exercise();
-          
-          this.newExercise.name = navigationExercise._name;
-          this.newExercise.description = navigationExercise._description;
-          this.newExercise.machine = navigationExercise._machine;
-          this.newExercise.muscleGroups = navigationExercise._muscleGroups;
-          this.newExercise.images = navigationExercise._images;
-          
           this.muscleGroup = ""
-          this.imagesPicked = this.newExercise.images;
+          this.newExercise = new Exercise();
 
-          console.log(navigationExercise);
+          this.newExercise.name = navigationExercise.name;
+          this.newExercise.description = navigationExercise.description;
+          this.newExercise.machine = navigationExercise.machine;
+          this.newExercise.muscleGroups = navigationExercise.muscleGroups;
+          this.newExercise.images = navigationExercise.images;
+
           console.log(this.newExercise);
         } 
       }
@@ -78,10 +64,7 @@ export class AddPage implements OnInit {
    * To upload images:
    *  1.- Get the base64 encoded img from ImagePicker
    *  2.- Convert the base64 img into Blob file and give it a name.
-   * 
-   *  3a.- Save those objects of {name, blob} in an array of data to be uploaded to Firebase Storage as it accepts blob files.
-   *  OR
-   *  3b.- Upload each image to Firebase once they are selected. We will have to wait for the data {img_url, img_id}
+   *  3.- Save those objects of {name, blob} in an array of data to be uploaded to Firebase Storage as it accepts blob files.
    */
   pickImages() {
     this.imagesPicked = [];
@@ -102,22 +85,15 @@ export class AddPage implements OnInit {
     // Step 1.
     this._imagePicker.getPictures(this._imagePickerOptions).then(
       results => {
+        console.log(results);
         for (let i = 0; i < results.length; i++) {
-          //this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
+          this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
 
           // Step 2.
-          let blob: Blob = this.getBlob(results[i], ".jpg");
-          // Step 3a.
-          //this._imagesPicked.push({name: `image${i}.jpg`, blob})
-          //Step 3b
-          this._imageService.uploadImage(blob).then(
-            (response) => {
-              //response is an object with a download_url and an image_id attributes
-              console.log(response);
-
-              this.newExercise.images.push({url: response.download_url, id: response.image_id})
-            }
-          );
+          let blob = this.getBlob(results[i], ".jpg");
+          
+          // Step 3.
+          this._imagesPicked.push({name: `image${i}.jpg`, blob})
         }
         console.log(this._imagesPicked);
       },
@@ -125,7 +101,7 @@ export class AddPage implements OnInit {
     );
   }
 
-  private getBlob(b64Data:string, contentType:string, sliceSize:number= 512): Blob {
+  private getBlob(b64Data:string, contentType:string, sliceSize:number= 512) {
     contentType = contentType || '';
     sliceSize = sliceSize || 512;
     let byteCharacters = atob(b64Data);
@@ -148,32 +124,17 @@ export class AddPage implements OnInit {
 }
 
   removeImage(imageIndex) {
-    let imageId = this.newExercise.images[imageIndex].id;
-    this._imageService.removeImage(imageId).then(
-      () => {
-        this.newExercise.images.splice(imageIndex, 1)
-      }
-    );
+    this.imagesPicked.splice(imageIndex, 1);
   }
 
   onAddExercise(form: NgForm) {
-    if(!this._isEdited){
-      //creation of the exercise
-      this._exerciseService
-        .createExercise(this.newExercise, this._imagesPicked)
-        .then(() => {
-          this.muscleGroup = "";
-          this.newExercise = new Exercise();
-          this._router.navigate(["home"]);
-        });
-    }else{
-      //update existing exercise
-      this._exerciseService.updateExercise(this.newExercise, this._editingId).then(
-        () => {
-          this._router.navigate(["home"]);
-        }
-      );
-    }
+    this._exerciseService
+      .createExercise(this.newExercise, this._imagesPicked)
+      .then(() => {
+        this.muscleGroup = "";
+        this.newExercise = new Exercise();
+        this._router.navigate(["home"]);
+      });
   }
 
   imagePicked(event) {

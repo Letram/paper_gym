@@ -22,10 +22,13 @@ export class HomePage implements OnInit {
       response => {
         this.userExercises = []
         for(let i = 0; i < response.length; i++){
-          let exerciseAux = response[i].payload.doc.data();
-          exerciseAux.id = response[i].payload.doc.id; 
-          console.log({exerciseAux, id: response[i].payload.doc.id});
-          this.userExercises.push(exerciseAux);
+          let exerciseAux = response[i].payload.doc.data() as Exercise;
+          exerciseAux.id = response[i].payload.doc.id 
+          this.userExercises.push((response[i].payload.doc.data()) as Exercise)
+          console.log({
+            exId: response[i].payload.doc.id,
+            exData: response[i].payload.doc.data()
+          });
         }
         console.log(this.userExercises);
         if(!response)console.log("No exercises available yet...");

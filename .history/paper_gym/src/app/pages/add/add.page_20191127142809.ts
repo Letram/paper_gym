@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵclearResolutionOfComponentResourcesQueue } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ExerciseService } from "src/app/services/exercise.service";
 import { Exercise } from "src/app/models/Exercise";
 import { NgForm } from "@angular/forms";
@@ -103,7 +103,7 @@ export class AddPage implements OnInit {
     this._imagePicker.getPictures(this._imagePickerOptions).then(
       results => {
         for (let i = 0; i < results.length; i++) {
-          //this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
+          this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
 
           // Step 2.
           let blob: Blob = this.getBlob(results[i], ".jpg");
@@ -112,10 +112,7 @@ export class AddPage implements OnInit {
           //Step 3b
           this._imageService.uploadImage(blob).then(
             (response) => {
-              //response is an object with a download_url and an image_id attributes
               console.log(response);
-
-              this.newExercise.images.push({url: response.download_url, id: response.image_id})
             }
           );
         }
@@ -148,12 +145,7 @@ export class AddPage implements OnInit {
 }
 
   removeImage(imageIndex) {
-    let imageId = this.newExercise.images[imageIndex].id;
-    this._imageService.removeImage(imageId).then(
-      () => {
-        this.newExercise.images.splice(imageIndex, 1)
-      }
-    );
+    this.imagesPicked.splice(imageIndex, 1);
   }
 
   onAddExercise(form: NgForm) {
