@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{exercise.name}}</ion-title>
+    <ion-title>{{exercise._name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,23 +9,25 @@
     pager="true"
     paginationType="progress"
     [options]="sliderOptions"
-    *ngIf="exercise.images.length > 0"
+    *ngIf="exercise._images.length > 0"
   >
     <ion-slide *ngFor="let img of exercise.images">
-      <img [src]="img.url" alt="" />
+      <img [src]="img" alt="" />
     </ion-slide>
   </ion-slides>
   <section class="details machine" *ngIf="exercise.machine">
-    {{exercise.machine}}
+    {{exercise._machine}}
   </section>
   <ion-item>
     <ion-row>
-      <ion-col size="6">
+      <ion-col size="9">
         <section class="details description">
-          {{exercise.description}}
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+          consequuntur suscipit necessitatibus debitis ad blanditiis est quo
+          quos consectetur adipisci?
         </section>
       </ion-col>
-      <ion-col size="6">
+      <ion-col size="3">
         <section class="details muscleGroup">
           <ion-list>
             <ion-item *ngFor="let mg of exercise.muscleGroups">
@@ -40,13 +39,7 @@
     </ion-row>
   </ion-item>
   <section class="details video" *ngIf="exercise.video">
-    <iframe
-      width="100%"
-      height="315"
-      [src]="trustedVideoUrl"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
+    {{trustedVideoUrl}}
   </section>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="dark-blue" (click)="editExercise()">

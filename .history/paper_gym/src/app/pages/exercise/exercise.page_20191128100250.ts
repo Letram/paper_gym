@@ -36,7 +36,7 @@ export class ExercisePage implements OnInit {
   }
 
   private transform(videoURL: string){
-    return videoURL.replace("youtu.be", "youtube.com/embed");
+    return videoURL.replace("watch?v=", "embed/");
   }
 
   editExercise(){

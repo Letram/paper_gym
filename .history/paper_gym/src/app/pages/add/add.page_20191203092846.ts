@@ -8,10 +8,7 @@ import { Exercise } from "src/app/models/Exercise";
 import { NgForm } from "@angular/forms";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 import { Router, ActivatedRoute } from "@angular/router";
-import {
-  TypeModifier,
-  THIS_EXPR
-} from "@angular/compiler/src/output/output_ast";
+import { TypeModifier } from "@angular/compiler/src/output/output_ast";
 import { ImageServiceService } from "src/app/services/image-service.service";
 @Component({
   selector: "app-add",
@@ -26,7 +23,7 @@ export class AddPage implements OnInit {
 
   private _isEdited: boolean = false;
   private _editingId: string = "";
-  private _userExercises: Exercise[];
+
   private _imagePicked: File;
   private _imagesPicked: any[];
   private _imagePickerOptions: any;
@@ -46,13 +43,10 @@ export class AddPage implements OnInit {
     this.newExercise = new Exercise();
     this.muscleGroup = "";
     this._exerciseService.getMuscleGroups().subscribe(
-      userMuscleGroupsObject => {
-        if (userMuscleGroupsObject.MUSCLEGROUPS)
-          this.userMuscleGroups = userMuscleGroupsObject.MUSCLEGROUPS;
-        console.log(this.userMuscleGroups);
+      muscleGroups => {
+        console.log(muscleGroups);
       },
-      error =>
-        console.log(`[ADD PAGE ERR {RETRIEVING USER MUSCLEGROUPS}] => ${error}`)
+      error => console.log(`[ERROR RETRIEVING USER MUSCLE GROUPS] => ${error}`)
     );
     this._route.queryParams.subscribe(_ => {
       if (
@@ -74,49 +68,11 @@ export class AddPage implements OnInit {
         console.log(this.newExercise);
       }
     });
-    this._exerciseService.getExercises().subscribe(
-      response => {
-        this._userExercises = [];
-        for (let i = 0; i < response.length; i++) {
-          let exerciseAux = response[i].payload.doc.data();
-          exerciseAux.id = response[i].payload.doc.id;
-          console.log({ exerciseAux, id: response[i].payload.doc.id });
-          this._userExercises.push(exerciseAux);
-        }
-        console.log(this._userExercises);
-        if (!response) console.log("No exercises available yet...");
-      },
-      error => {
-        console.log(`[ADD PAGE ERR] => ${error}`);
-      }
-    );
   }
 
   addMuscleGroup() {
     this.newExercise.muscleGroups.push(this.muscleGroup);
-    if (this.userMuscleGroups.indexOf(this.muscleGroup) === -1) {
-      this.userMuscleGroups.push(this.muscleGroup);
-      this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
-    }
     this.muscleGroup = "";
-  }
-
-  removeMuscleGroup(muscleGroupToRemove: string): void {
-    this.newExercise.muscleGroups.splice(
-      this.newExercise.muscleGroups.findIndex(
-        exerciseMuscleGroup => exerciseMuscleGroup == muscleGroupToRemove
-      ),
-      1
-    );
-    if (
-      this._userExercises.filter(userExercise => userExercise.muscleGroups.indexOf(muscleGroupToRemove) !== -1).length <= 1
-    ){
-      this.userMuscleGroups.splice(this.userMuscleGroups.indexOf(muscleGroupToRemove),1);
-      this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
-    }else{
-      console.log(this._userExercises.filter(userExercise => userExercise.muscleGroups.indexOf(muscleGroupToRemove) !== -1)
-      )
-    }
   }
 
   //https://stackoverflow.com/questions/55853879/convert-image-uri-to-file-or-blob/55858622#55858622

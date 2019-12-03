@@ -33,7 +33,7 @@ export class ExerciseService {
       .valueChanges();
   }
 
-  updateMuscleGroup(newMuscleGroupArray: string[]) {
+  createMuscleGroup(newMuscleGroupArray: string[]) {
     let currentUser = this._authService.getUserStored();
 
     return this._afs

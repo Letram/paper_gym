@@ -30,13 +30,7 @@ export class ExercisePage implements OnInit {
         }
       }
     );
-    if(this.exercise.video){
-      this.trustedVideoUrl = this._domSanitizer.bypassSecurityTrustResourceUrl(this.transform(this.exercise.video));
-    }
-  }
-
-  private transform(videoURL: string){
-    return videoURL.replace("youtu.be", "youtube.com/embed");
+    if(this.exercise.video)
   }
 
   editExercise(){

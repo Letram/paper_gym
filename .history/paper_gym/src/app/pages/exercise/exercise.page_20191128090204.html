@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{exercise._name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides
+    pager="true"
+    paginationType="progress"
+    [options]="sliderOptions"
+    *ngIf="exercise._images.length > 0"
+  >
+    <ion-slide *ngFor="let img of exercise._images">
+      <img [src]="img" alt="" />
+    </ion-slide>
+  </ion-slides>
+  <section class="details machine">
+
+  </section>
+  <section class="details description">
+
+  </section>
+  <section class="details muscleGroup">
+
+  </section>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark-blue" (click)="editExercise()">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

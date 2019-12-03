@@ -31,12 +31,8 @@ export class ExercisePage implements OnInit {
       }
     );
     if(this.exercise.video){
-      this.trustedVideoUrl = this._domSanitizer.bypassSecurityTrustResourceUrl(this.transform(this.exercise.video));
+      this.trustedVideoUrl = this._domSanitizer.bypassSecurityTrustResourceUrl(this.exercise.video + "&output=embed");
     }
-  }
-
-  private transform(videoURL: string){
-    return videoURL.replace("youtu.be", "youtube.com/embed");
   }
 
   editExercise(){

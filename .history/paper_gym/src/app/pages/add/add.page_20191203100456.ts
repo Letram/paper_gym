@@ -96,7 +96,7 @@ export class AddPage implements OnInit {
     this.newExercise.muscleGroups.push(this.muscleGroup);
     if (this.userMuscleGroups.indexOf(this.muscleGroup) === -1) {
       this.userMuscleGroups.push(this.muscleGroup);
-      this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
+      this._exerciseService.createMuscleGroup(this.userMuscleGroups);
     }
     this.muscleGroup = "";
   }
@@ -112,7 +112,7 @@ export class AddPage implements OnInit {
       this._userExercises.filter(userExercise => userExercise.muscleGroups.indexOf(muscleGroupToRemove) !== -1).length <= 1
     ){
       this.userMuscleGroups.splice(this.userMuscleGroups.indexOf(muscleGroupToRemove),1);
-      this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
+      this._exerciseService.updateMucleGroup(this.userMuscleGroups);
     }else{
       console.log(this._userExercises.filter(userExercise => userExercise.muscleGroups.indexOf(muscleGroupToRemove) !== -1)
       )
