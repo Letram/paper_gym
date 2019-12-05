@@ -2,14 +2,15 @@
 
   <form id="login" #loginForm="ngForm" (ngSubmit)="login( loginForm )">
 
-    <!-- Form -->
-    <input  class="entrada" type="text"     [(ngModel)]="user.email"    name="email"    placeholder="Email"      required>
+    <input  class="entrada" type="text"     [(ngModel)]="user.email"    name="email"    placeholder="Email"      required autocomplete="off">
     <input  class="entrada" type="password" [(ngModel)]="user.password" name="password" placeholder="Contraseña" required>
-    <button class="boton"   type="submit">Acceder</button>
+    <button class="boton"   type="submit">
+      Acceder
+      <span class="error-message">{{ errorMessage }}</span>
+    </button>
   
-    <!-- Link -->
-    <div class="redirect">
-      Don't have an account?&nbsp;<a [routerLink]="'/register'" routerDirection="forward">Sign up here!</a>
+    <div class="register-link">
+      ¿Todavía no tienes cuenta?&nbsp;<a [routerLink]="'/register'" routerDirection="forward">¡Regístrate aquí!</a>
     </div>
 
   </form>

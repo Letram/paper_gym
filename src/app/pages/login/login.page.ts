@@ -15,6 +15,7 @@ declare var $: any;
 export class LoginPage implements OnInit {
 
   private user: User;
+  private errorMessage: string = '';
 
   // ─────────────── //
   //     METHODS     //
@@ -40,17 +41,18 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    this.authService.login(this.user)
-    .then(
-      ( response ) => {
-        console.log(response);
-        this.router.navigate([ '/home' ]);
-      }
-    ).catch(
-      ( error ) => {
-        console.log(`[LOGIN ERR] => ${error}`);
-      }
-    );
+    this.authService.login( this.user )
+      .then(( response ) => {
+        if ( response ) {
+          this.router.navigate([ '/home' ]);
+        } else {
+          this.showErrorMessage( 'Datos incorrectos' );
+        }
+      })
+      .catch(( error ) => {
+        this.showErrorMessage( 'Se ha producido un error' );
+        console.log( `[ ERROR MESSAGE ] » ${ error }` );
+      });
 
   }
 
@@ -64,15 +66,33 @@ export class LoginPage implements OnInit {
     const errorPassword = loginForm.controls['password'].errors;
 
     if ( errorEmail !== null ) {
-      $('.entrada[name="email"]').addClass('red-border');
-    } else {
-      $('.entrada[name="email"]').removeClass('red-border');
+      this.highlightBorder( 'email' );
     }
 
     if ( errorPassword !== null ) {
-      $('.entrada[name="password"]').addClass('red-border');
-    } else {
-      $('.entrada[name="password"]').removeClass('red-border');
+      this.highlightBorder( 'password' );
     }
+  }
+
+  highlightBorder( inputName: string ) {
+
+    $( `.entrada[name='${ inputName }']` ).addClass( 'red-border' );
+    
+    setTimeout( () => {
+      $( `.entrada[name='${ inputName }']` ).removeClass( 'red-border' );
+    }, 250);
+
+  }
+
+  showErrorMessage( message: string ) {
+
+    this.errorMessage = message;
+    
+    $( '.error-message' ).css( 'opacity', '1');
+    
+    setTimeout( () => {
+      $( '.error-message' ).css( 'opacity', '0');
+    }, 2500);
+
   }
 }
