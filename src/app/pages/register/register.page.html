@@ -1,26 +1,18 @@
-<ion-header>
-  <ion-toolbar color="dark-blue">
-    <ion-title>Sign up</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
 
-<ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col offset="2" size="8">
-        <ion-item>
-          <ion-label color="dark-gray">Email</ion-label>
-          <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label color="dark-gray">Password</ion-label>
-          <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-        </ion-item>
-          <ion-button color="blue" expand="block" (click)="register()">Sign up</ion-button>
-        <div class="redirect">
-          <p>Have an account?<span><a [routerLink]="'/login'" routerDirection="forward">Login here.</a></span></p>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <form id="register" #registerForm="ngForm" (ngSubmit)="register( registerForm )">
+
+      <input  class="entrada" type="text"     [(ngModel)]="user.email"    name="email"    placeholder="Email"      required autocomplete="off">
+      <input  class="entrada" type="password" [(ngModel)]="user.password" name="password" placeholder="Password" required>
+      <button class="boton"   type="submit">
+        Submit
+        <span class="error-message">{{ errorMessage }}</span>
+      </button>
+    
+      <div class="login-link">
+        Have an account?&nbsp;<a [routerLink]="'/login'" routerDirection="forward">Login here!</a>
+      </div>
+
+  </form>
+
 </ion-content>
