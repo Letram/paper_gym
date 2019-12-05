@@ -16,37 +16,22 @@ export class AuthService {
 
   async login( user: any ) {
 
-    try {
+    // Iniciamos sesión con los datos del usuario
+    let loggedUser = await this._afAuth.auth.signInWithEmailAndPassword( user.email, user.password );
 
-      let success    = false;
-      let loggedUser = await this._afAuth.auth.signInWithEmailAndPassword( user.email, user.password );
+    // Devolvemos la respuesta de Firebase ante un intento de inicio de sesión con el usuario que acabamos de crear
+    return await this.saveUserData( loggedUser );
 
-      await this.saveUserData( loggedUser ).then( response => {
-        success = response;
-      });
-
-      return success;
-
-    } catch (error) {
-      console.log(`[ LOGIN ERROR MESSAGE ] » ${error}`);
-    }
-    
   }
 
-  async register(user) {
-    try {
-      let registeredUser = await this._afAuth.auth.createUserWithEmailAndPassword(
-        user.email,
-        user.password
-      );
-      let success = false;
-      await this.saveUserData(registeredUser).then(response => {
-        success = response;
-      });
-      return success;
-    } catch (error) {
-      console.log(`[REGISTER ERR SERVICE] => ${error}`);
-    }
+  async register( user: any ) {
+
+    // Creamos un nuevo usuario
+    let registeredUser = await this._afAuth.auth.createUserWithEmailAndPassword( user.email, user.password );
+
+    // Devolvemos la respuesta de Firebase ante un intento de registro con el usuario que acabamos de crear
+    return await this.saveUserData(registeredUser);
+
   }
 
   private async saveUserData(
