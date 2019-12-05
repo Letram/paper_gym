@@ -26,3 +26,23 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import "./theme/my-colors.scss";
+
+// Text selection
+
+::-moz-selection { color: white; background: #3171e0 }
+::selection      { color: white; background: #3171e0 }
+
+// Utils
+
+.red-border {
+    border-color: red !important;
+}
+
+// ────────────── //
+//    GENERAL     //
+// ────────────── //
+
+body {
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+}

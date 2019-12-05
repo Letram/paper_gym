@@ -1,0 +1,17 @@
+<ion-content>
+
+  <form id="login" #loginForm="ngForm" (ngSubmit)="login( loginForm )">
+
+    <!-- Form -->
+    <input  class="entrada" type="text"     [(ngModel)]="user.email"    name="email"    placeholder="Email"      required>
+    <input  class="entrada" type="password" [(ngModel)]="user.password" name="password" placeholder="Contraseña" required>
+    <button class="boton"   type="submit">Acceder</button>
+  
+    <!-- Link -->
+    <div class="redirect">
+      Don't have an account?&nbsp;<a [routerLink]="'/register'" routerDirection="forward">Sign up here!</a>
+    </div>
+
+  </form>
+
+</ion-content>

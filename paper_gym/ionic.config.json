@@ -1,7 +1,0 @@
-{
-  "name": "paper_gym",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
