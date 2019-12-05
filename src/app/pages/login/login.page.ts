@@ -1,6 +1,6 @@
-import { User } from '../../models/User';
-import { NgForm } from '@angular/forms';
+import { User   } from '../../models/User';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -46,12 +46,11 @@ export class LoginPage implements OnInit {
         if ( response ) {
           this.router.navigate([ '/home' ]);
         } else {
-          this.showErrorMessage( 'Datos incorrectos' );
+          this.showErrorMessage( 'Something went wrong' );
         }
       })
-      .catch(( error ) => {
-        this.showErrorMessage( 'Se ha producido un error' );
-        console.log( `[ ERROR MESSAGE ] » ${ error }` );
+      .catch(( exception ) => {
+        this.showErrorMessage( exception.message );
       });
 
   }
