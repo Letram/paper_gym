@@ -23,13 +23,13 @@ import { ImagePicker } from "@ionic-native/image-picker/ngx";
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    IonicModule.forRoot({ animated: false }),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [
     StatusBar,
