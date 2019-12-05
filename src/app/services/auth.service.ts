@@ -1,30 +1,36 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
+
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
+
   public isLogged: any = false;
+
   constructor(private _afAuth: AngularFireAuth) {
     _afAuth.authState.subscribe(user => {
       this.isLogged = user;
     });
   }
 
-  async login(user) {
+  async login( user: any ) {
+
     try {
-      let loggedUser = await this._afAuth.auth.signInWithEmailAndPassword(
-        user.email,
-        user.password
-      );
-      let success = false;
-      await this.saveUserData(loggedUser).then(response => {
+
+      let success    = false;
+      let loggedUser = await this._afAuth.auth.signInWithEmailAndPassword( user.email, user.password );
+
+      await this.saveUserData( loggedUser ).then( response => {
         success = response;
       });
+
       return success;
+
     } catch (error) {
-      console.log(`[LOGIN ERR SERVICE] => ${error}`);
+      console.log(`[ LOGIN ERROR MESSAGE ] » ${error}`);
     }
+    
   }
 
   async register(user) {
