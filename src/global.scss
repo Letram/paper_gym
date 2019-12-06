@@ -27,15 +27,38 @@
 
 @import "./theme/my-colors.scss";
 
+// Colors
+
+$blue: rgb(50,115,225);
+
 // Text selection
 
 ::-moz-selection { color: white; background: #3171e0 }
 ::selection      { color: white; background: #3171e0 }
 
+// Placeholder
+
+input::-webkit-input-placeholder { color: rgba(255,255,255,.35); transition: .25s }
+     input:-ms-input-placeholder { color: rgba(255,255,255,.35); transition: .25s }
+              input::placeholder { color: rgba(255,255,255,.35); transition: .25s }
+
+input:focus::-webkit-input-placeholder { color: transparent }
+     input:focus:-ms-input-placeholder { color: transparent }
+              input:focus::placeholder { color: transparent }
+
 // Utils
 
 .red-border {
     border-color: red !important;
+}
+
+.is-relative {
+    position: relative !important;
+}
+
+.link {
+    color: $blue;
+    text-decoration: none;
 }
 
 // ────────────── //

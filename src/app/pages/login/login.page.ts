@@ -75,10 +75,10 @@ export class LoginPage implements OnInit {
 
   highlightBorder( inputName: string ) {
 
-    $( `.entrada[name='${ inputName }']` ).addClass( 'red-border' );
+    $( `.input[name='${ inputName }']` ).addClass( 'red-border' );
     
     setTimeout( () => {
-      $( `.entrada[name='${ inputName }']` ).removeClass( 'red-border' );
+      $( `.input[name='${ inputName }']` ).removeClass( 'red-border' );
     }, 250);
 
   }
@@ -89,9 +89,9 @@ export class LoginPage implements OnInit {
     
     $( '.error-message' ).css( 'opacity', '1');
     
-    setTimeout( () => {
-      $( '.error-message' ).css( 'opacity', '0');
-    }, 2500);
+    // setTimeout( () => {
+    //   $( '.error-message' ).css( 'opacity', '0');
+    // }, 2500);
 
   }
 }

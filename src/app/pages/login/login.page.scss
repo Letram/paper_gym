@@ -4,86 +4,93 @@
 
 $blue: rgb(50,115,225);
 
-// Placeholder
-
-input::-webkit-input-placeholder { color: rgba(255,255,255,.35); transition: .25s }
-     input:-ms-input-placeholder { color: rgba(255,255,255,.35); transition: .25s }
-              input::placeholder { color: rgba(255,255,255,.35); transition: .25s }
-
-input:focus::-webkit-input-placeholder { color: transparent }
-     input:focus:-ms-input-placeholder { color: transparent }
-              input:focus::placeholder { color: transparent }
-
 // Form
 
 #login {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     background: url(../../../assets/img/bg-login.jpg) center no-repeat;
     background-size: cover;
-    min-height: 100vh;
+    height: 100vh;
+    min-height: 300px;
 
-    .entrada {
-        color: white;
-        background: none;
-        border: none;
-        border-bottom: 2px solid $blue;
-        padding: 8px 10px;
-        margin-bottom: 25px;
+    .form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
         position: relative;
         z-index: 50;
-        width: 225px;
-        transition: .25s ease-in;
-
-        &:focus {
-            outline: none;
-            border-bottom-color: white;
-        }
-    }
-
-    .boton {
-        color: white;
-        font-size: 15px;
-        font-style: italic;
-        font-weight: 600;
-        text-transform: uppercase;
-        background: none;
-        border: 2px solid $blue;
-        padding: 15px 25px;
-        margin-top: 25px;
-        position: relative;
-        z-index: 50;
-        width: 225px;
-
-        &:focus {
-            background: $blue;
-            outline: none;
-        }
-
-        &:after {
-            content: '';
-            background: rgba(255,255,255,.035);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-        }
-    }
-
-    .error-message {
-        color: darkred;
-        font-size: 11px;
-        font-style: normal;
-        text-transform: none;
-        position: absolute;
-        left: 0;
-        bottom: -25px;
         width: 100%;
-        opacity: 0;
-        transition: .25s ease-in;
+        height: 100%;
+
+        .input {
+            display: block;
+            color: white;
+            background: none;
+            border: none;
+            border-bottom: 2px solid $blue;
+            padding: 8px 10px;
+            margin-bottom: 25px;
+            width: 225px;
+            transition: .25s ease-in;
+    
+            &:focus {
+                outline: none;
+                border-bottom-color: white;
+            }
+        }
+
+        .is-relative {
+            text-align: center;
+            width: 100%;
+
+            .button {
+                color: white;
+                font-size: 15px;
+                font-style: italic;
+                font-weight: 600;
+                text-transform: uppercase;
+                background: none;
+                border: 2px solid $blue;
+                padding: 15px 25px;
+                margin-top: 25px;
+                position: relative;
+                width: 225px;
+        
+                &:focus {
+                    background: $blue;
+                    outline: none;
+                }
+        
+                &:after {
+                    content: '';
+                    background: rgba(255,255,255,.05);
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 50%;
+                }
+            }
+    
+            .error-message {
+                color: darkred;
+                font-size: 10px;
+                font-style: normal;
+                text-align: center;
+                text-transform: none;
+                line-height: 15px;
+                white-space: nowrap;
+                position: absolute;
+                left: 0;
+                bottom: -25px;
+                width: 100%;
+                opacity: 0;
+                transition: .25s ease-in;
+            }
+        }
     }
 
     &:after {
@@ -96,19 +103,12 @@ input:focus::-webkit-input-placeholder { color: transparent }
         width: 100%;
         min-height: 100vh;
     }
-}
 
-.register-link {
-    color: white;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    bottom: 15px;
-    z-index: 50;
-    width: 100%;
-
-    a {
-        color: $blue;
-        text-decoration: none;
+    .register-link {
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: relative;
+        z-index: 50;
     }
 }
