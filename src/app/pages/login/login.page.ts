@@ -35,6 +35,8 @@ export class LoginPage implements OnInit {
 
   async login( loginForm: NgForm ) {
 
+    console.log( loginForm );
+
     this.checkEmptyFields( loginForm );
 
     if ( loginForm.invalid ) {
@@ -61,16 +63,12 @@ export class LoginPage implements OnInit {
 
   checkEmptyFields( loginForm: NgForm ) {
 
-    const errorEmail    = loginForm.controls['email'   ].errors;
-    const errorPassword = loginForm.controls['password'].errors;
+    const email   : number = loginForm.controls['email'   ].value ? loginForm.controls['email'   ].value.trim().length : 0;
+    const password: number = loginForm.controls['password'].value ? loginForm.controls['password'].value.trim().length : 0;
 
-    if ( errorEmail !== null ) {
-      this.highlightBorder( 'email' );
-    }
+    if ( email    === 0 ) this.highlightBorder( 'email' );
+    if ( password === 0 ) this.highlightBorder( 'password' );
 
-    if ( errorPassword !== null ) {
-      this.highlightBorder( 'password' );
-    }
   }
 
   highlightBorder( inputName: string ) {
