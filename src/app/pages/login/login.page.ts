@@ -35,13 +35,7 @@ export class LoginPage implements OnInit {
 
   async login( loginForm: NgForm ) {
 
-    console.log( loginForm );
-
     this.checkEmptyFields( loginForm );
-
-    if ( loginForm.invalid ) {
-      return;
-    }
 
     this.authService.login( this.user )
       .then(( response ) => {
@@ -73,8 +67,10 @@ export class LoginPage implements OnInit {
 
   highlightBorder( inputName: string ) {
 
+    // Resaltamos la entrada
     $( `.input[name='${ inputName }']` ).addClass( 'red-border' );
     
+    // Dejamos de resaltar la entrada pasado un tiempo
     setTimeout( () => {
       $( `.input[name='${ inputName }']` ).removeClass( 'red-border' );
     }, 250);
@@ -85,11 +81,13 @@ export class LoginPage implements OnInit {
 
     this.errorMessage = message;
     
+    // Mostramos el mensaje de error
     $( '.error-message' ).css( 'opacity', '1');
     
-    // setTimeout( () => {
-    //   $( '.error-message' ).css( 'opacity', '0');
-    // }, 2500);
+    // Ocultamos el mensaje de error pasado un tiempo
+    setTimeout( () => {
+      $( '.error-message' ).css( 'opacity', '0');
+    }, 2500);
 
   }
 }
