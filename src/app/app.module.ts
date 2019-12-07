@@ -19,7 +19,9 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,
