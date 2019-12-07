@@ -4,6 +4,10 @@
     <ion-slides #slides [options]="configuration" class="is-relative">
       <ion-slide class="login">
 
+        <!-- ───────────── -->
+        <!--     LOGIN     -->
+        <!-- ───────────── -->
+
         <!-- Formulario -->
         <form class="form" #loginForm="ngForm" (ngSubmit)="login( loginForm )">
 
@@ -24,6 +28,10 @@
 
       </ion-slide>
       <ion-slide class="register">
+
+        <!-- ──────────────── -->
+        <!--     REGISTRO     -->
+        <!-- ──────────────── -->
 
         <!-- Formulario -->
         <form class="form" #registerForm="ngForm" (ngSubmit)="register( registerForm )">

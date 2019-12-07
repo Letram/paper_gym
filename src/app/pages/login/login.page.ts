@@ -21,8 +21,8 @@ export class LoginPage implements OnInit {
     spaceBetween: 0,
     slidesPerView: 1,
     autoHeight: true,
-    pagination: true,
-    navigation: true
+    pagination: false,
+    navigation: false
   };
 
   // ─────────────── //
