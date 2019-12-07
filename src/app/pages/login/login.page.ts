@@ -17,6 +17,14 @@ export class LoginPage implements OnInit {
   private user: User;
   private errorMessage: string = '';
 
+  configuration = {
+    spaceBetween: 0,
+    slidesPerView: 1,
+    autoHeight: true,
+    pagination: true,
+    navigation: true
+  };
+
   // ─────────────── //
   //     METHODS     //
   // ─────────────── //
@@ -35,7 +43,8 @@ export class LoginPage implements OnInit {
 
   async login( loginForm: NgForm ) {
 
-    this.checkEmptyFields( loginForm );
+    if ( this.checkEmptyFields( loginForm ) )
+      return;
 
     this.authService.login( this.user )
       .then(( response ) => {
@@ -51,17 +60,42 @@ export class LoginPage implements OnInit {
 
   }
 
+  async register( registerForm: NgForm ){
+
+    if ( this.checkEmptyFields( registerForm ) )
+      return;
+
+    this.authService.register( this.user )
+      .then(( response ) => {
+        if ( response ) {
+          this.router.navigate([ '/home' ]);
+        } else {
+          this.showErrorMessage( 'Something went wrong' );
+        }
+      })
+      .catch(( exception ) => {
+        this.showErrorMessage( exception.message );
+      });
+
+  }
+
+  next( slide, index ) {
+    slide.slideTo( index );
+  }
+
   // ──────────────── //
   //     AUXILIAR     //
   // ──────────────── //
 
-  checkEmptyFields( loginForm: NgForm ) {
+  checkEmptyFields( loginForm: NgForm ): boolean {
 
     const email   : number = loginForm.controls['email'   ].value ? loginForm.controls['email'   ].value.trim().length : 0;
     const password: number = loginForm.controls['password'].value ? loginForm.controls['password'].value.trim().length : 0;
 
     if ( email    === 0 ) this.highlightBorder( 'email' );
     if ( password === 0 ) this.highlightBorder( 'password' );
+
+    return email === 0 || password === 0;
 
   }
 

@@ -1,23 +1,50 @@
 <ion-content>
-  <section id="login">
+  <main>
 
-    <!-- Formulario -->
-    <form class="form" #loginForm="ngForm" (ngSubmit)="login( loginForm )">
+    <ion-slides #slides [options]="configuration" class="is-relative">
+      <ion-slide class="login">
 
-      <input  class="input"  type="text"     [(ngModel)]="user.email"    name="email"    placeholder="Email"      required autocomplete="off" email>
-      <input  class="input"  type="password" [(ngModel)]="user.password" name="password" placeholder="Password" required>
+        <!-- Formulario -->
+        <form class="form" #loginForm="ngForm" (ngSubmit)="login( loginForm )">
 
-      <div class="is-relative">
-        <button class="button" type="submit">Submit</button>
-        <span class="error-message">{{ errorMessage }}</span>
-      </div>
-      
-    </form>
+          <input  class="input"  type="text"     [(ngModel)]="user.email"    name="email"    placeholder="Email"    required autocomplete="off" email>
+          <input  class="input"  type="password" [(ngModel)]="user.password" name="password" placeholder="Password" required>
+    
+          <div class="is-relative">
+            <button class="button" type="submit">Login</button>
+            <span class="error-message">{{ errorMessage }}</span>
+          </div>
+          
+        </form>
+    
+        <!-- Enlace a registro -->
+        <div class="register-link">
+          Don't have an account?&nbsp;<a class="link" (click)="next( slides, 1 )">Sign up here!</a>
+        </div>
 
-    <!-- Enlace a la página de registro -->
-    <div class="register-link">
-      Don't have an account?&nbsp;<a class="link" [routerLink]="'/register'" routerDirection="forward">Sign up here!</a>
-    </div>
+      </ion-slide>
+      <ion-slide class="register">
 
-  </section>
+        <!-- Formulario -->
+        <form class="form" #registerForm="ngForm" (ngSubmit)="register( registerForm )">
+
+            <input  class="input"  type="text"     [(ngModel)]="user.email"    name="email"    placeholder="Email"    required autocomplete="off" email>
+            <input  class="input"  type="password" [(ngModel)]="user.password" name="password" placeholder="Password" required>
+            
+            <div class="is-relative">
+              <button class="button" type="submit">Signup</button>
+              <span class="error-message">{{ errorMessage }}</span>
+            </div>
+
+        </form>
+
+        <!-- Enlace a login -->
+        <div class="login-link">
+          Have an account?&nbsp;<a (click)="next( slides, 0 )">Login here!</a>
+        </div>
+
+      </ion-slide>
+    </ion-slides>
+
+  </main>
 </ion-content>
