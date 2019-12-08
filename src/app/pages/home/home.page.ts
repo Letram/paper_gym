@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { Router, NavigationExtras, NavigationEnd } from '@angular/router';
+import { Component, OnInit        } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
+
+// Models
 import { Exercise } from 'src/app/models/Exercise';
+
+// Services
+import { AuthService     } from 'src/app/services/auth.service';
 import { ExerciseService } from 'src/app/services/exercise.service';
 
 @Component({
@@ -11,43 +15,48 @@ import { ExerciseService } from 'src/app/services/exercise.service';
 })
 export class HomePage implements OnInit {
 
-  public currentUser: any;
-  public userExercises: Exercise[];
+  public exercises: Exercise[] = [];
 
-  constructor(private _authService:AuthService, private _exerciseService:ExerciseService, private _router: Router) { }
+  // ─────────────── //
+  //     METHODS     //
+  // ─────────────── //
+
+  constructor( private authService: AuthService, private exerciseService: ExerciseService, private router: Router ) {}
 
   ngOnInit() {
-    console.log("Home page init...");
-    this._exerciseService.getExercises().subscribe(
+    
+    this.exerciseService.getExercises().subscribe(
       response => {
-        this.userExercises = []
-        for(let i = 0; i < response.length; i++){
+
+        for( let i = 0; i < response.length; i++ ) {
           let exerciseAux = response[i].payload.doc.data();
           exerciseAux.id = response[i].payload.doc.id; 
           console.log({exerciseAux, id: response[i].payload.doc.id});
-          this.userExercises.push(exerciseAux);
+          this.exercises.push(exerciseAux);
         }
-        console.log(this.userExercises);
-        if(!response)console.log("No exercises available yet...");
-      },
-      error => {
-        console.log(`[HOME PAGE ERR] => ${error}`);
+
+        console.log( this.exercises );
+
+      }, exception => {
+        console.log(`[ ERROR MESSAGE] » ${ exception }`);
       }
     );
+
   }
 
   logout(){
-    this._authService.logout().then(
-      () => this._router.navigate([""])
-    );
+    this.authService.logout().then( () => this.router.navigate(['']) );
   }
 
-  openExercise(exerciseToOpen: Exercise){
+  openExercise( exerciseToOpen: Exercise ) {
+
     let navigationExtras: NavigationExtras = {
       state: {
         exercise: exerciseToOpen
       }
     };
-    this._router.navigate(["exercise"], navigationExtras);
+
+    this.router.navigate( ['exercise'], navigationExtras );
+
   }
 }
