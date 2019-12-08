@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DefaultImagePipe implements PipeTransform {
 
-  transform( imagePath: string ): string {
-    return imagePath ? './assets/img/default.jpg' : `${ imagePath }`;
+  transform( images: any[] ): string {
+    return images.length === 0 ? './assets/img/default.jpg' : `${ images[0].url }`;
   }
 
 }
