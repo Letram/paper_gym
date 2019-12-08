@@ -38,13 +38,13 @@ $blue: rgb(50,115,225);
 
 // Placeholder
 
-input::-webkit-input-placeholder { color: rgba(255,255,255,.35); transition: .25s }
-     input:-ms-input-placeholder { color: rgba(255,255,255,.35); transition: .25s }
-              input::placeholder { color: rgba(255,255,255,.35); transition: .25s }
+.input::-webkit-input-placeholder { color: rgba(255,255,255,.35); transition: .25s }
+     .input:-ms-input-placeholder { color: rgba(255,255,255,.35); transition: .25s }
+              .input::placeholder { color: rgba(255,255,255,.35); transition: .25s }
 
-input:focus::-webkit-input-placeholder { color: transparent }
-     input:focus:-ms-input-placeholder { color: transparent }
-              input:focus::placeholder { color: transparent }
+.input:focus::-webkit-input-placeholder { color: transparent }
+     .input:focus:-ms-input-placeholder { color: transparent }
+              .input:focus::placeholder { color: transparent }
 
 // Utils
 
@@ -52,8 +52,20 @@ input:focus::-webkit-input-placeholder { color: transparent }
     border-color: red !important;
 }
 
+.padding-left-10 {
+    padding-left: 10px !important;
+}
+
+.margin-top-0 {
+    margin-top: 0 !important;
+}
+
 .is-relative {
     position: relative !important;
+}
+
+.width-100 {
+    width: 100% !important;
 }
 
 .link {
