@@ -5,7 +5,6 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Exercise } from 'src/app/models/Exercise';
 
 // Services
-import { AuthService     } from 'src/app/services/auth.service';
 import { ExerciseService } from 'src/app/services/exercise.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class HomePage implements OnInit {
   //     METHODS     //
   // ─────────────── //
 
-  constructor( private authService: AuthService, private exerciseService: ExerciseService, private router: Router ) {}
+  constructor( private exerciseService: ExerciseService, private router: Router ) {}
 
   ngOnInit() {
     
@@ -42,10 +41,6 @@ export class HomePage implements OnInit {
       }
     );
 
-  }
-
-  logout(){
-    this.authService.logout().then( () => this.router.navigate(['']) );
   }
 
   openExercise( exerciseToOpen: Exercise ) {
