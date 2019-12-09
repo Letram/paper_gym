@@ -8,6 +8,7 @@ import { Exercise } from "src/app/models/Exercise";
 import { NgForm } from "@angular/forms";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 import { Router, ActivatedRoute } from "@angular/router";
+import { NavController     } from '@ionic/angular';
 import {
   TypeModifier,
   THIS_EXPR
@@ -37,6 +38,7 @@ export class AddPage implements OnInit {
     private _imagePicker: ImagePicker,
     private _router: Router,
     private _route: ActivatedRoute,
+    private navController: NavController
   ) {
     this.newExercise = new Exercise();
     this.muscleGroup = "";
@@ -93,6 +95,10 @@ export class AddPage implements OnInit {
         console.log(`[ADD PAGE ERR] => ${error}`);
       }
     );
+  }
+
+  return() {
+    this.navController.back();
   }
 
   addMuscleGroup() {

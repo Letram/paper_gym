@@ -1,7 +1,14 @@
 <ion-content>
   <section id="add">
 
-    <app-navbar [returnButton]="true"></app-navbar>
+    <!-- Navbar -->
+    <div class="navbar">
+      <a class="item return" (click)="return()">
+        <i class="icon fa fa-angle-left" aria-hidden="true"></i>
+        <span class="item padding-left-10">Paper Gym</span>
+      </a>
+      <span class="item" (click)="logout()">Logout</span>
+    </div>
   
     <!-- ──────────── -->
     <!--     FORM     -->
@@ -29,14 +36,9 @@
       </div>
 
       <h2 class="title">Days to be done</h2>
-      
-      <div *ngIf="newExercise.days !== undefined">
-        <div *ngFor="let day of dayNames; let i = index">
-          {{dayNames[i]}}
-          <input type="checkbox" [(ngModel)]="newExercise.days[i]" name="{{dayNames[i]}}">
-        </div>
+      <div *ngIf="newExercise.days?.items">
+        <input type="checkbox" *ngFor="let dayValue of newExercise.days?; let i = index" [placeholder] = "dayNames[i]" [value]="dayValue">
       </div>
-
       <h2 class="title">Images</h2>
       
       <button class="button" type="button" (click)="pickImages()">Select images</button>

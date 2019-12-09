@@ -1,0 +1,139 @@
+#home {
+  background: #373737;
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #3273e1;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.navbar .item {
+  color: white;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: none;
+  padding: 15px 25px;
+}
+
+.navbar:after {
+  content: '';
+  background: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+}
+
+.card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #323232;
+  border-radius: 2px;
+  -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  margin: 0 15px 15px;
+  height: 125px;
+}
+
+.card .thumbnail {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 150px;
+  height: 100%;
+}
+
+.card .information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 15px;
+  width: 100%;
+}
+
+.card .information .name,
+.card .information .muscle-group {
+  color: white;
+  font-size: 15px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.card .information .name {
+  font-weight: normal;
+  border-bottom: 1px solid #3273e1;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.card .information .muscle-group {
+  font-style: italic;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.add {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  text-decoration: none;
+  background: #3273e1;
+  border-radius: 50%;
+  -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 55px;
+  height: 55px;
+}
+/*# sourceMappingURL=home.page.css.map */

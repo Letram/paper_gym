@@ -1,7 +1,14 @@
 <ion-content>
   <section id="add">
 
-    <app-navbar [returnButton]="true"></app-navbar>
+    <!-- Navbar -->
+    <div class="navbar">
+      <a class="item return" (click)="return()">
+        <i class="icon fa fa-angle-left" aria-hidden="true"></i>
+        <span class="item padding-left-10">Paper Gym</span>
+      </a>
+      <span class="item" (click)="logout()">Logout</span>
+    </div>
   
     <!-- ──────────── -->
     <!--     FORM     -->

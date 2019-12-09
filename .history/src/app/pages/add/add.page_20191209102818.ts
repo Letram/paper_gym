@@ -8,6 +8,7 @@ import { Exercise } from "src/app/models/Exercise";
 import { NgForm } from "@angular/forms";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 import { Router, ActivatedRoute } from "@angular/router";
+import { NavController     } from '@ionic/angular';
 import {
   TypeModifier,
   THIS_EXPR
@@ -23,7 +24,6 @@ export class AddPage implements OnInit {
   public userMuscleGroups: string[];
   public newExercise: Exercise;
   public imagesPicked: string[];
-  public dayNames: string[]; 
 
   private _isEdited: boolean = false;
   private _editingId: string = "";
@@ -37,17 +37,16 @@ export class AddPage implements OnInit {
     private _imagePicker: ImagePicker,
     private _router: Router,
     private _route: ActivatedRoute,
+    private navController: NavController
   ) {
     this.newExercise = new Exercise();
     this.muscleGroup = "";
-    this.dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   }
 
   ngOnInit() {
     console.log("Add exercise page init...");
     this.newExercise = new Exercise();
     console.log(this.newExercise);
-    console.log({arr: this.newExercise.days, length: this.newExercise.days.length});
     this.muscleGroup = "";
     this._exerciseService.getMuscleGroups().subscribe(
       userMuscleGroupsObject => {
@@ -70,11 +69,12 @@ export class AddPage implements OnInit {
         this._editingId = navigationExercise.id;
 
         this.newExercise = navigationExercise;
-        if(this.newExercise.days === undefined){
-          this.newExercise.days = [false, false, false, false, false, false, false];
-        }
+
         this.muscleGroup = "";
         this.imagesPicked = this.newExercise.images;
+
+        console.log(navigationExercise);
+        console.log(this.newExercise);
       }
     });
     this._exerciseService.getExercises().subscribe(
@@ -93,6 +93,10 @@ export class AddPage implements OnInit {
         console.log(`[ADD PAGE ERR] => ${error}`);
       }
     );
+  }
+
+  return() {
+    this.navController.back();
   }
 
   addMuscleGroup() {

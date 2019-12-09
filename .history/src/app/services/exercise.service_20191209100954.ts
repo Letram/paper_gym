@@ -64,20 +64,18 @@ export class ExerciseService {
     console.log(exercisePathId);
 
     //Step 2.
-    if(exerciseImages){
-      for (let index = 0; index < exerciseImages.length; index++) {
-        const exerciseImage = exerciseImages[index];
-        let imagePath = `IMAGES/${currentUser.uid}/${exercisePathId.exerciseId}/${exerciseImage.name}`;
-        let url: string = await this._afStorage
-          .ref(imagePath)
-          .put(exerciseImage.blob as Blob)
-          .then(fileSnapshot => {
-            return fileSnapshot.ref.getDownloadURL().then(url => url);
-          })
-          .catch(error => console.log(`[UPLOAD IMG ERROR] => ${error}`));
-        console.log(`Upload image url => ${url}`);
-        exerciseToAdd.images.push(url);
-      }
+    for (let index = 0; index < exerciseImages.length; index++) {
+      const exerciseImage = exerciseImages[index];
+      let imagePath = `IMAGES/${currentUser.uid}/${exercisePathId.exerciseId}/${exerciseImage.name}`;
+      let url: string = await this._afStorage
+        .ref(imagePath)
+        .put(exerciseImage.blob as Blob)
+        .then(fileSnapshot => {
+          return fileSnapshot.ref.getDownloadURL().then(url => url);
+        })
+        .catch(error => console.log(`[UPLOAD IMG ERROR] => ${error}`));
+      console.log(`Upload image url => ${url}`);
+      exerciseToAdd.images.push(url);
     }
 
     //Step 3.
