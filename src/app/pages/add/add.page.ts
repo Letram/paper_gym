@@ -31,16 +31,21 @@ export class AddPage implements OnInit {
   private _imagePicked: File;
   private _imagesPicked: any[];
   private _imagePickerOptions: any;
+
+  // ─────────────── //
+  //     METHODS     //
+  // ─────────────── //
+
   constructor(
-    private _exerciseService: ExerciseService,
-    private _imageService: ImageServiceService,
-    private _imagePicker: ImagePicker,
     private _router: Router,
     private _route: ActivatedRoute,
+    private _imagePicker: ImagePicker,
+    private _imageService: ImageServiceService,
+    private _exerciseService: ExerciseService,
   ) {
+    this.dayNames    = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
+    this.muscleGroup = '';
     this.newExercise = new Exercise();
-    this.muscleGroup = "";
-    this.dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   }
 
   ngOnInit() {
