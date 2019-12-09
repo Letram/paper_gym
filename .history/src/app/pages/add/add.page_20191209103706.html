@@ -35,15 +35,10 @@
         </ion-list>
       </div>
 
-      <h2 class="title">Days to be done</h2>
-      
-      <div *ngIf="newExercise.days !== undefined">
-        <div *ngFor="let day of dayNames; let i = index">
-          {{dayNames[i]}}
-          <input type="checkbox" [(ngModel)]="newExercise.days[i]" name="{{dayNames[i]}}">
-        </div>
+      <h2>Days to be done</h2>
+      <div *ngIf="newExercise.days?.items">
+        
       </div>
-
       <h2 class="title">Images</h2>
       
       <button class="button" type="button" (click)="pickImages()">Select images</button>

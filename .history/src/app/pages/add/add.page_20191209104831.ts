@@ -72,9 +72,7 @@ export class AddPage implements OnInit {
         this._editingId = navigationExercise.id;
 
         this.newExercise = navigationExercise;
-        if(this.newExercise.days === undefined){
-          this.newExercise.days = [false, false, false, false, false, false, false];
-        }
+
         this.muscleGroup = "";
         this.imagesPicked = this.newExercise.images;
       }

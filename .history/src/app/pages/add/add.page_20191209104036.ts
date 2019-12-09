@@ -49,7 +49,6 @@ export class AddPage implements OnInit {
     console.log("Add exercise page init...");
     this.newExercise = new Exercise();
     console.log(this.newExercise);
-    console.log({arr: this.newExercise.days, length: this.newExercise.days.length});
     this.muscleGroup = "";
     this._exerciseService.getMuscleGroups().subscribe(
       userMuscleGroupsObject => {
@@ -72,9 +71,7 @@ export class AddPage implements OnInit {
         this._editingId = navigationExercise.id;
 
         this.newExercise = navigationExercise;
-        if(this.newExercise.days === undefined){
-          this.newExercise.days = [false, false, false, false, false, false, false];
-        }
+
         this.muscleGroup = "";
         this.imagesPicked = this.newExercise.images;
       }

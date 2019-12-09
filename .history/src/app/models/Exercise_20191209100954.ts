@@ -6,7 +6,6 @@ export class Exercise {
   images: any[];
   muscleGroups: string[];
   video: string;
-  days: boolean[];
 
   constructor() {
     this.name = "";
@@ -15,6 +14,5 @@ export class Exercise {
     this.images = [];
     this.muscleGroups = [];
     this.video = "";
-    this.days = [false, false, false, false, false, false, false];
   }
 }

@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
     
     this.exerciseService.getExercises().subscribe(
       response => {
-        this.exercises = [];
+
         for( let i = 0; i < response.length; i++ ) {
           let exerciseAux = response[i].payload.doc.data();
           exerciseAux.id = response[i].payload.doc.id; 

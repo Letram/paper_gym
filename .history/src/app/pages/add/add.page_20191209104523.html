@@ -36,14 +36,10 @@
       </div>
 
       <h2 class="title">Days to be done</h2>
-      
-      <div *ngIf="newExercise.days !== undefined">
-        <div *ngFor="let day of dayNames; let i = index">
-          {{dayNames[i]}}
-          <input type="checkbox" [(ngModel)]="newExercise.days[i]" name="{{dayNames[i]}}">
-        </div>
+      <div *ngIf="newExercise.days?.items">
+        <input type="checkbox" *ngFor="let dayValue of newExercise.days?.items; let i = index">
+        {{dayNames[i]}}
       </div>
-
       <h2 class="title">Images</h2>
       
       <button class="button" type="button" (click)="pickImages()">Select images</button>

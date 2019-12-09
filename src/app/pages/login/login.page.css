@@ -1,0 +1,337 @@
+.ion-color-blue {
+  --ion-color-base: var(--ion-color-blue);
+  --ion-color-base-rgb: var(--ion-color-blue-rgb);
+  --ion-color-contrast: var(--ion-color-blue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-blue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-blue-shade);
+  --ion-color-tint: var(--ion-color-blue-tint);
+}
+
+.ion-color-dark-blue {
+  --ion-color-base: var(--ion-color-dark-blue);
+  --ion-color-base-rgb: var(--ion-color-dark-blue-rgb);
+  --ion-color-contrast: var(--ion-color-dark-blue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-blue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-blue-shade);
+  --ion-color-tint: var(--ion-color-dark-blue-tint);
+}
+
+.ion-color-green {
+  --ion-color-base: var(--ion-color-green);
+  --ion-color-base-rgb: var(--ion-color-green-rgb);
+  --ion-color-contrast: var(--ion-color-green-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-green-contrast-rgb);
+  --ion-color-shade: var(--ion-color-green-shade);
+  --ion-color-tint: var(--ion-color-green-tint);
+}
+
+.ion-color-dark-green {
+  --ion-color-base: var(--ion-color-dark-green);
+  --ion-color-base-rgb: var(--ion-color-dark-green-rgb);
+  --ion-color-contrast: var(--ion-color-dark-green-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-green-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-green-shade);
+  --ion-color-tint: var(--ion-color-dark-green-tint);
+}
+
+.ion-color-yellow {
+  --ion-color-base: var(--ion-color-yellow);
+  --ion-color-base-rgb: var(--ion-color-yellow-rgb);
+  --ion-color-contrast: var(--ion-color-yellow-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-yellow-contrast-rgb);
+  --ion-color-shade: var(--ion-color-yellow-shade);
+  --ion-color-tint: var(--ion-color-yellow-tint);
+}
+
+.ion-color-dark-yellow {
+  --ion-color-base: var(--ion-color-dark-yellow);
+  --ion-color-base-rgb: var(--ion-color-dark-yellow-rgb);
+  --ion-color-contrast: var(--ion-color-dark-yellow-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-yellow-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-yellow-shade);
+  --ion-color-tint: var(--ion-color-dark-yellow-tint);
+}
+
+.ion-color-orange {
+  --ion-color-base: var(--ion-color-orange);
+  --ion-color-base-rgb: var(--ion-color-orange-rgb);
+  --ion-color-contrast: var(--ion-color-orange-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-orange-contrast-rgb);
+  --ion-color-shade: var(--ion-color-orange-shade);
+  --ion-color-tint: var(--ion-color-orange-tint);
+}
+
+.ion-color-dark-orange {
+  --ion-color-base: var(--ion-color-dark-orange);
+  --ion-color-base-rgb: var(--ion-color-dark-orange-rgb);
+  --ion-color-contrast: var(--ion-color-dark-orange-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-orange-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-orange-shade);
+  --ion-color-tint: var(--ion-color-dark-orange-tint);
+}
+
+.ion-color-red {
+  --ion-color-base: var(--ion-color-red);
+  --ion-color-base-rgb: var(--ion-color-red-rgb);
+  --ion-color-contrast: var(--ion-color-red-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-red-contrast-rgb);
+  --ion-color-shade: var(--ion-color-red-shade);
+  --ion-color-tint: var(--ion-color-red-tint);
+}
+
+.ion-color-dark-red {
+  --ion-color-base: var(--ion-color-dark-red);
+  --ion-color-base-rgb: var(--ion-color-dark-red-rgb);
+  --ion-color-contrast: var(--ion-color-dark-red-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-red-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-red-shade);
+  --ion-color-tint: var(--ion-color-dark-red-tint);
+}
+
+.ion-color-gray {
+  --ion-color-base: var(--ion-color-gray);
+  --ion-color-base-rgb: var(--ion-color-gray-rgb);
+  --ion-color-contrast: var(--ion-color-gray-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-gray-contrast-rgb);
+  --ion-color-shade: var(--ion-color-gray-shade);
+  --ion-color-tint: var(--ion-color-gray-tint);
+}
+
+.ion-color-dark-gray {
+  --ion-color-base: var(--ion-color-dark-gray);
+  --ion-color-base-rgb: var(--ion-color-dark-gray-rgb);
+  --ion-color-contrast: var(--ion-color-dark-gray-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-gray-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-gray-shade);
+  --ion-color-tint: var(--ion-color-dark-gray-tint);
+}
+
+.ion-color-beige {
+  --ion-color-base: var(--ion-color-beige);
+  --ion-color-base-rgb: var(--ion-color-beige-rgb);
+  --ion-color-contrast: var(--ion-color-beige-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-beige-contrast-rgb);
+  --ion-color-shade: var(--ion-color-beige-shade);
+  --ion-color-tint: var(--ion-color-beige-tint);
+}
+
+.ion-color-dark-beige {
+  --ion-color-base: var(--ion-color-dark-beige);
+  --ion-color-base-rgb: var(--ion-color-dark-beige-rgb);
+  --ion-color-contrast: var(--ion-color-dark-beige-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-beige-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-beige-shade);
+  --ion-color-tint: var(--ion-color-dark-beige-tint);
+}
+
+.ion-color-sand {
+  --ion-color-base: var(--ion-color-sand);
+  --ion-color-base-rgb: var(--ion-color-sand-rgb);
+  --ion-color-contrast: var(--ion-color-sand-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-sand-contrast-rgb);
+  --ion-color-shade: var(--ion-color-sand-shade);
+  --ion-color-tint: var(--ion-color-sand-tint);
+}
+
+.ion-color-dark-sand {
+  --ion-color-base: var(--ion-color-dark-sand);
+  --ion-color-base-rgb: var(--ion-color-dark-sand-rgb);
+  --ion-color-contrast: var(--ion-color-dark-sand-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-sand-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-sand-shade);
+  --ion-color-tint: var(--ion-color-dark-sand-tint);
+}
+
+.ion-color-violet {
+  --ion-color-base: var(--ion-color-violet);
+  --ion-color-base-rgb: var(--ion-color-violet-rgb);
+  --ion-color-contrast: var(--ion-color-violet-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-violet-contrast-rgb);
+  --ion-color-shade: var(--ion-color-violet-shade);
+  --ion-color-tint: var(--ion-color-violet-tint);
+}
+
+.ion-color-dark-violet {
+  --ion-color-base: var(--ion-color-dark-violet);
+  --ion-color-base-rgb: var(--ion-color-dark-violet-rgb);
+  --ion-color-contrast: var(--ion-color-dark-violet-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-violet-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-violet-shade);
+  --ion-color-tint: var(--ion-color-dark-violet-tint);
+}
+
+.ion-color-purple {
+  --ion-color-base: var(--ion-color-purple);
+  --ion-color-base-rgb: var(--ion-color-purple-rgb);
+  --ion-color-contrast: var(--ion-color-purple-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-purple-contrast-rgb);
+  --ion-color-shade: var(--ion-color-purple-shade);
+  --ion-color-tint: var(--ion-color-purple-tint);
+}
+
+.ion-color-dark-purple {
+  --ion-color-base: var(--ion-color-dark-purple);
+  --ion-color-base-rgb: var(--ion-color-dark-purple-rgb);
+  --ion-color-contrast: var(--ion-color-dark-purple-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-purple-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-purple-shade);
+  --ion-color-tint: var(--ion-color-dark-purple-tint);
+}
+
+main {
+  background: url(../../../assets/img/bg-login.jpg) center no-repeat;
+  background-size: cover;
+}
+
+main:after {
+  content: '';
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.75)));
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.75) 40%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 350px;
+}
+
+.login,
+.register {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100vh;
+  min-height: 350px;
+}
+
+.login .form,
+.register .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: -35px;
+  width: 100%;
+  height: 100%;
+}
+
+.login .form .input,
+.register .form .input {
+  display: block;
+  color: white;
+  font-size: 15px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #3273e1;
+  padding: 8px 10px;
+  margin-bottom: 25px;
+  width: 225px;
+  -webkit-transition: .25s ease-in;
+  transition: .25s ease-in;
+}
+
+.login .form .input:focus,
+.register .form .input:focus {
+  outline: none;
+  border-bottom-color: white;
+}
+
+.login .form .is-relative,
+.register .form .is-relative {
+  text-align: center;
+  width: 100%;
+}
+
+.login .form .is-relative .button,
+.register .form .is-relative .button {
+  color: white;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: none;
+  border: 2px solid #3273e1;
+  padding: 15px 25px;
+  margin-top: 25px;
+  position: relative;
+  width: 225px;
+}
+
+.login .form .is-relative .button:focus,
+.register .form .is-relative .button:focus {
+  background: #3273e1;
+  outline: none;
+}
+
+.login .form .is-relative .button:after,
+.register .form .is-relative .button:after {
+  content: '';
+  background: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+}
+
+.login .form .is-relative .error-message,
+.register .form .is-relative .error-message {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: darkred;
+  font-size: 11px;
+  line-height: 15px;
+  padding: 0 50px;
+  position: absolute;
+  left: 0;
+  bottom: -60px;
+  width: 100%;
+  height: 50px;
+  opacity: 0;
+  -webkit-transition: .25s ease-in;
+  transition: .25s ease-in;
+}
+
+.login .login-link,
+.login .register-link,
+.register .login-link,
+.register .register-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: white;
+  font-size: 15px;
+  position: relative;
+  z-index: 50;
+  height: 35px;
+}
+/*# sourceMappingURL=login.page.css.map */
