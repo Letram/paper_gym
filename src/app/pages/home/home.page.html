@@ -1,11 +1,7 @@
 <ion-content>
   <section id="home">
 
-    <!-- Navbar -->
-    <div class="navbar">
-      <span class="item">Paper Gym</span>
-      <span class="item" (click)="logout()">Logout</span>
-    </div>
+    <app-navbar></app-navbar>
     
     <!-- List of exercises -->
     <div class="exercises" *ngIf="exercises.length > 0">
