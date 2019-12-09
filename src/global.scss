@@ -46,6 +46,24 @@ $blue: rgb(50,115,225);
      .input:focus:-ms-input-placeholder { color: transparent }
               .input:focus::placeholder { color: transparent }
 
+// Form autofill
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+    animation-name: auto-complete;
+    animation-fill-mode: both;
+}
+
+@keyframes auto-complete {
+    to {
+        color: white;
+        font-size: 15px;
+        font-family: 'Roboto', sans-serif;
+        background: none;
+    }
+}
+
 // Utils
 
 .red-border {
