@@ -1,0 +1,8 @@
+<div class="navbar">
+  <a class="item return" *ngIf="returnButton" (click)="return()">
+    <i class="icon fa fa-angle-left" aria-hidden="true"></i>
+    <span class="item padding-left-10">Paper Gym</span>
+  </a>
+  <span class="item" *ngIf="!returnButton">Paper Gym</span>
+  <span class="item" (click)="logout()">Logout</span>
+</div>

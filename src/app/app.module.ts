@@ -1,4 +1,4 @@
-import { NgModule  } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AppComponent  } from "./app.component";
 import { SplashScreen  } from "@ionic-native/splash-screen/ngx";
@@ -39,6 +39,6 @@ import { ImagePicker } from "@ionic-native/image-picker/ngx";
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
 })
 export class AppModule {}
