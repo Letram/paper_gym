@@ -62,15 +62,4 @@ export class HomePage implements OnInit {
       (error) => console.log(`[REMOVE EXERCISE ERR] => ${error}`)
     );
   }
-
-  editExercise( exerciseToEdit: Exercise){
-    let navigationExtras: NavigationExtras = {
-      state: {
-        exercise: exerciseToEdit,
-        edit:true
-      }
-    };
-
-    this.router.navigate( ['add'], navigationExtras );
-  }
 }

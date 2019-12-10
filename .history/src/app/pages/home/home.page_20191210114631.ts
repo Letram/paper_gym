@@ -20,11 +20,11 @@ export class HomePage implements OnInit {
   //     METHODS     //
   // ─────────────── //
 
-  constructor( private _exerciseService: ExerciseService, private router: Router ) {}
+  constructor( private exerciseService: ExerciseService, private router: Router ) {}
 
   ngOnInit() {
     
-    this._exerciseService.getExercises().subscribe(
+    this.exerciseService.getExercises().subscribe(
       response => {
         this.exercises = [];
         for( let i = 0; i < response.length; i++ ) {
@@ -44,6 +44,7 @@ export class HomePage implements OnInit {
   }
 
   openExercise( exerciseToOpen: Exercise ) {
+    return;
     let navigationExtras: NavigationExtras = {
       state: {
         exercise: exerciseToOpen
@@ -53,24 +54,7 @@ export class HomePage implements OnInit {
     this.router.navigate( ['exercise'], navigationExtras );
   }
 
-  removeExercise(exerciseId:string){
-    this._exerciseService.removeExercise(exerciseId)
-    .then(
-      () => console.log("Exercise removed succesfully")
-    )
-    .catch(
-      (error) => console.log(`[REMOVE EXERCISE ERR] => ${error}`)
-    );
-  }
-
-  editExercise( exerciseToEdit: Exercise){
-    let navigationExtras: NavigationExtras = {
-      state: {
-        exercise: exerciseToEdit,
-        edit:true
-      }
-    };
-
-    this.router.navigate( ['add'], navigationExtras );
+  onLongPress(){
+    console.log("Long press works!");
   }
 }
