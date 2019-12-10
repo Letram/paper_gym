@@ -13,14 +13,13 @@ import {
   THIS_EXPR
 } from "@angular/compiler/src/output/output_ast";
 import { ImageServiceService } from "src/app/services/image-service.service";
-
-declare var $: any;
 @Component({
   selector: "app-add",
   templateUrl: "./add.page.html",
   styleUrls: ["./add.page.scss"]
 })
 
+declare var $: any;
 
 export class AddPage implements OnInit {
   public muscleGroup: string;
