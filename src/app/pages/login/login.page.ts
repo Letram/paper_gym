@@ -15,7 +15,8 @@ declare var $: any;
 export class LoginPage implements OnInit {
 
   private user: User;
-  private errorMessage: string = '';
+  private errorMessage = '';
+  private showSpinner  = false;
 
   configuration = {
     spaceBetween: 0,
@@ -43,8 +44,11 @@ export class LoginPage implements OnInit {
 
   async login( loginForm: NgForm ) {
 
-    if ( this.checkEmptyFields( loginForm ) )
+    if ( this.checkEmptyFields( loginForm )) {
       return;
+    }
+
+    this.showSpinner = true;
 
     this.authService.login( this.user )
       .then(( response ) => {
@@ -56,7 +60,9 @@ export class LoginPage implements OnInit {
       })
       .catch(( exception ) => {
         this.showErrorMessage( exception.message );
-      });
+      }
+    );
+
 
   }
 
