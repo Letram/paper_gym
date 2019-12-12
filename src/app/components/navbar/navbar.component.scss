@@ -24,12 +24,12 @@ $lightblack: rgb(055,055,055);
         text-transform: uppercase;
         background: none;
         padding: 15px 25px;
+        position: relative;
+        z-index: 25;
 
         &.return .icon {
-            font-size: 20px;
+            font-size: 15px;
             font-weight: 900;
-            position: relative;
-            top: 1px;
         }
     }
 
