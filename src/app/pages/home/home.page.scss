@@ -1,6 +1,7 @@
 // Colors
-
-$blue : rgb(050,115,225);
+@import '../../../theme/my-colors.scss';
+//$blue : rgb(050,115,225);
+$blue: color(blue, darker);
 $black: rgb(050,050,050);
 $lightblack: rgb(055,055,055);
 

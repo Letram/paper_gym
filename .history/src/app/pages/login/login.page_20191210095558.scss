@@ -1,10 +1,8 @@
 @import "../../../theme/my-colors.scss";
 
 // Colors
-@import '../../../theme/my-colors.scss';
-//$blue : rgb(050,115,225);
-$blue: color(blue, darker);
-//$blue: rgb(50,115,225);
+
+$blue: rgb(50,115,225);
 
 // General
 
@@ -126,8 +124,5 @@ main {
         position: relative;
         z-index: 50;
         height: 35px;
-        a{
-            color: $blue;
-        }
     }
 }

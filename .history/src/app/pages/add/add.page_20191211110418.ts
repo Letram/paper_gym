@@ -140,6 +140,7 @@ export class AddPage implements OnInit {
   pickImages() {
     // Prevent the user to upload the same exercise more than one time disabling the button
     $("#submit_btn").attr("disabled", true);
+    console.log({btn_state: $("#submit_btn").attr("disabled")});
     this.imagesPicked = [];
     this._imagesPicked = [];
     this._imagePickerOptions = {
@@ -168,7 +169,7 @@ export class AddPage implements OnInit {
           //Step 3b
           this._imageService.uploadImage(blob).then(response => {
             //response is an object with a download_url and an image_id attributes
-            console.log({response});
+            console.log({response, results, i});
 
             this.newExercise.images.push({
               url: response.download_url,
@@ -178,6 +179,7 @@ export class AddPage implements OnInit {
             // Enabling the submit button once the upload of the image has finished.
             if(i === results.length-1){
               $('#submit_btn').removeAttr("disabled");
+              console.log({btn_state: $("#submit_btn").attr("disabled")});
             }
           });
         }
@@ -221,7 +223,6 @@ export class AddPage implements OnInit {
   }
 
   onAddExercise(form: NgForm) {
-    $("#submit_btn").attr("disabled", true);
     if (!this._isEdited) {
       //creation of the exercise
       this._exerciseService
@@ -239,8 +240,6 @@ export class AddPage implements OnInit {
           this._router.navigate(["home"]);
         });
     }
-    $("#submit_btn").removeAttr("disabled");
-
   }
 
   imagePicked(event) {
