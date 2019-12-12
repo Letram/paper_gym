@@ -13,11 +13,16 @@ import {
   THIS_EXPR
 } from "@angular/compiler/src/output/output_ast";
 import { ImageServiceService } from "src/app/services/image-service.service";
+import undefined = require('firebase/empty-import');
+
+declare var $: any;
 @Component({
   selector: "app-add",
   templateUrl: "./add.page.html",
   styleUrls: ["./add.page.scss"]
 })
+
+
 export class AddPage implements OnInit {
   public muscleGroup: string;
   public userMuscleGroups: string[];
@@ -56,8 +61,11 @@ export class AddPage implements OnInit {
     this.muscleGroup = "";
     this._exerciseService.getMuscleGroups().subscribe(
       userMuscleGroupsObject => {
-        if (userMuscleGroupsObject.MUSCLEGROUPS)
-          this.userMuscleGroups = userMuscleGroupsObject.MUSCLEGROUPS;
+        if ( userMuscleGroupsObject !== undefined ) {
+          if (userMuscleGroupsObject.MUSCLEGROUPS) {
+            this.userMuscleGroups = userMuscleGroupsObject.MUSCLEGROUPS;
+          }
+        }
         console.log(this.userMuscleGroups);
       },
       error =>
@@ -101,12 +109,21 @@ export class AddPage implements OnInit {
   }
 
   addMuscleGroup() {
-    this.newExercise.muscleGroups.push(this.muscleGroup);
-    if (this.userMuscleGroups.indexOf(this.muscleGroup) === -1) {
-      this.userMuscleGroups.push(this.muscleGroup);
-      this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
+
+    if ( this.checkEmptyFields() ) {
+      return;
     }
-    this.muscleGroup = "";
+
+    this.newExercise.muscleGroups.push( this.muscleGroup );
+
+    if ( this.userMuscleGroups && this.userMuscleGroups.indexOf( this.muscleGroup ) === -1 ) {
+      this.userMuscleGroups.push( this.muscleGroup );
+      this._exerciseService.updateMuscleGroup( this.userMuscleGroups );
+    }
+
+    // Vaciamos el campo
+    this.muscleGroup = '';
+
   }
 
   removeMuscleGroup(muscleGroupToRemove: string): void {
@@ -121,7 +138,7 @@ export class AddPage implements OnInit {
     ){
       this.userMuscleGroups.splice(this.userMuscleGroups.indexOf(muscleGroupToRemove),1);
       this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
-    }else{
+    } else {
       console.log(this._userExercises.filter(userExercise => userExercise.muscleGroups.indexOf(muscleGroupToRemove) !== -1)
       )
     }
@@ -139,6 +156,8 @@ export class AddPage implements OnInit {
    *  3b.- Upload each image to Firebase once they are selected. We will have to wait for the data {img_url, img_id}
    */
   pickImages() {
+    // Prevent the user to upload the same exercise more than one time disabling the button
+    $("#submit_btn").attr("disabled", true);
     this.imagesPicked = [];
     this._imagesPicked = [];
     this._imagePickerOptions = {
@@ -167,12 +186,17 @@ export class AddPage implements OnInit {
           //Step 3b
           this._imageService.uploadImage(blob).then(response => {
             //response is an object with a download_url and an image_id attributes
-            console.log(response);
+            console.log({response});
 
             this.newExercise.images.push({
               url: response.download_url,
               id: response.image_id
             });
+
+            // Enabling the submit button once the upload of the image has finished.
+            if(i === results.length-1){
+              $('#submit_btn').removeAttr("disabled");
+            }
           });
         }
         console.log(this._imagesPicked);
@@ -215,6 +239,7 @@ export class AddPage implements OnInit {
   }
 
   onAddExercise(form: NgForm) {
+    $("#submit_btn").attr("disabled", true);
     if (!this._isEdited) {
       //creation of the exercise
       this._exerciseService
@@ -232,9 +257,39 @@ export class AddPage implements OnInit {
           this._router.navigate(["home"]);
         });
     }
+    $("#submit_btn").removeAttr("disabled");
+
   }
 
   imagePicked(event) {
     this._imagePicked = event.target.files[0];
+  }
+
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+
+  checkEmptyFields(): boolean {
+
+    const VALUE = this.muscleGroup.trim();
+
+    if ( VALUE === '' ) {
+      this.highlightBorder( '.muscle-group .input' );
+    }
+
+    return VALUE === '';
+
+  }
+
+  highlightBorder( inputName: string ) {
+
+    // Resaltamos la entrada
+    $( `${ inputName }` ).addClass( 'red-border' );
+
+    // Dejamos de resaltar la entrada pasado un tiempo
+    setTimeout( () => {
+      $( `${ inputName }` ).removeClass( 'red-border' );
+    }, 250);
+
   }
 }

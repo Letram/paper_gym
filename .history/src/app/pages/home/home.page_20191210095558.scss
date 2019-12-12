@@ -1,0 +1,89 @@
+// Colors
+
+$blue : rgb(050,115,225);
+$black: rgb(050,050,050);
+$lightblack: rgb(055,055,055);
+
+// General
+
+#home {
+    background: $lightblack;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+// Card
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $black;
+    border-radius: 2px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,.5);
+    margin: 0 15px 15px;
+    height: 125px;
+
+    .thumbnail {
+        flex-shrink: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 150px;
+        height: 100%;
+    }
+
+    .information {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 15px;
+        width: 100%;
+
+        .name,
+        .muscle-group {
+            color: white;
+            font-size: 15px;
+            padding: 0 10px;
+            width: 100%;
+        }
+
+        .name {
+            font-weight: normal;
+            border-bottom: 1px solid $blue;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .muscle-group {
+            font-style: italic;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Add excersice
+
+.add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 900;
+    text-decoration: none;
+    background: $blue;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px rgba(0,0,0,.5);
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 55px;
+    height: 55px;
+}

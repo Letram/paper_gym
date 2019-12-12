@@ -2,7 +2,8 @@
 
 // Colors
 
-$blue: rgb(50,115,225);
+//$blue : rgb(050,115,225);
+$blue: color(blue, darker);
 
 // General
 
@@ -124,5 +125,8 @@ main {
         position: relative;
         z-index: 50;
         height: 35px;
+        a{
+            color: $blue;
+        }
     }
 }

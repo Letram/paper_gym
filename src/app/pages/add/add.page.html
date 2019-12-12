@@ -11,21 +11,26 @@
 
       <h2 class="title margin-top-0">Exercise information</h2>
 
-      <input    class="input" type="text" [(ngModel)]="newExercise.name"        name="name"        placeholder="Exercise name"        autocomplete="off">
+      <input    class="input" type="text" [(ngModel)]="newExercise.name"        name="name"        placeholder="Exercise name"        autocomplete="off" required>
       <textarea class="input" type="text" [(ngModel)]="newExercise.description" name="description" placeholder="Exercise description" autocomplete="off" rows="5"></textarea>
       <input    class="input" type="text" [(ngModel)]="newExercise.machine"     name="machine"     placeholder="Exercise machine"     autocomplete="off">
 
       <h2 class="title">Muscle group</h2>
-      <input  class="input"  type="text"   [(ngModel)]="muscleGroup" name="muscleGroup" placeholder="Muscle group" autocomplete="off">
-      <button class="button" type="button" [disabled]="muscleGroup.length <= 0" (click)="addMuscleGroup( addExerciseForm )">Add muscle group</button>
 
-      <div *ngIf="newExercise.muscleGroups.length > 0">
-        <ion-list>
-          <ion-item *ngFor="let mg of newExercise.muscleGroups">
-            <ion-label>{{mg}}</ion-label>
-            <ion-icon name="close" end (click)="removeMuscleGroup(mg)"></ion-icon>
-          </ion-item>
-        </ion-list>
+      <div class="muscle-group">
+        <input  class="input"  type="text"   [(ngModel)]="muscleGroup" name="muscleGroup" placeholder="Muscle group" autocomplete="off">
+        <button class="button" type="button" (click)="addMuscleGroup()">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="muscle-group-inserted" *ngIf="newExercise.muscleGroups.length > 0">
+        <div class="item" *ngFor="let mg of newExercise.muscleGroups">
+          <div class="input">{{ mg }}</div>
+          <button class="button" type="button" (click)="removeMuscleGroup(mg)">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
 
       <h2 class="title">Days to be done</h2>
@@ -59,7 +64,7 @@
       <input class="input" [(ngModel)]="newExercise.video" name="video" placeholder="Video description">
       <!-- [pattern]="http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?=]*)?" -->
 
-      <button class="button width-100" type="submit" [disabled]="!addExerciseForm.form.valid">Add exercise</button>
+      <button class="button width-100" type="submit" [disabled]="!addExerciseForm.form.valid" id="submit_btn">Add exercise</button>
 
     </form>
   </section>

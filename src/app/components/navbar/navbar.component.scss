@@ -1,6 +1,7 @@
 // Colors
-
-$blue : rgb(050,115,225);
+@import '../../../theme/my-colors.scss';
+//$blue : rgb(050,115,225);
+$blue : color(blue, darker);
 $black: rgb(040,040,040);
 $lightblack: rgb(055,055,055);
 
@@ -23,12 +24,12 @@ $lightblack: rgb(055,055,055);
         text-transform: uppercase;
         background: none;
         padding: 15px 25px;
+        position: relative;
+        z-index: 25;
 
         &.return .icon {
-            font-size: 20px;
+            font-size: 15px;
             font-weight: 900;
-            position: relative;
-            top: 1px;
         }
     }
 

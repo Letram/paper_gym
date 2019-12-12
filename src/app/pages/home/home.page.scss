@@ -1,6 +1,7 @@
 // Colors
-
-$blue : rgb(050,115,225);
+@import '../../../theme/my-colors.scss';
+//$blue : rgb(050,115,225);
+$blue: color(blue, darker);
 $black: rgb(050,050,050);
 $lightblack: rgb(055,055,055);
 
@@ -22,6 +23,7 @@ $lightblack: rgb(055,055,055);
     border-radius: 2px;
     box-shadow: 5px 5px 10px rgba(0,0,0,.5);
     margin: 0 15px 15px;
+    width: 100%;
     height: 125px;
 
     .thumbnail {

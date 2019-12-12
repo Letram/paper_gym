@@ -1,7 +1,9 @@
 
 // Colors
+@import '../../../theme/my-colors.scss';
 
-$blue : rgb(050,115,225);
+$blue : color(blue, darker);
+//$blue : rgb(050,115,225);
 $black: rgb(040,040,040);
 $lightblack: rgb(055,055,055);
 
@@ -59,6 +61,7 @@ $lightblack: rgb(055,055,055);
         text-transform: uppercase;
         background: none;
         border: 2px solid $blue;
+        border-radius: 2px;
         padding: 15px 25px;
         margin: 0 0 10px;
         position: relative;
@@ -79,25 +82,94 @@ $lightblack: rgb(055,055,055);
             height: 50%;
         }
     }
+}
 
-    .days {
-        padding-left: 25px;
+.days {
+    padding-left: 25px;
 
-        .day {
-            margin-bottom: 10px;
+    .day {
+        margin-bottom: 10px;
 
-            .checkbox {
-                position: relative;
-                top: 1px;
-            }
+        .checkbox {
+            position: relative;
+            top: 1px;
+        }
 
-            .name {
-                color: white;
-                font-size: 15px;
-                font-style: italic;
-                font-weight: 600;
-                text-transform: uppercase;
-                margin-left: 10px;
+        .name {
+            color: white;
+            font-size: 15px;
+            font-style: italic;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 10px;
+        }
+    }
+}
+
+&:disabled{
+    background: darken($blue, 20%);
+    color: darken(white, 40%);
+}
+
+// Muscle Group
+
+.muscle-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .input {
+        margin-right: 10px;
+        width: 100%;
+    }
+
+    .button {
+        flex-shrink: 0;
+        background: $blue;
+        background: none;
+        padding: 0;
+        width: 49px;
+        height: 49px;
+
+        &::after {
+            background: none;
+            border-left: 45px solid transparent;
+            border-right: 0 solid transparent;
+            border-bottom: 45px solid rgba(255,255,255,.05);
+            width: 0;
+            height: 0;
+        }
+    }
+}
+
+.muscle-group-inserted {
+    margin-top: 25px;
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
+        .input {
+            margin-right: 10px;
+            width: 100%;
+        }
+    
+        .button {
+            flex-shrink: 0;
+            background: $blue;
+            background: none;
+            padding: 0;
+            width: 49px;
+            height: 49px;
+
+            &::after {
+                background: none;
+                border-left: 45px solid transparent;
+                border-right: 0 solid transparent;
+                border-bottom: 45px solid rgba(255,255,255,.05);
+                width: 0;
+                height: 0;
             }
         }
     }
