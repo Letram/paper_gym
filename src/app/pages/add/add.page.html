@@ -16,16 +16,21 @@
       <input    class="input" type="text" [(ngModel)]="newExercise.machine"     name="machine"     placeholder="Exercise machine"     autocomplete="off">
 
       <h2 class="title">Muscle group</h2>
-      <input  class="input"  type="text"   [(ngModel)]="muscleGroup" name="muscleGroup" placeholder="Muscle group" autocomplete="off">
-      <button class="button" type="button" [disabled]="muscleGroup.length <= 0" (click)="addMuscleGroup( addExerciseForm )">Add muscle group</button>
 
-      <div *ngIf="newExercise.muscleGroups.length > 0">
-        <ion-list>
-          <ion-item *ngFor="let mg of newExercise.muscleGroups">
-            <ion-label>{{mg}}</ion-label>
-            <ion-icon name="close" end (click)="removeMuscleGroup(mg)"></ion-icon>
-          </ion-item>
-        </ion-list>
+      <div class="muscle-group">
+        <input  class="input"  type="text"   [(ngModel)]="muscleGroup" name="muscleGroup" placeholder="Muscle group" autocomplete="off">
+        <button class="button" type="button" (click)="addMuscleGroup()">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="muscle-group-inserted" *ngIf="newExercise.muscleGroups.length > 0">
+        <div class="item" *ngFor="let mg of newExercise.muscleGroups">
+          <div class="input">{{ mg }}</div>
+          <button class="button" type="button" (click)="removeMuscleGroup(mg)">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
 
       <h2 class="title">Days to be done</h2>
