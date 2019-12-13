@@ -7,13 +7,13 @@
     <!--     FORM     -->
     <!-- ──────────── -->
 
-    <form class="form" #addExerciseForm="ngForm" (ngSubmit)="onAddExercise(addExerciseForm)">
+    <form class="form" #addExerciseForm="ngForm" (ngSubmit)="onAddExercise()">
 
       <h2 class="title margin-top-0">Exercise information</h2>
 
-      <input    class="input" type="text" [(ngModel)]="newExercise.name"        name="name"        placeholder="Exercise name"        autocomplete="off" required>
-      <textarea class="input" type="text" [(ngModel)]="newExercise.description" name="description" placeholder="Exercise description" autocomplete="off" rows="5"></textarea>
-      <input    class="input" type="text" [(ngModel)]="newExercise.machine"     name="machine"     placeholder="Exercise machine"     autocomplete="off">
+      <input    type="text" [(ngModel)]="newExercise.name"        name="name"        placeholder="Exercise name"        autocomplete="off" class="input required">
+      <textarea type="text" [(ngModel)]="newExercise.description" name="description" placeholder="Exercise description" autocomplete="off" class="input" rows="5"></textarea>
+      <input    type="text" [(ngModel)]="newExercise.machine"     name="machine"     placeholder="Exercise machine"     autocomplete="off" class="input">
 
       <h2 class="title">Muscle group</h2>
 
@@ -64,7 +64,10 @@
         </div>
       </div>
 
-      <button class="button width-100" type="submit" [disabled]="!addExerciseForm.form.valid" id="submit_btn">Add exercise</button>
+      <div class="is-relative">
+        <button id="submit_btn" class="button width-100 margin-0" type="submit">Add exercise</button>
+        <span class="error-message">{{ errorMessage }}</span>
+      </div>
 
     </form>
   </section>

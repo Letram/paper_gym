@@ -171,3 +171,17 @@ $lightblack: rgb(055,055,055);
         }
     }
 }
+
+.error-message {
+    color: red;
+    font-size: 11px;
+    text-align: center;
+    line-height: 15px;
+    padding: 0 50px;
+    position: absolute;
+    left: 0;
+    bottom: -25px;
+    width: 100%;
+    opacity: 0;
+    transition: .25s ease-in;
+}
