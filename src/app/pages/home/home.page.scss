@@ -89,3 +89,20 @@ $lightblack: rgb(055,055,055);
     width: 55px;
     height: 55px;
 }
+
+// No exercises
+
+.no-exercises {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: color(beige, base);
+    font-style: italic;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
