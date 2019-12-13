@@ -85,6 +85,7 @@ $lightblack: rgb(055,055,055);
 }
 
 .days {
+    margin-bottom: 35px;
     padding-left: 25px;
 
     .day {
@@ -104,11 +105,6 @@ $lightblack: rgb(055,055,055);
             margin-left: 10px;
         }
     }
-}
-
-&:disabled{
-    background: darken($blue, 20%);
-    color: darken(white, 40%);
 }
 
 // Muscle Group
@@ -151,6 +147,7 @@ $lightblack: rgb(055,055,055);
         justify-content: space-between;
     
         .input {
+            box-shadow: none;
             margin-right: 10px;
             width: 100%;
         }

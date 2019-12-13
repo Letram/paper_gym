@@ -33,15 +33,6 @@
         </div>
       </div>
 
-      <h2 class="title">Days to be done</h2>
-      
-      <div class="days" *ngIf="newExercise.days !== undefined">
-        <div class="day" *ngFor="let dayName of dayNames; let i = index">
-          <input class="checkbox" type="checkbox" [(ngModel)]="newExercise.days[i]" name="{{ dayNames[i] }}">
-          <span class="name">{{ dayNames[i] }}</span>
-        </div>
-      </div>
-
       <h2 class="title">Images</h2>
       
       <button class="button" type="button" (click)="pickImages()">Select images</button>
@@ -61,8 +52,17 @@
 
       <h2 class="title">Video</h2>
 
-      <input class="input" [(ngModel)]="newExercise.video" name="video" placeholder="Video description">
+      <input class="input" [(ngModel)]="newExercise.video" name="video" placeholder="Video URL">
       <!-- [pattern]="http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?=]*)?" -->
+
+      <h2 class="title">Days to be done</h2>
+      
+      <div class="days" *ngIf="newExercise.days !== undefined">
+        <div class="day" *ngFor="let dayName of dayNames; let i = index">
+          <input class="checkbox" type="checkbox" [(ngModel)]="newExercise.days[i]" name="{{ dayNames[i] }}">
+          <span class="name">{{ dayNames[i] }}</span>
+        </div>
+      </div>
 
       <button class="button width-100" type="submit" [disabled]="!addExerciseForm.form.valid" id="submit_btn">Add exercise</button>
 
