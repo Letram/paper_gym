@@ -2,18 +2,22 @@
   <section id="add">
 
     <app-navbar [returnButton]="true"></app-navbar>
-  
-    <!-- ──────────── -->
-    <!--     FORM     -->
-    <!-- ──────────── -->
 
     <form class="form" #addExerciseForm="ngForm" (ngSubmit)="onAddExercise()">
+
+      <!-- ─────────────────── -->
+      <!--     INFORMATION     -->
+      <!-- ─────────────────── -->
 
       <h2 class="title margin-top-0">Exercise information</h2>
 
       <input    type="text" [(ngModel)]="newExercise.name"        name="name"        placeholder="Exercise name"        autocomplete="off" class="input required">
       <textarea type="text" [(ngModel)]="newExercise.description" name="description" placeholder="Exercise description" autocomplete="off" class="input" rows="5"></textarea>
       <input    type="text" [(ngModel)]="newExercise.machine"     name="machine"     placeholder="Exercise machine"     autocomplete="off" class="input">
+
+      <!-- ──────────────────── -->
+      <!--     MUSCLE GROUP     -->
+      <!-- ──────────────────── -->
 
       <h2 class="title">Muscle group</h2>
 
@@ -33,27 +37,35 @@
         </div>
       </div>
 
+      <!-- ────────────── -->
+      <!--     IMAGES     -->
+      <!-- ────────────── -->
+
       <h2 class="title">Images</h2>
       
-      <button class="button" type="button" (click)="pickImages()">Select images</button>
-      <!-- <ion-input type="file" accept="image/*" (change) = "imagePicked($event)">Select images</ion-input> -->
+      <button class="add-image" type="button" (click)="pickImages()">
+        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+      </button>
 
-      <ion-item>  
-        <ion-row *ngIf="newExercise.images">  
-          <ion-col style="padding:10px;" size="4" *ngFor="let image of newExercise.images; let imageIndex = index">  
-            <ion-card>  
-              <ion-thumbnail item-start (click)="removeImage(imageIndex)">  
-                <img src={{image.url}} alt="Sample Image">  
-              </ion-thumbnail>  
-            </ion-card>  
-          </ion-col>  
-        </ion-row>  
-      </ion-item>
+      <div class="images" *ngIf="newExercise.images">
+        <div class="image" *ngFor="let image of newExercise.images; let imageIndex = index">
+          <ion-thumbnail item-start (click)="removeImage(imageIndex)">  
+            <img [src]="image.url" alt="Image">
+          </ion-thumbnail>  
+        </div>
+      </div>
+
+      <!-- ───────────── -->
+      <!--     VIDEO     -->
+      <!-- ───────────── -->
 
       <h2 class="title">Video</h2>
 
       <input class="input" [(ngModel)]="newExercise.video" name="video" placeholder="Video URL">
-      <!-- [pattern]="http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?=]*)?" -->
+
+      <!-- ──────────── -->
+      <!--     DAYS     -->
+      <!-- ──────────── -->
 
       <h2 class="title">Days to be done</h2>
       

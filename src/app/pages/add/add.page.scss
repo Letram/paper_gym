@@ -3,7 +3,6 @@
 @import '../../../theme/my-colors.scss';
 
 $blue : color(blue, darker);
-//$blue : rgb(050,115,225);
 $black: rgb(040,040,040);
 $lightblack: rgb(055,055,055);
 
@@ -16,7 +15,7 @@ $lightblack: rgb(055,055,055);
 }
 
 .title {
-    color: white;
+    color: color(beige, base);
     font-size: 15px;
     font-style: italic;
     font-weight: 600;
@@ -26,7 +25,23 @@ $lightblack: rgb(055,055,055);
     margin: 25px 0 35px;
 }
 
-// Form
+.error-message {
+    color: red;
+    font-size: 11px;
+    text-align: center;
+    line-height: 15px;
+    padding: 0 50px;
+    position: absolute;
+    left: 0;
+    bottom: -25px;
+    width: 100%;
+    opacity: 0;
+    transition: .25s ease-in;
+}
+
+// ──────────── //
+//     FORM     //
+// ──────────── //
 
 .form {
     padding: 0 25px;
@@ -36,7 +51,7 @@ $lightblack: rgb(055,055,055);
 
     .input {
         resize: none;
-        color: white;
+        color: color(beige, base);
         font-size: 15px;
         background: none;
         border: 1px solid $black;
@@ -54,7 +69,7 @@ $lightblack: rgb(055,055,055);
     
     .button {
         display: block;
-        color: white;
+        color: color(beige, base);
         font-size: 15px;
         font-style: italic;
         font-weight: 600;
@@ -97,7 +112,7 @@ $lightblack: rgb(055,055,055);
         }
 
         .name {
-            color: white;
+            color: color(beige, base);
             font-size: 15px;
             font-style: italic;
             font-weight: 600;
@@ -172,16 +187,17 @@ $lightblack: rgb(055,055,055);
     }
 }
 
-.error-message {
-    color: red;
-    font-size: 11px;
-    text-align: center;
-    line-height: 15px;
-    padding: 0 50px;
-    position: absolute;
-    left: 0;
-    bottom: -25px;
-    width: 100%;
-    opacity: 0;
-    transition: .25s ease-in;
+// ───────────── //
+//     IMAGE     //
+// ───────────── //
+
+.add-image {
+    color: color(beige, base);
+    font-size: 25px;
+    background: rgba(250,240,230,.025);
+    border: 1px solid rgba(250,240,230,.35);
+    border-radius: 2px;
+    outline: none;
+    padding: 25px;
+    margin-left: 25px;
 }

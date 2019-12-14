@@ -29,12 +29,12 @@
 
 // Colors
 
-$blue: rgb(50,115,225);
+$blue : color(blue, darker);
 
 // Text selection
 
-::-moz-selection { color: white; background: #3171e0 }
-::selection      { color: white; background: #3171e0 }
+::-moz-selection { color: color(beige, base); background: color(blue, darker) }
+::selection      { color: color(beige, base); background: color(blue, darker) }
 
 // Placeholder
 
@@ -57,7 +57,7 @@ $blue: rgb(50,115,225);
 
 @keyframes auto-complete {
     to {
-        color: white;
+        color: color(beige, base);
         font-size: 15px;
         font-family: 'Roboto', sans-serif;
         background: none;
