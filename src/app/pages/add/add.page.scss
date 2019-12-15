@@ -1,5 +1,6 @@
 
 // Colors
+
 @import '../../../theme/my-colors.scss';
 
 $blue : color(blue, darker);
@@ -7,23 +8,6 @@ $black: rgb(040,040,040);
 $lightblack: rgb(055,055,055);
 
 // General
-
-#add {
-    background: $lightblack;
-    min-height: 100vh;
-    padding-bottom: 50px;
-}
-
-.title {
-    color: color(beige, base);
-    font-size: 15px;
-    font-style: italic;
-    font-weight: 600;
-    text-transform: uppercase;
-    border-bottom: 2px solid $blue;
-    padding: 0 15px 15px;
-    margin: 25px 0 35px;
-}
 
 .error-message {
     color: red;
