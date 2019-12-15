@@ -59,10 +59,12 @@ export class HomePage implements OnInit {
 
     let id = `#card${ index }`;
 
-    if ( $( id ).hasClass('active') )
+    if ( $( id ).hasClass('active') ) {
       $( id ).removeClass( 'active' );
-    else
+    }
+    else {
       $( id ).addClass( 'active' );
+    }
 
   }
 
