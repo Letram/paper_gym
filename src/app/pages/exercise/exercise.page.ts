@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit                        } from '@angular/core';
+import { SafeResourceUrl, DomSanitizer            } from '@angular/platform-browser';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+
+// Models
 import { Exercise } from 'src/app/models/Exercise';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-exercise',
@@ -12,34 +14,32 @@ export class ExercisePage implements OnInit {
 
   exercise: Exercise;
   trustedVideoUrl: SafeResourceUrl;
-  sliderOptions: any = {
-    initialSlide: 1,
-    speed: 400
-  };
+  
+  // ─────────────── //
+  //     METHODS     //
+  // ─────────────── //
+
   constructor(private _route: ActivatedRoute, private _router: Router, private _domSanitizer: DomSanitizer) {
     this.exercise = new Exercise();
   }
 
   ngOnInit() {
-    console.log("Exercise details page init...");
+
     this._route.queryParams.subscribe(
       (_) => {
-        if(this._router.getCurrentNavigation().extras.state){
+        if ( this._router.getCurrentNavigation().extras.state ) {
           this.exercise = this._router.getCurrentNavigation().extras.state.exercise;
-          console.log(this.exercise);
         }
       }
     );
-    if(this.exercise.video){
-      this.trustedVideoUrl = this._domSanitizer.bypassSecurityTrustResourceUrl(this.transform(this.exercise.video));
+
+    if (this.exercise.video) {
+      this.trustedVideoUrl = this._domSanitizer.bypassSecurityTrustResourceUrl( this.transform( this.exercise.video ));
     }
   }
 
-  private transform(videoURL: string){
-    return videoURL.replace("youtu.be", "youtube.com/embed");
-  }
-
   editExercise(){
+
     let navigationExtras: NavigationExtras = {
       state: {
         exercise: this.exercise,
@@ -47,7 +47,14 @@ export class ExercisePage implements OnInit {
       }
     };
 
-    this._router.navigate(["add"], navigationExtras);
+    this._router.navigate( ["add"], navigationExtras );
   }
 
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+
+  private transform(videoURL: string){
+    return videoURL.replace("youtu.be", "youtube.com/embed");
+  }
 }

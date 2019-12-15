@@ -1,56 +1,59 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{exercise.name}}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-slides
-    pager="true"
-    paginationType="progress"
-    [options]="sliderOptions"
-    *ngIf="exercise.images.length > 0"
-  >
-    <ion-slide *ngFor="let img of exercise.images">
-      <img [src]="img.url" alt="" />
-    </ion-slide>
-  </ion-slides>
-  <section class="details machine" *ngIf="exercise.machine">
-    {{exercise.machine}}
+  <section class="dark-bg">
+
+    <app-navbar [returnButton]="true"></app-navbar>
+
+    <div class="form">
+
+      <h2 class="title margin-top-0">Información</h2>
+
+      <div class="item first" *ngIf="exercise.machine">
+        {{ exercise.name }}
+      </div>
+
+      <div class="item" *ngIf="exercise.machine">
+        {{ exercise.machine }}
+      </div>
+
+      <div class="item" *ngIf="exercise.description">
+        {{ exercise.description }}
+      </div>
+
+      <div class="item" *ngIf="exercise.muscleGroups">
+        <ng-container *ngFor="let mg of exercise.muscleGroups">
+          {{ mg }},&nbsp;
+        </ng-container>
+      </div>
+
+      <ng-container *ngIf="exercise.images.length > 0">
+        <div *ngFor="let img of exercise.images">
+          <img [src]="img.url" alt="" />
+        </div>
+      </ng-container>
+
+      <div *ngIf="exercise.video">
+        <iframe width="100%" height="315" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <h2 class="title">Avances</h2>
+
+      <div class="item first">
+        Número de series
+      </div>
+
+      <div class="item">
+        Número de repeticiones
+      </div>
+
+      <div class="item">
+        Tiempo de descanso
+      </div>
+
+      <!-- Edit exercise -->
+      <a class="edit" (click)="editExercise()">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </a>
+
+    </div>
   </section>
-  <ion-item>
-    <ion-row>
-      <ion-col size="6">
-        <section class="details description">
-          {{exercise.description}}
-        </section>
-      </ion-col>
-      <ion-col size="6">
-        <section class="details muscleGroup">
-          <ion-list>
-            <ion-item *ngFor="let mg of exercise.muscleGroups">
-              <ion-label>{{mg}}</ion-label>
-            </ion-item>
-          </ion-list>
-        </section>
-      </ion-col>
-    </ion-row>
-  </ion-item>
-  <section class="details video" *ngIf="exercise.video">
-    <iframe
-      width="100%"
-      height="315"
-      [src]="trustedVideoUrl"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
-  </section>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="dark-blue" (click)="editExercise()">
-      <ion-icon name="create"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
