@@ -7,10 +7,58 @@ $lightblack: rgb(055,055,055);
 
 // General
 
-#home {
-    background: $lightblack;
-    min-height: 100vh;
-    padding-bottom: 50px;
+.exercises {
+    padding: 0 25px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 650px;
+
+    .wrapper {
+        box-shadow: 5px 5px 10px rgba(0,0,0,.5);
+        margin-bottom: 15px;
+        position: relative;
+        width: 100%;
+
+        .operations {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 25;
+            width: 100px;
+            height: 125px;
+
+            .edit,
+            .delete {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                width: 50px;
+                height: 125px;
+
+                .icon {
+                    color: color(beige, base);
+                    font-size: 18px;
+                }
+
+                &::after {
+                    content: '';
+                    background: linear-gradient(to right, rgba(0,0,0,.5), transparent);
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    width: 10px;
+                }
+            }
+
+            .edit   { background: orange }
+            .delete { background: red    }
+        }
+    }
 }
 
 // Card
@@ -21,10 +69,12 @@ $lightblack: rgb(055,055,055);
     justify-content: space-between;
     background: $black;
     border-radius: 2px;
-    box-shadow: 5px 5px 10px rgba(0,0,0,.5);
-    margin: 0 15px 15px;
+    position: relative;
+    right: 0;
+    z-index: 50;
     width: 100%;
     height: 125px;
+    transition: .25s ease-out;
 
     .thumbnail {
         flex-shrink: 0;

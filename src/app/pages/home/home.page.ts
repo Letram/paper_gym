@@ -7,6 +7,9 @@ import { Exercise } from 'src/app/models/Exercise';
 // Services
 import { ExerciseService } from 'src/app/services/exercise.service';
 
+// jQuery
+declare var $: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -15,6 +18,15 @@ import { ExerciseService } from 'src/app/services/exercise.service';
 export class HomePage implements OnInit {
 
   public exercises: Exercise[] = [];
+
+  configuracion = {
+    loop: false,
+    spaceBetween: 0,
+    slidesPerView: 'auto',
+    autoHeight: true,
+    pagination: false,
+    navigation: false
+  };
 
   // ─────────────── //
   //     METHODS     //
@@ -44,13 +56,16 @@ export class HomePage implements OnInit {
   }
 
   openExercise( exerciseToOpen: Exercise ) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        exercise: exerciseToOpen
-      }
-    };
 
-    this.router.navigate( ['exercise'], navigationExtras );
+    $( '.card' ).css( 'right', '100px');
+
+    // let navigationExtras: NavigationExtras = {
+    //   state: {
+    //     exercise: exerciseToOpen
+    //   }
+    // };
+
+    // this.router.navigate( ['exercise'], navigationExtras );
   }
 
   removeExercise(exerciseId:string){
