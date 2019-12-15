@@ -115,6 +115,10 @@ $lightblack: rgb(055,055,055);
         }
     }
 
+    &.active {
+        right: 100px;
+    }
+
     &:last-child {
         margin-bottom: 0;
     }

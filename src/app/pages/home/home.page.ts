@@ -55,17 +55,26 @@ export class HomePage implements OnInit {
 
   }
 
+  showOptions( index: number ) {
+
+    let id = `#card${ index }`;
+
+    if ( $( id ).hasClass('active') )
+      $( id ).removeClass( 'active' );
+    else
+      $( id ).addClass( 'active' );
+
+  }
+
   openExercise( exerciseToOpen: Exercise ) {
 
-    $( '.card' ).css( 'right', '100px');
+    let navigationExtras: NavigationExtras = {
+      state: {
+        exercise: exerciseToOpen
+      }
+    };
 
-    // let navigationExtras: NavigationExtras = {
-    //   state: {
-    //     exercise: exerciseToOpen
-    //   }
-    // };
-
-    // this.router.navigate( ['exercise'], navigationExtras );
+    this.router.navigate( ['exercise'], navigationExtras );
   }
 
   removeExercise(exerciseId:string){

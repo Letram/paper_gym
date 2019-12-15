@@ -5,7 +5,7 @@
 
     <div class="exercises">
       <div class="wrapper" *ngFor="let exercise of exercises; let i = index">
-        <div class="card" (click)="openExercise( exercise )">
+        <div [id]="'card' + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( i )">
           <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
           <div class="information">
             <div class="name">{{ exercise.name }}</div>
