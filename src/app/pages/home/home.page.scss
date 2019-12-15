@@ -14,10 +14,12 @@ $lightblack: rgb(055,055,055);
     max-width: 650px;
 
     .wrapper {
+        border-radius: 2px;
         box-shadow: 5px 5px 10px rgba(0,0,0,.5);
         margin-bottom: 15px;
         position: relative;
         width: 100%;
+        overflow: hidden;
 
         .operations {
             display: flex;
@@ -27,7 +29,7 @@ $lightblack: rgb(055,055,055);
             top: 0;
             right: 0;
             z-index: 25;
-            width: 100px;
+            width: 150px;
             height: 125px;
 
             .edit,
@@ -36,12 +38,12 @@ $lightblack: rgb(055,055,055);
                 align-items: center;
                 justify-content: center;
                 position: relative;
-                width: 50px;
+                width: 75px;
                 height: 125px;
 
                 .icon {
                     color: color(beige, base);
-                    font-size: 18px;
+                    font-size: 20px;
                 }
 
                 &::after {
@@ -68,7 +70,6 @@ $lightblack: rgb(055,055,055);
     align-items: center;
     justify-content: space-between;
     background: $black;
-    border-radius: 2px;
     position: relative;
     right: 0;
     z-index: 50;
@@ -116,7 +117,7 @@ $lightblack: rgb(055,055,055);
     }
 
     &.active {
-        right: 100px;
+        right: 150px;
     }
 
     &:last-child {
