@@ -15,6 +15,7 @@ $lightblack: rgb(055,055,055);
     box-shadow: 0 5px 10px rgba(0,0,0,.5);
     margin-bottom: 50px;
     position: relative;
+    z-index: 100;
 
     .item {
         color: white;
