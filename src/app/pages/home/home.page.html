@@ -18,8 +18,8 @@
         <div [id]="'card' + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( i )">
           <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
           <div class="information">
-            <div class="name">{{ exercise.name }}</div>
-            <div class="muscle-group">{{ exercise.muscleGroups.join(", ") }}</div>
+            {{ exercise.name }}
+            <!-- <div class="muscle-group">{{ exercise.muscleGroups.join(", ") }}</div> -->
           </div>
         </div>
         <div class="operations">
