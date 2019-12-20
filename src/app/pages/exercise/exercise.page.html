@@ -5,7 +5,7 @@
 
     <div class="form">
 
-      <h2 class="title margin-top-0">Información</h2>
+      <h2 class="title margin-top-0">Information</h2>
 
       <div class="item first" *ngIf="exercise.name">
         {{ exercise.name }}
@@ -23,39 +23,45 @@
         <ng-container *ngFor="let mg of exercise.muscleGroups">
           {{ mg }},&nbsp;
         </ng-container>
+      </div>      
+
+      <h2 class="title">Progress</h2>
+
+      <div class="item separate first">
+        <span>Peso</span>
       </div>
 
-      <ng-container *ngIf="exercise.images.length > 0">
-        <div *ngFor="let img of exercise.images">
-          <img [src]="img.url" alt="" />
-        </div>
-      </ng-container>
-
-      <div *ngIf="exercise.video">
-        <iframe width="100%" height="315" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
+      <div class="item separate">
+        <span>Número de series</span>
+        <span>{{ exercise.series }}</span>
       </div>
 
-      <h2 class="title">Avances</h2>
-
-      <div class="item first">
-        Número de series
-        {{ exercise.series }}
+      <div class="item separate">
+        <span>Número de repeticiones</span>
+        <span>{{ exercise.reps }}</span>
       </div>
 
-      <div class="item">
-        Número de repeticiones
-        {{ exercise.reps }}
-      </div>
-
-      <div class="item">
-        Tiempo de descanso
-        {{ exercise.restTime }}
+      <div class="item separate">
+        <span>Tiempo de descanso</span>
+        <span>{{ exercise.restTime }}</span>
       </div>
 
       <!-- Edit exercise -->
       <a class="edit" (click)="editExercise()">
         <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
+
+      <h2 class="title" *ngIf="exercise.images.length > 0 || exercise.video">Multimedia</h2>
+
+      <ng-container *ngIf="exercise.images.length > 0">
+        <div *ngFor="let img of exercise.images">
+          <img class="machine-image" [src]="img.url" alt="" />
+        </div>
+      </ng-container>
+
+      <div class="video" *ngIf="exercise.video">
+        <iframe width="100%" height="315" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
+      </div>
 
     </div>
   </section>
