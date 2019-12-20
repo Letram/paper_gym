@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{exercise.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides
+    pager="true"
+    paginationType="progress"
+    [options]="sliderOptions"
+    *ngIf="exercise.images.length > 0"
+  >
+    <ion-slide *ngFor="let img of exercise.images">
+      <img [src]="img.url" alt="" />
+    </ion-slide>
+  </ion-slides>
+  <section class="details machine" *ngIf="exercise.machine">
+    {{exercise.machine}}
+  </section>
+  <ion-item>
+    <ion-row>
+      <ion-col size="6">
+        <section class="details description">
+          {{exercise.description}}
+        </section>
+      </ion-col>
+      <ion-col size="6">
+        <section class="details muscleGroup">
+          <ion-list>
+            <ion-item *ngFor="let mg of exercise.muscleGroups">
+              <ion-label>{{mg}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </section>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <section class="details video" *ngIf="exercise.video">
+    <iframe
+      width="100%"
+      height="315"
+      [src]="trustedVideoUrl"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </section>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark-blue" (click)="updateRestTime(5)">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

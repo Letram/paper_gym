@@ -10,9 +10,8 @@ export class Exercise {
   series: number;
   reps: number;
   restTime: number;
-  id:string;
+
   constructor() {
-    this.id="";
     this.name = "";
     this.description = "";
     this.machine = "";

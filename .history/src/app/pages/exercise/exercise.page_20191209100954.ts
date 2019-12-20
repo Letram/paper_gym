@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Exercise } from 'src/app/models/Exercise';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
-import { ExerciseService } from 'src/app/services/exercise.service';
 
 @Component({
   selector: 'app-exercise',
@@ -17,11 +16,7 @@ export class ExercisePage implements OnInit {
     initialSlide: 1,
     speed: 400
   };
-  constructor(
-    private _route: ActivatedRoute, 
-    private _router: Router,
-    private _domSanitizer: DomSanitizer,
-    private _exerciseService: ExerciseService) {
+  constructor(private _route: ActivatedRoute, private _router: Router, private _domSanitizer: DomSanitizer) {
     this.exercise = new Exercise();
   }
 
@@ -32,14 +27,12 @@ export class ExercisePage implements OnInit {
         if(this._router.getCurrentNavigation().extras.state){
           this.exercise = this._router.getCurrentNavigation().extras.state.exercise;
           console.log(this.exercise);
-          if(this.exercise.video){
-            this.trustedVideoUrl = this._domSanitizer.bypassSecurityTrustResourceUrl(this.transform(this.exercise.video));
-          }
-        }else{
-          this._router.navigate(["home"]);
         }
       }
     );
+    if(this.exercise.video){
+      this.trustedVideoUrl = this._domSanitizer.bypassSecurityTrustResourceUrl(this.transform(this.exercise.video));
+    }
   }
 
   private transform(videoURL: string){
@@ -56,9 +49,5 @@ export class ExercisePage implements OnInit {
 
     this._router.navigate(["add"], navigationExtras);
   }
-  
-  updateParam(param:string, amount:number): void{
-    this.exercise[param] = (this.exercise[param] + amount) <= 1 ? 1 : (this.exercise[param] + amount);
-    this._exerciseService.updateExercise(this.exercise, this.exercise.id);
-  }
+
 }
