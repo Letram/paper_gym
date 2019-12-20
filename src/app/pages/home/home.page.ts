@@ -20,13 +20,14 @@ export class HomePage implements OnInit {
   public exercises: Exercise[] = [];
 
   configuracion = {
-    loop: false,
     spaceBetween: 0,
     slidesPerView: 'auto',
+    freeMode: true,
     autoHeight: true,
-    pagination: false,
-    navigation: false
   };
+
+  days = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'All' ];
+  selectedDay = new Date().getDay() - 1;
 
   // ─────────────── //
   //     METHODS     //
@@ -35,7 +36,7 @@ export class HomePage implements OnInit {
   constructor( private _exerciseService: ExerciseService, private router: Router ) {}
 
   ngOnInit() {
-    
+
     this._exerciseService.getExercises().subscribe(
       response => {
         this.exercises = [];
@@ -57,12 +58,11 @@ export class HomePage implements OnInit {
 
   showOptions( index: number ) {
 
-    let id = `#card${ index }`;
+    const id = `#card${ index }`;
 
     if ( $( id ).hasClass('active') ) {
       $( id ).removeClass( 'active' );
-    }
-    else {
+    } else {
       $( id ).addClass( 'active' );
     }
 
@@ -98,5 +98,11 @@ export class HomePage implements OnInit {
     };
 
     this.router.navigate( ['add'], navigationExtras );
+  }
+
+  changeDay( day: number ) {
+
+    this.selectedDay = day === 7 ? -1 : day;
+
   }
 }

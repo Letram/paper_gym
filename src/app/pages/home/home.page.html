@@ -4,7 +4,17 @@
     <app-navbar></app-navbar>
 
     <div class="exercises">
-      <div class="wrapper" *ngFor="let exercise of exercises; let i = index">
+
+      <!-- Days -->
+      <ion-slides class="days" [options]="configuracion">
+        <ion-slide class="day" *ngFor="let day of days; index as i" [ngClass]="{ 'active' : i == selectedDay }" (click)="changeDay( i )">
+          {{ day }}
+        </ion-slide>
+      </ion-slides>
+
+      <ng-container *ngFor="let exercise of exercises; let i = index">
+      
+      <div class="wrapper" *ngIf="exercise.days[selectedDay] || selectedDay == -1">
         <div [id]="'card' + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( i )">
           <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
           <div class="information">
@@ -21,6 +31,7 @@
           </span>
         </div>
       </div>
+      </ng-container>
     </div>
   
     <!-- Warning when no exercises -->
