@@ -1,50 +1,26 @@
 <ion-content>
-  <section id="home">
+  <section class="dark-bg">
 
     <app-navbar></app-navbar>
-    
-    <!-- List of exercises -->
-    <div class="exercises" *ngIf="exercises.length > 0">
 
-    <!-- Sliding item with icon end options on end side 
-        TODO -> Maquetar esto para que quede todo guapo
-    -->
-    <ion-item-sliding class="itemjiji" *ngFor="let exercise of exercises" style="background: red">
-      <ion-item class="itemjiji" (click)="openExercise( exercise )" style="background: red">
-        <div class="card">
+    <div class="exercises">
+      <div class="wrapper" *ngFor="let exercise of exercises; let i = index">
+        <div [id]="'card' + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( i )">
           <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
           <div class="information">
             <div class="name">{{ exercise.name }}</div>
             <div class="muscle-group">{{ exercise.muscleGroups.join(", ") }}</div>
           </div>
         </div>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="danger" (click)="removeExercise( exercise.id )">
-          <ion-icon slot="end" name="trash"></ion-icon>
-          Remove
-        </ion-item-option>
-        <ion-item-option color="primary" (click)="editExercise( exercise )">
-          <ion-icon slot="end" name="create"></ion-icon>
-          Edit
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-
-      <!--
-
-      <div class="card" *ngFor="let exercise of exercises" (click)="openExercise( exercise )">
-  
-        <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
-
-        <div class="information">
-          <div class="name">{{ exercise.name }}</div>
-          <div class="muscle-group">{{ exercise.muscleGroups.join(", ") }}</div>
+        <div class="operations">
+          <span class="edit" (click)="editExercise( exercise )">
+            <i class="icon fa fa-pencil"></i>
+          </span>
+          <span class="delete" (click)="removeExercise( exercise.id )">
+            <i class="icon fa fa-trash"></i>
+          </span>
         </div>
-  
-      </div> 
-
-    -->
+      </div>
     </div>
   
     <!-- Warning when no exercises -->

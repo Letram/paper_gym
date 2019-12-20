@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent {
 
-  @Input() returnButton: boolean = false;
+  @Input() returnButton = false;
 
   // ─────────────── //
   //     METHODS     //
@@ -24,7 +24,8 @@ export class NavbarComponent {
     this.navController.back();
   }
 
-  logout(){
+  logout() {
+    console.log( 'jiji' );
     this.authService.logout().then( () => this.router.navigate(['']) );
   }
 

@@ -19,8 +19,9 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 
 // Gesture config
-import {IonicGestureConfig} from "./utils/IonicGestureConfig";
-import {LongPressModule} from "ionic-long-press";
+import { LongPressModule    } from "ionic-long-press";
+import { IonicGestureConfig } from "./utils/IonicGestureConfig";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +42,8 @@ import {LongPressModule} from "ionic-long-press";
     StatusBar,
     ImagePicker,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig}
+    { provide: RouteReuseStrategy,    useClass: IonicRouteStrategy },
+    { provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig }
   ],
   bootstrap: [ AppComponent ],
 })

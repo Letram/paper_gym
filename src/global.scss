@@ -29,12 +29,14 @@
 
 // Colors
 
-$blue: rgb(50,115,225);
+$blue : color(blue, darker);
+$black: rgb(040,040,040);
+$lightblack: rgb(055,055,055);
 
 // Text selection
 
-::-moz-selection { color: white; background: #3171e0 }
-::selection      { color: white; background: #3171e0 }
+::-moz-selection { color: color(beige, base); background: color(blue, darker) }
+::selection      { color: color(beige, base); background: color(blue, darker) }
 
 // Placeholder
 
@@ -57,7 +59,7 @@ $blue: rgb(50,115,225);
 
 @keyframes auto-complete {
     to {
-        color: white;
+        color: color(beige, base);
         font-size: 15px;
         font-family: 'Roboto', sans-serif;
         background: none;
@@ -66,12 +68,33 @@ $blue: rgb(50,115,225);
 
 // Utils
 
+.title {
+    color: color(beige, base);
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 2px solid $blue;
+    padding: 0 15px 15px;
+    margin: 25px 0 35px;
+}
+
+.dark-bg {
+    background: $lightblack;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
 .red-border {
     border-color: red !important;
 }
 
 .padding-left-10 {
     padding-left: 10px !important;
+}
+
+.margin-0 {
+    margin: 0 !important;
 }
 
 .margin-top-0 {
@@ -97,5 +120,4 @@ $blue: rgb(50,115,225);
 
 body {
     font-size: 15px;
-    font-family: 'Montserrat', sans-serif;
 }

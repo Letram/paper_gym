@@ -1,50 +1,54 @@
-import {
-  Component,
-  OnInit,
-  ɵclearResolutionOfComponentResourcesQueue
-} from "@angular/core";
-import { ExerciseService } from "src/app/services/exercise.service";
-import { Exercise } from "src/app/models/Exercise";
-import { NgForm } from "@angular/forms";
-import { ImagePicker } from "@ionic-native/image-picker/ngx";
-import { Router, ActivatedRoute } from "@angular/router";
-import {
-  TypeModifier,
-  THIS_EXPR
-} from "@angular/compiler/src/output/output_ast";
-import { ImageServiceService } from "src/app/services/image-service.service";
+import { NgForm                 } from '@angular/forms';
+import { Component, OnInit      } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
+// Models
+import { Exercise } from 'src/app/models/Exercise';
+
+// Services
+import { ExerciseService     } from 'src/app/services/exercise.service';
+import { ImageServiceService } from 'src/app/services/image-service.service';
+
+// Image Picker
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+
+// jQuery
 declare var $: any;
+
 @Component({
-  selector: "app-add",
-  templateUrl: "./add.page.html",
-  styleUrls: ["./add.page.scss"]
+  selector: 'app-add',
+  templateUrl: './add.page.html',
+  styleUrls: ['./add.page.scss']
 })
-
-
 export class AddPage implements OnInit {
-  public muscleGroup: string;
-  public userMuscleGroups: string[];
-  public newExercise: Exercise;
-  public imagesPicked: string[];
-  public dayNames: string[]; 
 
-  private _isEdited: boolean = false;
+  public newExercise: Exercise;
+
+  public errorMessage = 'De algo hay que morir';
+
+  public muscleGroup: string;
+  
+  public dayNames: string[];
+  public imagesPicked: string[];
+  public userMuscleGroups: string[];
+
+  private disabledButton = false;
+
   private _editingId: string = "";
+  private _isEdited: boolean = false;
   private _userExercises: Exercise[];
   private _imagePicked: File;
   private _imagesPicked: any[];
   private _imagePickerOptions: any;
-  constructor(
-    private _exerciseService: ExerciseService,
-    private _imageService: ImageServiceService,
-    private _imagePicker: ImagePicker,
-    private _router: Router,
-    private _route: ActivatedRoute,
-  ) {
+
+  // ─────────────── //
+  //     METHODS     //
+  // ─────────────── //
+
+  constructor( private _router: Router, private _route: ActivatedRoute, private _imagePicker: ImagePicker, private _exerciseService: ExerciseService, private _imageService: ImageServiceService ) {
+    this.dayNames    = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
+    this.muscleGroup = '';
     this.newExercise = new Exercise();
-    this.muscleGroup = "";
-    this.dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   }
 
   ngOnInit() {
@@ -55,8 +59,11 @@ export class AddPage implements OnInit {
     this.muscleGroup = "";
     this._exerciseService.getMuscleGroups().subscribe(
       userMuscleGroupsObject => {
-        if (userMuscleGroupsObject.MUSCLEGROUPS)
-          this.userMuscleGroups = userMuscleGroupsObject.MUSCLEGROUPS;
+        if ( userMuscleGroupsObject !== undefined ) {
+          if (userMuscleGroupsObject.MUSCLEGROUPS) {
+            this.userMuscleGroups = userMuscleGroupsObject.MUSCLEGROUPS;
+          }
+        }
         console.log(this.userMuscleGroups);
       },
       error =>
@@ -97,12 +104,21 @@ export class AddPage implements OnInit {
   }
 
   addMuscleGroup() {
-    this.newExercise.muscleGroups.push(this.muscleGroup);
-    if (this.userMuscleGroups.indexOf(this.muscleGroup) === -1) {
-      this.userMuscleGroups.push(this.muscleGroup);
-      this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
+
+    if ( this.checkEmptyFields( this.muscleGroup, '.muscle-group .input' ) ) {
+      return;
     }
-    this.muscleGroup = "";
+
+    this.newExercise.muscleGroups.push( this.muscleGroup );
+
+    if ( this.userMuscleGroups && this.userMuscleGroups.indexOf( this.muscleGroup ) === -1 ) {
+      this.userMuscleGroups.push( this.muscleGroup );
+      this._exerciseService.updateMuscleGroup( this.userMuscleGroups );
+    }
+
+    // Vaciamos el campo
+    this.muscleGroup = '';
+
   }
 
   removeMuscleGroup(muscleGroupToRemove: string): void {
@@ -117,7 +133,7 @@ export class AddPage implements OnInit {
     ){
       this.userMuscleGroups.splice(this.userMuscleGroups.indexOf(muscleGroupToRemove),1);
       this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
-    }else{
+    } else {
       console.log(this._userExercises.filter(userExercise => userExercise.muscleGroups.indexOf(muscleGroupToRemove) !== -1)
       )
     }
@@ -217,30 +233,83 @@ export class AddPage implements OnInit {
     });
   }
 
-  onAddExercise(form: NgForm) {
-    $("#submit_btn").attr("disabled", true);
-    if (!this._isEdited) {
-      //creation of the exercise
-      this._exerciseService
-        .createExercise(this.newExercise, this._imagesPicked)
-        .then(() => {
-          this.muscleGroup = "";
-          this.newExercise = new Exercise();
-          this._router.navigate(["home"]);
-        });
-    } else {
-      //update existing exercise
-      this._exerciseService
-        .updateExercise(this.newExercise, this._editingId)
-        .then(() => {
-          this._router.navigate(["home"]);
-        });
+  imagePicked( event: any ) {
+    this._imagePicked = event.target.files[0];
+  }
+
+  async onAddExercise() {
+
+    if ( this.checkEmptyFields( this.newExercise.name, '.required', true ) ) {
+      return;
     }
-    $("#submit_btn").removeAttr("disabled");
+
+    this.disabledButton = true;
+
+    // Creation of a new exercise
+    if ( !this._isEdited ) {
+
+      await this._exerciseService.createExercise(this.newExercise, this._imagesPicked)
+        .then(() => {
+          this.muscleGroup = '';
+          this.newExercise = new Exercise();
+          this._router.navigate([ 'home' ]);
+        });
+
+    // Updating existing exercise
+    } else {
+
+      await this._exerciseService.updateExercise(this.newExercise, this._editingId)
+        .then(() => { this._router.navigate([ 'home' ]); });
+
+    }
+
+    this.disabledButton = false;
 
   }
 
-  imagePicked(event) {
-    this._imagePicked = event.target.files[0];
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+
+  checkEmptyFields( text: string, selector: string, isSubmit: boolean = false ): boolean {
+
+    const VALUE = text.trim();
+
+    if ( VALUE === '' ) {
+      this.highlightBorder( selector );
+
+      if ( isSubmit ) {
+        this.showErrorMessage( 'You have to write the exercise name' );
+      }
+    }
+
+    return VALUE === '';
+
+  }
+
+  highlightBorder( selector: string ) {
+
+    // Resaltamos la entrada
+    $( `${ selector }` ).addClass( 'red-border' );
+
+    // Dejamos de resaltar la entrada pasado un tiempo
+    setTimeout( () => {
+      $( `${ selector }` ).removeClass( 'red-border' );
+    }, 250);
+
+  }
+
+  showErrorMessage( message: string ) {
+
+    this.errorMessage = message;
+
+    // Mostramos el mensaje de error
+    $( '.error-message' ).css( 'opacity', '1');
+
+    // Ocultamos el mensaje de error pasado un tiempo
+    setTimeout( () => {
+      $( '.error-message' ).css( 'opacity', '0');
+    }, 2500);
+
   }
 }

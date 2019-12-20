@@ -15,7 +15,8 @@ declare var $: any;
 export class LoginPage implements OnInit {
 
   private user: User;
-  private errorMessage: string = '';
+  private errorMessage = '';
+  private showSpinner  = false;
 
   configuration = {
     spaceBetween: 0,
@@ -43,8 +44,11 @@ export class LoginPage implements OnInit {
 
   async login( loginForm: NgForm ) {
 
-    if ( this.checkEmptyFields( loginForm ) )
+    if ( this.checkEmptyFields( loginForm )) {
       return;
+    }
+
+    this.showSpinner = true;
 
     this.authService.login( this.user )
       .then(( response ) => {
@@ -56,14 +60,16 @@ export class LoginPage implements OnInit {
       })
       .catch(( exception ) => {
         this.showErrorMessage( exception.message );
-      });
+      }
+    );
 
   }
 
-  async register( registerForm: NgForm ){
+  async register( registerForm: NgForm ) {
 
-    if ( this.checkEmptyFields( registerForm ) )
+    if ( this.checkEmptyFields( registerForm ) ) {
       return;
+    }
 
     this.authService.register( this.user )
       .then(( response ) => {
@@ -103,7 +109,7 @@ export class LoginPage implements OnInit {
 
     // Resaltamos la entrada
     $( `.input[name='${ inputName }']` ).addClass( 'red-border' );
-    
+
     // Dejamos de resaltar la entrada pasado un tiempo
     setTimeout( () => {
       $( `.input[name='${ inputName }']` ).removeClass( 'red-border' );
@@ -114,10 +120,10 @@ export class LoginPage implements OnInit {
   showErrorMessage( message: string ) {
 
     this.errorMessage = message;
-    
+
     // Mostramos el mensaje de error
     $( '.error-message' ).css( 'opacity', '1');
-    
+
     // Ocultamos el mensaje de error pasado un tiempo
     setTimeout( () => {
       $( '.error-message' ).css( 'opacity', '0');

@@ -1,65 +1,85 @@
 <ion-content>
-  <section id="add">
+  <section class="dark-bg">
 
     <app-navbar [returnButton]="true"></app-navbar>
-  
-    <!-- ──────────── -->
-    <!--     FORM     -->
-    <!-- ──────────── -->
 
-    <form class="form" #addExerciseForm="ngForm" (ngSubmit)="onAddExercise(addExerciseForm)">
+    <form class="form" #addExerciseForm="ngForm" (ngSubmit)="onAddExercise()">
+
+      <!-- ─────────────────── -->
+      <!--     INFORMATION     -->
+      <!-- ─────────────────── -->
 
       <h2 class="title margin-top-0">Exercise information</h2>
 
-      <input    class="input" type="text" [(ngModel)]="newExercise.name"        name="name"        placeholder="Exercise name"        autocomplete="off" required>
-      <textarea class="input" type="text" [(ngModel)]="newExercise.description" name="description" placeholder="Exercise description" autocomplete="off" rows="5"></textarea>
-      <input    class="input" type="text" [(ngModel)]="newExercise.machine"     name="machine"     placeholder="Exercise machine"     autocomplete="off">
+      <input    type="text" [(ngModel)]="newExercise.name"        name="name"        placeholder="Exercise name"        autocomplete="off" class="input required">
+      <textarea type="text" [(ngModel)]="newExercise.description" name="description" placeholder="Exercise description" autocomplete="off" class="input" rows="5"></textarea>
+      <input    type="text" [(ngModel)]="newExercise.machine"     name="machine"     placeholder="Exercise machine"     autocomplete="off" class="input">
+
+      <!-- ──────────────────── -->
+      <!--     MUSCLE GROUP     -->
+      <!-- ──────────────────── -->
 
       <h2 class="title">Muscle group</h2>
-      <input  class="input"  type="text"   [(ngModel)]="muscleGroup" name="muscleGroup" placeholder="Muscle group" autocomplete="off">
-      <button class="button" type="button" [disabled]="muscleGroup.length <= 0" (click)="addMuscleGroup( addExerciseForm )">Add muscle group</button>
 
-      <div *ngIf="newExercise.muscleGroups.length > 0">
-        <ion-list>
-          <ion-item *ngFor="let mg of newExercise.muscleGroups">
-            <ion-label>{{mg}}</ion-label>
-            <ion-icon name="close" end (click)="removeMuscleGroup(mg)"></ion-icon>
-          </ion-item>
-        </ion-list>
+      <div class="muscle-group">
+        <input  class="input"  type="text"   [(ngModel)]="muscleGroup" name="muscleGroup" placeholder="Muscle group" autocomplete="off">
+        <button class="button" type="button" (click)="addMuscleGroup()">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
       </div>
 
-      <h2 class="title">Days to be done</h2>
-      
-      <div *ngIf="newExercise.days !== undefined">
-        <div *ngFor="let day of dayNames; let i = index">
-          {{dayNames[i]}}
-          <input type="checkbox" [(ngModel)]="newExercise.days[i]" name="{{dayNames[i]}}">
+      <div class="muscle-group-inserted" *ngIf="newExercise.muscleGroups.length > 0">
+        <div class="item" *ngFor="let mg of newExercise.muscleGroups">
+          <div class="input">{{ mg }}</div>
+          <button class="button" type="button" (click)="removeMuscleGroup(mg)">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
 
+      <!-- ────────────── -->
+      <!--     IMAGES     -->
+      <!-- ────────────── -->
+
       <h2 class="title">Images</h2>
       
-      <button class="button" type="button" (click)="pickImages()">Select images</button>
-      <!-- <ion-input type="file" accept="image/*" (change) = "imagePicked($event)">Select images</ion-input> -->
+      <button class="add-image" type="button" (click)="pickImages()">
+        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+      </button>
 
-      <ion-item>  
-        <ion-row *ngIf="newExercise.images">  
-          <ion-col style="padding:10px;" size="4" *ngFor="let image of newExercise.images; let imageIndex = index">  
-            <ion-card>  
-              <ion-thumbnail item-start (click)="removeImage(imageIndex)">  
-                <img src={{image.url}} alt="Sample Image">  
-              </ion-thumbnail>  
-            </ion-card>  
-          </ion-col>  
-        </ion-row>  
-      </ion-item>
+      <div class="images" *ngIf="newExercise.images">
+        <div class="image" *ngFor="let image of newExercise.images; let imageIndex = index">
+          <ion-thumbnail item-start (click)="removeImage(imageIndex)">  
+            <img [src]="image.url" alt="Image">
+          </ion-thumbnail>  
+        </div>
+      </div>
+
+      <!-- ───────────── -->
+      <!--     VIDEO     -->
+      <!-- ───────────── -->
 
       <h2 class="title">Video</h2>
 
-      <input class="input" [(ngModel)]="newExercise.video" name="video" placeholder="Video description">
-      <!-- [pattern]="http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?=]*)?" -->
+      <input class="input" [(ngModel)]="newExercise.video" name="video" placeholder="Video URL">
 
-      <button class="button width-100" type="submit" [disabled]="!addExerciseForm.form.valid" id="submit_btn">Add exercise</button>
+      <!-- ──────────── -->
+      <!--     DAYS     -->
+      <!-- ──────────── -->
+
+      <h2 class="title">Days to be done</h2>
+      
+      <div class="days" *ngIf="newExercise.days !== undefined">
+        <div class="day" *ngFor="let dayName of dayNames; let i = index">
+          <input class="checkbox" type="checkbox" [(ngModel)]="newExercise.days[i]" name="{{ dayNames[i] }}">
+          <span class="name">{{ dayNames[i] }}</span>
+        </div>
+      </div>
+
+      <div class="is-relative">
+        <button id="submit_btn" class="button width-100 margin-0" type="submit">Save changes</button>
+        <span class="error-message">{{ errorMessage }}</span>
+      </div>
 
     </form>
   </section>
