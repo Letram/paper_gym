@@ -1,6 +1,9 @@
 import { Component, OnInit        } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
+// Interfaces
+import { Schedule } from 'src/app/Interfaces/schedule';
+
 // Models
 import { Exercise } from 'src/app/models/Exercise';
 
@@ -17,16 +20,23 @@ declare var $: any;
 })
 export class HomePage implements OnInit {
 
-  public exercises: Exercise[] = [];
+  private exercises: Exercise[] = [];
 
   configuracion = {
-    spaceBetween: 0,
-    slidesPerView: 'auto',
     freeMode: true,
     autoHeight: true,
+    spaceBetween: 0,
+    slidesPerView: 'auto'
   };
 
   days = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'All' ];
+
+  schedule = { 'monday': {},'tuesday': {},'wednesday': {},'thursday': {},'friday': {},'saturday': {},'sunday': {},'all': {} };
+
+  musclesGroups = [];
+  
+  musclesPerDay = new Array(7);
+
   selectedDay = new Date().getDay() - 1;
 
   // ─────────────── //
@@ -37,22 +47,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
 
-    this._exerciseService.getExercises().subscribe(
-      response => {
-        this.exercises = [];
-        for( let i = 0; i < response.length; i++ ) {
-          let exerciseAux = response[i].payload.doc.data();
-          exerciseAux.id = response[i].payload.doc.id; 
-          console.log({exerciseAux, id: response[i].payload.doc.id});
-          this.exercises.push(exerciseAux);
-        }
-
-        console.log( this.exercises );
-
-      }, exception => {
-        console.log(`[ ERROR MESSAGE] » ${ exception }`);
-      }
-    );
+    this.getExercisesList();
 
   }
 
@@ -102,7 +97,97 @@ export class HomePage implements OnInit {
 
   changeDay( day: number ) {
 
+    // Si el usuario selecciona 'All', que corresponde al índice 7 del vector de días, el índice del día seleccionado valdrá -1 o su valor correspondiente en cualquier otro caso
     this.selectedDay = day === 7 ? -1 : day;
+
+  }
+
+  // ──────────────── //
+  //     AUXILIAR     //
+  // ──────────────── //
+
+  private getExercisesList() {
+
+    let exercise: Exercise;
+
+    this._exerciseService.getExercises().subscribe(
+      response => {
+
+        for( let i = 0; i < response.length; i++ ) {
+
+          exercise    = response[i].payload.doc.data();
+          exercise.id = response[i].payload.doc.id; 
+
+          this.exercises.push( exercise );
+
+        }
+
+        this.generateSchedule();
+        this.getTodayRoutine( 4 );
+
+      }, exception => {
+
+        this.exercises = [];
+        console.log(`[ ERROR MESSAGE] » ${ exception }`);
+
+      }
+    );
+  }
+
+  private generateSchedule() {
+
+    // Almacenamos en un vector los grupos musculares asignados para cada día
+    for ( let i = 0; i < 7; i++ ) {
+      this.musclesPerDay[i] = this.getMusclesFromSpecificDay( i );
+    }
+
+    // console.log( this.musclesPerDay )
+
+    // Para cada día de la semana asignamos los correspondientes grupos musculares con sus correspondientes ejercicios
+    for ( let i = 0; i < 7; i++ ) {
+
+      let day     = this.days[i].toLowerCase();
+      let muscles = this.musclesPerDay[i];
+
+      muscles.forEach( ( muscle: string ) => {
+        this.schedule[ day ][ muscle ] = this.getExercisesFromSpecificDay(i).filter( exercise => exercise.muscleGroups.find( muscleGroup => muscle == muscleGroup ));
+      });
+    }
+  }
+
+  private getExercisesFromSpecificDay( day: number ) {
+    return this.exercises.filter( exercise => exercise.days[ day ] == true );
+  }
+
+  private getMusclesFromSpecificDay( day: number ) {
+
+    let muscles = [];
+
+    this.getExercisesFromSpecificDay( day ).forEach( exercise => {
+      exercise.muscleGroups.forEach( muscle => {
+        muscles.push( muscle );
+      });
+    });
+
+    muscles =  [...new Set( muscles )]; // Eliminamos los elementos repetidos
+
+    return muscles;
+  }
+
+  musclesToday  : string  [] = [];
+  exercisesToday: any[] = [];
+
+  private getTodayRoutine( today: number = new Date().getDay() - 1 ) {
+    
+    // Almacenamos los grupos musculares asignados al día seleccionado
+    this.musclesToday = this.getMusclesFromSpecificDay( today );
+    console.log( this.musclesToday );
+
+    // Almacenamos los ejercicios correspondientes al día seleccionado, clasificados por grupos musculares
+    for ( let i = 0; i < this.musclesToday.length; i++ ) {
+      this.exercisesToday[i] = this.exercises.filter( exercise => exercise.days[today] && exercise.muscleGroups.find( muscle => muscle === this.musclesToday[i] ) );
+    }
+    console.log( this.exercisesToday );
 
   }
 }

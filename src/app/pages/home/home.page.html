@@ -3,34 +3,34 @@
 
     <app-navbar></app-navbar>
 
-    <div class="exercises">
-
-      <!-- Days -->
+    <!-- Days -->
+    <div class="container">
       <ion-slides class="days" [options]="configuracion">
         <ion-slide class="day" *ngFor="let day of days; index as i" [ngClass]="{ 'active' : i == selectedDay }" (click)="changeDay( i )">
           {{ day }}
         </ion-slide>
       </ion-slides>
-
-      <ng-container *ngFor="let exercise of exercises; let i = index">
-      
-      <div class="wrapper" *ngIf="exercise.days[selectedDay] || selectedDay == -1">
-        <div [id]="'card' + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( i )">
-          <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
-          <div class="information">
-            {{ exercise.name }}
-            <!-- <div class="muscle-group">{{ exercise.muscleGroups.join(", ") }}</div> -->
+    </div>
+    
+    <div class="exercises" *ngIf=" exercises.length > 0">
+      <ng-container *ngFor="let muscleToday of musclesToday; let j = index">
+        <h2 class="title">{{ muscleToday }}</h2>
+        <ng-container *ngFor="let exercise of exercisesToday[j]; let i = index">
+          <div class="wrapper">
+            <div [id]="'card' + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( i )">
+              <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
+              <div class="information">{{ exercise.name }}</div>
+            </div>
+            <div class="operations">
+              <span class="edit" (tap)="editExercise( exercise )" (press)="showOptions( i )">
+                <i class="icon fa fa-pencil"></i>
+              </span>
+              <span class="delete" (tap)="removeExercise( exercise.id )" (press)="showOptions( i )">
+                <i class="icon fa fa-trash"></i>
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="operations">
-          <span class="edit" (click)="editExercise( exercise )">
-            <i class="icon fa fa-pencil"></i>
-          </span>
-          <span class="delete" (click)="removeExercise( exercise.id )">
-            <i class="icon fa fa-trash"></i>
-          </span>
-        </div>
-      </div>
+        </ng-container>
       </ng-container>
     </div>
   

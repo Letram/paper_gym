@@ -88,14 +88,14 @@ $lightblack: rgb(055,055,055);
 
     .information {
         display: flex;
+        align-items: center;
+        justify-content: flex-start;
         color: color(beige, base);
         font-size: 15px;
         font-weight: 600;
         font-style: italic;
         text-transform: uppercase;
-        align-items: flex-start;
-        justify-content: center;
-        flex-direction: column;
+        line-height: 22px;
         padding: 0 20px;
         width: 100%;
     }
@@ -125,6 +125,7 @@ $lightblack: rgb(055,055,055);
     position: fixed;
     right: 25px;
     bottom: 25px;
+    z-index: 75;
     width: 55px;
     height: 55px;
 }
@@ -148,8 +149,15 @@ $lightblack: rgb(055,055,055);
 
 // Days
 
+.container {
+    padding: 0 25px;
+    margin: 0 auto 50px;
+    width: 100%;
+    max-width: 650px;
+}
+
 .days {
-    margin-bottom: 50px;
+    
 
     .day {
         color: color(beige, base);
