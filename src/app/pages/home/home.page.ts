@@ -131,7 +131,7 @@ export class HomePage implements OnInit {
         }
 
         this.generateSchedule();
-        this.getTodayRoutine( 4 );
+        this.getTodayRoutine( this.selectedDay );
 
       }, exception => {
 
