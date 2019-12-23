@@ -3,21 +3,22 @@
 
     <app-navbar></app-navbar>
 
-    <!-- Days -->
-    <div class="container">
+    <!-- Days Selector -->
+    <div class="tabs">
       <ion-slides class="days" [options]="configuracion">
-        <ion-slide class="day" *ngFor="let day of days; index as i" [ngClass]="{ 'active' : i == selectedDay }" (click)="changeDay( i )">
+        <ion-slide class="day" *ngFor="let day of days; let i = index" [ngClass]="{ 'active' : i == selectedDay }" (click)="changeDay( i )">
           {{ day }}
         </ion-slide>
       </ion-slides>
     </div>
     
-    <div class="exercises" *ngIf=" exercises.length > 0">
+    <!-- List of Exercises -->
+    <div class="exercises" *ngIf=" exercisesToday.length > 0">
       <ng-container *ngFor="let muscleToday of musclesToday; let j = index">
         <h2 class="title">{{ muscleToday }}</h2>
         <ng-container *ngFor="let exercise of exercisesToday[j]; let i = index">
           <div class="wrapper">
-            <div [id]="'card' + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( i )">
+            <div [id]="'card' + muscleToday + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( muscleToday, i )">
               <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
               <div class="information">{{ exercise.name }}</div>
             </div>
@@ -35,11 +36,11 @@
     </div>
   
     <!-- Warning when no exercises -->
-    <div class="no-exercises" *ngIf=" exercises.length === 0">
+    <div class="no-exercises" *ngIf=" exercisesToday.length === 0">
       No exercises available yet...
     </div>
   
-    <!-- Add exercise -->
+    <!-- Add Exercise Button -->
     <a class="add" [routerLink]="'/add'">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </a>

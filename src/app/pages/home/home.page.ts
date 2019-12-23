@@ -1,9 +1,6 @@
 import { Component, OnInit        } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
-// Interfaces
-import { Schedule } from 'src/app/Interfaces/schedule';
-
 // Models
 import { Exercise } from 'src/app/models/Exercise';
 
@@ -37,7 +34,7 @@ export class HomePage implements OnInit {
   
   musclesPerDay = new Array(7);
 
-  selectedDay = new Date().getDay() - 1;
+  selectedDay: number = 0;
 
   // ─────────────── //
   //     METHODS     //
@@ -47,13 +44,15 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
 
+    this.selectedDay = this.today();
+
     this.getExercisesList();
 
   }
 
-  showOptions( index: number ) {
+  showOptions( muscleName: string, exerciseIndex: number ) {
 
-    const id = `#card${ index }`;
+    const id = `#card${ muscleName }${ exerciseIndex }`;
 
     if ( $( id ).hasClass('active') ) {
       $( id ).removeClass( 'active' );
@@ -74,16 +73,6 @@ export class HomePage implements OnInit {
     this.router.navigate( ['exercise'], navigationExtras );
   }
 
-  removeExercise(exerciseId:string){
-    this._exerciseService.removeExercise(exerciseId)
-    .then(
-      () => console.log("Exercise removed successfully")
-    )
-    .catch(
-      (error) => console.log(`[REMOVE EXERCISE ERR] => ${error}`)
-    );
-  }
-
   editExercise( exerciseToEdit: Exercise){
     let navigationExtras: NavigationExtras = {
       state: {
@@ -95,16 +84,35 @@ export class HomePage implements OnInit {
     this.router.navigate( ['add'], navigationExtras );
   }
 
+  removeExercise( exerciseID: string ) {
+    this._exerciseService.removeExercise( exerciseID )
+    .then(
+      () => console.log("Exercise removed successfully")
+    )
+    .catch(
+      (error) => console.log(`[REMOVE EXERCISE ERR] => ${error}`)
+    );
+  }
+
   changeDay( day: number ) {
 
-    // Si el usuario selecciona 'All', que corresponde al índice 7 del vector de días, el índice del día seleccionado valdrá -1 o su valor correspondiente en cualquier otro caso
-    this.selectedDay = day === 7 ? -1 : day;
+    this.selectedDay = day;
+
+    this.getTodayRoutine( this.selectedDay );
 
   }
 
   // ──────────────── //
   //     AUXILIAR     //
   // ──────────────── //
+
+  private today() {
+
+    let today = new Date().getDay() -1;
+
+    return today === -1 ? 6 : today;
+
+  }
 
   private getExercisesList() {
 
@@ -156,7 +164,9 @@ export class HomePage implements OnInit {
   }
 
   private getExercisesFromSpecificDay( day: number ) {
-    return this.exercises.filter( exercise => exercise.days[ day ] == true );
+    
+    return day === 7 ? this.exercises : this.exercises.filter( exercise => exercise.days[ day ] == true );
+
   }
 
   private getMusclesFromSpecificDay( day: number ) {
@@ -177,17 +187,24 @@ export class HomePage implements OnInit {
   musclesToday  : string  [] = [];
   exercisesToday: any[] = [];
 
-  private getTodayRoutine( today: number = new Date().getDay() - 1 ) {
+  private getTodayRoutine( today: number = this.today() ) {
     
     // Almacenamos los grupos musculares asignados al día seleccionado
     this.musclesToday = this.getMusclesFromSpecificDay( today );
+    
+    console.log( `────────────────────────────────────────────────────` );
     console.log( this.musclesToday );
+    console.log( `────────────────────────────────────────────────────` );
 
     // Almacenamos los ejercicios correspondientes al día seleccionado, clasificados por grupos musculares
+    this.exercisesToday = [];
     for ( let i = 0; i < this.musclesToday.length; i++ ) {
       this.exercisesToday[i] = this.exercises.filter( exercise => exercise.days[today] && exercise.muscleGroups.find( muscle => muscle === this.musclesToday[i] ) );
     }
+
+    console.log( `────────────────────────────────────────────────────` );
     console.log( this.exercisesToday );
+    console.log( `────────────────────────────────────────────────────` );
 
   }
 }
