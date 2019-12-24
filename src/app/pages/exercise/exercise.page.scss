@@ -18,7 +18,7 @@ $lightblack: rgb(055,055,055);
 
     .item {
         color: color(beige, base);
-        font-size: 15px;
+        font-size: 12px;
         font-style: italic;
         font-weight: 600;
         text-transform: uppercase;
@@ -57,8 +57,27 @@ $lightblack: rgb(055,055,055);
     height: 55px;
 }
 
-// Images
+// Multimedia
 
-.machine-image {
-    margin-bottom: 15px;
+.machine-images {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 15px;
+    
+    .machine-image {
+        background-position: center;;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 25%;
+        height: 75px;
+        margin: 0 5px 15px 0;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.video {
+    padding: 0 15px;
 }
