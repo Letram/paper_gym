@@ -3,8 +3,11 @@ import { SafeResourceUrl, DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 
 // Models
-import { Exercise } from "src/app/models/Exercise";
+import { Exercise        } from "src/app/models/Exercise";
 import { ExerciseService } from "src/app/services/exercise.service";
+
+// jQuery
+declare var $: any;
 
 @Component({
   selector: "app-exercise",
@@ -63,6 +66,33 @@ export class ExercisePage implements OnInit {
     this.exercise[param] = this.exercise[param] + amount <= 1 ? 1 : this.exercise[param] + amount;
     this._exerciseService.updateExercise(this.exercise, this.exercise.id);
   }
+
+  // ────────────────── //
+  //     MULTIMEDIA     //
+  // ────────────────── //
+  
+  zoomImage( imageURL: string ) {
+
+    $( '.zoomed-image .image' ).attr( 'src', imageURL );
+
+    $('.zoomed-image').animate({
+      zIndex: 200
+    }, 0, function() {
+      $( '.zoomed-image' ).css( 'opacity', '1');
+    });
+    
+  }
+
+  closeZoomedImage() {
+   
+    $('.zoomed-image').animate({
+      opacity: 0
+    }, 0, function() {
+      $( '.zoomed-image' ).css( 'z-index', '-1');
+    });
+
+  }
+
   // ──────────────── //
   //     AUXILIAR     //
   // ──────────────── //

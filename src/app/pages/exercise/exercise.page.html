@@ -49,7 +49,7 @@
       <h2 class="title" *ngIf="exercise.images.length > 0 || exercise.video">Multimedia</h2>
 
       <div class="machine-images" *ngIf="exercise.images.length > 0">
-        <div #squaredImage class="machine-image" *ngFor="let image of exercise.images" [style.backgroundImage]="'url(' + ( image.url ) + ')'" [ngStyle]="{ 'height.px': squaredImage.offsetWidth }"></div>
+        <div #squaredImage class="machine-image" *ngFor="let image of exercise.images" (click)="zoomImage( image.url )" [style.backgroundImage]="'url(' + ( image.url ) + ')'" [ngStyle]="{ 'height.px': squaredImage.offsetWidth }"></div>
       </div>
 
       <div class="video" *ngIf="exercise.video">
@@ -60,6 +60,11 @@
       <a class="edit" (click)="editExercise()">
         <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
+
+      <!--  -->
+      <div class="zoomed-image" (click)="closeZoomedImage()">
+        <img class="image" alt="Zoomed Image">
+      </div>
 
     </div>
   </section>
