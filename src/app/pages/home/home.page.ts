@@ -151,6 +151,10 @@ export class HomePage implements OnInit {
 
   }
 
+  // ────────────────────────────────── //
+  //     TODAY'S ROUTINE GENERATION     //
+  // ────────────────────────────────── //
+
   private getExercisesList() {
 
     let exercise: Exercise;
@@ -167,7 +171,7 @@ export class HomePage implements OnInit {
 
         }
 
-        this.generateSchedule();
+        // this.generateSchedule();
         this.getTodayRoutine( this.selectedDay );
 
       }, exception => {
@@ -179,14 +183,68 @@ export class HomePage implements OnInit {
     );
   }
 
+  routine: any[] = [];
+
+  private getTodayRoutine( today: number = this.today() ) {
+    
+    // Almacenamos los grupos musculares asignados al día seleccionado
+    this.musclesToday = this.getMusclesFromSpecificDay( today );
+
+    console.log( this.musclesToday );
+    
+    let todaysExercises = this.exercises.filter( exercise => exercise.days[today] );
+
+    // Almacenamos los ejercicios correspondientes al día seleccionado, clasificados por grupos musculares
+    for ( let i = 0; i < this.musclesToday.length; i++ ) {
+      this.exercisesToday[i] = todaysExercises.filter( exercise => exercise.muscleGroups.find( muscle => muscle === this.musclesToday[i] ));
+    }
+
+    // Si uno de los grupos musculares es 'all' (ubicado siempre al final), agrupamos los ejercicios correspondientes
+    if ( this.musclesToday.find( muscle => muscle === 'all' )) {
+      this.exercisesToday[ this.musclesToday.length - 1 ] = todaysExercises.filter( exercise => exercise.muscleGroups.length === 0 );
+    }
+
+  }
+
+  private getMusclesFromSpecificDay( day: number ) {
+
+    let todaysMuscles = [];
+
+    // Almacenamos ejercicios correspondientes al día seleccionado
+    let todaysExercises = this.getExercisesFromSpecificDay( day );
+
+    // Recorremos estos ejercicios para extraer los grupos musculares asignados
+    todaysExercises.forEach( exercise => {
+
+      // Para cada ejercicio, recorremos los grupos musculares asignados
+      exercise.muscleGroups.forEach( muscleGroup => {
+
+        // Comprobamos que el grupo muscular no esté repetido
+        if ( !todaysMuscles.find( muscle => muscleGroup === muscle )) {
+          todaysMuscles.push( muscleGroup );
+        }
+        
+      });
+    });
+
+    // Si existen ejercicios sin grupo muscular asignado, se inserta 'all' al final del vector de grupos musculares
+    if ( todaysExercises.find( exercise => exercise.muscleGroups.length === 0 )) {
+      todaysMuscles.push( 'all' );
+    }
+
+    return todaysMuscles;
+  }
+
+  private getExercisesFromSpecificDay( day: number ) {
+    return day === 7 ? this.exercises : this.exercises.filter( exercise => exercise.days[ day ] );
+  }
+
   private generateSchedule() {
 
     // Almacenamos en un vector los grupos musculares asignados para cada día
     for ( let i = 0; i < 7; i++ ) {
       this.musclesPerDay[i] = this.getMusclesFromSpecificDay( i );
     }
-
-    // console.log( this.musclesPerDay )
 
     // Para cada día de la semana asignamos los correspondientes grupos musculares con sus correspondientes ejercicios
     for ( let i = 0; i < 7; i++ ) {
@@ -198,47 +256,5 @@ export class HomePage implements OnInit {
         this.schedule[ day ][ muscle ] = this.getExercisesFromSpecificDay(i).filter( exercise => exercise.muscleGroups.find( muscleGroup => muscle == muscleGroup ));
       });
     }
-  }
-
-  private getExercisesFromSpecificDay( day: number ) {
-    
-    return day === 7 ? this.exercises : this.exercises.filter( exercise => exercise.days[ day ] == true );
-
-  }
-
-  private getMusclesFromSpecificDay( day: number ) {
-
-    let muscles = [];
-
-    this.getExercisesFromSpecificDay( day ).forEach( exercise => {
-      exercise.muscleGroups.forEach( muscle => {
-        muscles.push( muscle );
-      });
-    });
-
-    muscles =  [...new Set( muscles )]; // Eliminamos los elementos repetidos
-
-    return muscles;
-  }
-
-  private getTodayRoutine( today: number = this.today() ) {
-    
-    // Almacenamos los grupos musculares asignados al día seleccionado
-    this.musclesToday = this.getMusclesFromSpecificDay( today );
-    
-    console.log( `────────────────────────────────────────────────────` );
-    console.log( this.musclesToday );
-    console.log( `────────────────────────────────────────────────────` );
-
-    // Almacenamos los ejercicios correspondientes al día seleccionado, clasificados por grupos musculares
-    this.exercisesToday = [];
-    for ( let i = 0; i < this.musclesToday.length; i++ ) {
-      this.exercisesToday[i] = this.exercises.filter( exercise => exercise.days[today] && exercise.muscleGroups.find( muscle => muscle === this.musclesToday[i] ) );
-    }
-
-    console.log( `────────────────────────────────────────────────────` );
-    console.log( this.exercisesToday );
-    console.log( `────────────────────────────────────────────────────` );
-
   }
 }
