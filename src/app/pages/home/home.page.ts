@@ -183,16 +183,12 @@ export class HomePage implements OnInit {
     );
   }
 
-  routine: any[] = [];
-
   private getTodayRoutine( today: number = this.today() ) {
-    
+
     // Almacenamos los grupos musculares asignados al día seleccionado
     this.musclesToday = this.getMusclesFromSpecificDay( today );
 
-    console.log( this.musclesToday );
-    
-    let todaysExercises = this.exercises.filter( exercise => exercise.days[today] );
+    let todaysExercises = today === 7 ? this.exercises : this.exercises.filter( exercise => exercise.days[today] );
 
     // Almacenamos los ejercicios correspondientes al día seleccionado, clasificados por grupos musculares
     for ( let i = 0; i < this.musclesToday.length; i++ ) {
