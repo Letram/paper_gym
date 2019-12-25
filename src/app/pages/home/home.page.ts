@@ -36,6 +36,11 @@ export class HomePage implements OnInit {
 
   selectedDay: number = 0;
 
+  musclesToday  : string  [] = [];
+  exercisesToday: any[] = [];
+
+  exerciseIDAboutToRemove: string;
+
   // ─────────────── //
   //     METHODS     //
   // ─────────────── //
@@ -84,14 +89,34 @@ export class HomePage implements OnInit {
     this.router.navigate( ['add'], navigationExtras );
   }
 
-  removeExercise( exerciseID: string ) {
-    this._exerciseService.removeExercise( exerciseID )
-    .then(
-      () => console.log("Exercise removed successfully")
-    )
-    .catch(
-      (error) => console.log(`[REMOVE EXERCISE ERR] => ${error}`)
-    );
+  showConfirmBox( exerciseID: string ) {
+
+    this.exerciseIDAboutToRemove = exerciseID;
+
+    $('.confirm-overlay').animate({
+      zIndex: 200
+    }, 0, function() {
+      $('.confirm-overlay').css('opacity', '1');
+    });
+
+  }
+
+  removeExercise( decision: string ) {
+
+    if ( decision === 'yes' ) {
+      this._exerciseService.removeExercise( this.exerciseIDAboutToRemove )
+      .then(
+        () => {
+          this.getExercisesList();
+          console.log( 'Exercise removed successfully' )
+        }
+      )
+      .catch(
+        ( error ) => console.log(` REMOVE EXERCISE ERR ] => ${ error }` )
+      );
+    }
+
+    this.hideConfirmBox();
   }
 
   changeDay( day: number ) {
@@ -111,6 +136,18 @@ export class HomePage implements OnInit {
     let today = new Date().getDay() -1;
 
     return today === -1 ? 6 : today;
+
+  }
+
+  private hideConfirmBox() {
+
+    this.exerciseIDAboutToRemove = null;
+
+    $('.confirm-overlay').animate({
+      opacity: 0
+    }, 250, function() {
+      $('.confirm-overlay').css('z-index', '-1');
+    });
 
   }
 
@@ -183,9 +220,6 @@ export class HomePage implements OnInit {
 
     return muscles;
   }
-
-  musclesToday  : string  [] = [];
-  exercisesToday: any[] = [];
 
   private getTodayRoutine( today: number = this.today() ) {
     

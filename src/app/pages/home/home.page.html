@@ -23,10 +23,10 @@
               <div class="information">{{ exercise.name }}</div>
             </div>
             <div class="operations">
-              <span class="edit" (tap)="editExercise( exercise )" (press)="showOptions( i )">
+              <span class="edit" (tap)="editExercise( exercise )" (press)="showOptions( muscleToday, i )">
                 <i class="icon fa fa-pencil"></i>
               </span>
-              <span class="delete" (tap)="removeExercise( exercise.id )" (press)="showOptions( i )">
+              <span class="delete" (tap)="showConfirmBox( exercise.id )" (press)="showOptions( muscleToday, i )">
                 <i class="icon fa fa-trash"></i>
               </span>
             </div>
@@ -44,6 +44,19 @@
     <a class="add" [routerLink]="'/add'">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
+
+    <!-- Confirm Box -->
+    <div class="confirm-overlay">
+      <div class="confirm-box">
+        <div class="confirm-message">
+          ¿Are you sure?<br>This action cannot be undone
+        </div>
+        <div class="confirm-buttons">
+          <button class="button" (click)="removeExercise('yes')">Yes</button>
+          <button class="button" (click)="removeExercise('no')">No</button>
+        </div>
+      </div>
+    </div>
 
   </section>
 </ion-content>
