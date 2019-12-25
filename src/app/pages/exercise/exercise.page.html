@@ -49,11 +49,11 @@
       <h2 class="title" *ngIf="exercise.images.length > 0 || exercise.video">Multimedia</h2>
 
       <div class="machine-images" *ngIf="exercise.images.length > 0">
-        <div class="machine-image" *ngFor="let image of exercise.images" [style.backgroundImage]="'url(' + ( image.url ) + ')'"></div>
+        <div #squaredImage class="machine-image" *ngFor="let image of exercise.images" [style.backgroundImage]="'url(' + ( image.url ) + ')'" [ngStyle]="{ 'height.px': squaredImage.offsetWidth }"></div>
       </div>
 
       <div class="video" *ngIf="exercise.video">
-        <iframe width="100%" height="315" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
+        <iframe #youtubeVideo width="100%" [ngStyle]="{ 'height.px': youtubeVideo.offsetWidth / 1.8 }" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
       </div>
 
       <!-- Edit Exercise Button -->
