@@ -127,6 +127,19 @@ export class HomePage implements OnInit {
 
   }
 
+  collapseExercisesList( index: number ) {
+    
+    if ( $( `#title-${ index } .caret` ).hasClass( 'collapsed' )) {
+      $( `#title-${ index } .caret` ).removeClass( 'collapsed' );
+    } else {
+      $( `#title-${ index } .caret` ).addClass( 'collapsed' );
+    }
+
+
+    $( `#exercises-list-${ index }` ).fadeToggle( 250 );
+
+  }
+
   // ──────────────── //
   //     AUXILIAR     //
   // ──────────────── //
@@ -199,6 +212,10 @@ export class HomePage implements OnInit {
     if ( this.musclesToday.find( muscle => muscle === 'all' )) {
       this.exercisesToday[ this.musclesToday.length - 1 ] = todaysExercises.filter( exercise => exercise.muscleGroups.length === 0 );
     }
+
+    console.log( 'Músculos today:', this.musclesToday );
+
+    console.log( 'Ejercicios today:', this.exercisesToday );
 
   }
 

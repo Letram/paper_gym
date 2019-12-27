@@ -13,14 +13,26 @@
     </div>
     
     <!-- List of Exercises -->
-    <div class="exercises" *ngIf=" exercisesToday.length > 0">
+    <div class="routine" *ngIf=" musclesToday.length > 0">
       <ng-container *ngFor="let muscleToday of musclesToday; let j = index">
-        <h2 class="title">{{ muscleToday }}</h2>
-        <ng-container *ngFor="let exercise of exercisesToday[j]; let i = index">
-          <div class="wrapper">
+        
+        <!-- Title -->
+        <h2 [id]="'title-' + j" class="title" (click)="collapseExercisesList( j )">
+          {{ muscleToday }}
+          <i class="caret fa fa-angle-down"></i>
+        </h2>
+
+        <!-- Card -->
+        <div [id]="'exercises-list-' + j" class="exercises-list">
+          <div class="wrapper" *ngFor="let exercise of exercisesToday[j]; let i = index">
             <div [id]="'card' + muscleToday + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( muscleToday, i )">
               <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
-              <div class="information">{{ exercise.name }}</div>
+              <div class="information">
+                {{ exercise.name }}
+              </div>
+              <div class="parameters">
+                {{ exercise.series }}&nbsp;×&nbsp;{{ exercise.reps }}&nbsp;,&nbsp;{{ exercise.weight }}&nbsp;kg
+              </div>
             </div>
             <div class="operations">
               <span class="edit" (tap)="editExercise( exercise )" (press)="showOptions( muscleToday, i )">
@@ -31,12 +43,12 @@
               </span>
             </div>
           </div>
-        </ng-container>
+        </div>
       </ng-container>
     </div>
   
     <!-- Warning when no exercises -->
-    <div class="no-exercises" *ngIf=" exercisesToday.length === 0">
+    <div class="no-routine" *ngIf=" musclesToday.length === 0">
       No exercises available yet...
     </div>
   
