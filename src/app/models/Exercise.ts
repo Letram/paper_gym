@@ -1,29 +1,37 @@
-import { MuscleGroup } from "./MuscleGroup";
 export class Exercise {
-  name: string;
-  description: string;
+
+  // Information
+  id     : string;
+  name   : string;
   machine: string;
-  images: any[];
+  description : string;
   muscleGroups: string[];
-  video: string;
+
   days: boolean[];
-  series: number;
-  reps: number;
+
+  // Multimedia
+  images: any[];
+  video: string;
+
+
+  // Parameters
+  series  : number;
+  reps    : number;
   restTime: number;
-  id:string;
-  weight: number;
+  weight  : number;
+  
   constructor() {
-    this.id="";
-    this.name = "";
-    this.description = "";
-    this.machine = "";
-    this.images = [];
+    this.id           = '';
+    this.name         = '';
+    this.description  = '';
+    this.machine      = '';
     this.muscleGroups = [];
-    this.video = "";
-    this.days = [false, false, false, false, false, false, false];
-    this.series = 0;
-    this.reps = 0;
-    this.restTime = 0;
-    this.weight = 0;
+    this.days         = [ false, false, false, false, false, false, false ];
+    this.images       = [];
+    this.video        = '';
+    // this.series   = 0;
+    // this.reps     = 0;
+    // this.weight   = 0;
+    // this.restTime = 0;
   }
 }
