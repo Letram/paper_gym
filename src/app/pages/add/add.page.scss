@@ -74,7 +74,7 @@ $lightblack: rgb(055,055,055);
     
         &:after {
             content: '';
-            background: rgba(255,255,255,.05);
+            background: rgba(250,240,230,.05);
             position: absolute;
             bottom: 0;
             left: 0;
@@ -86,7 +86,7 @@ $lightblack: rgb(055,055,055);
 
 .days {
     margin-bottom: 35px;
-    padding-left: 25px;
+    padding-left: 15px;
 
     .day {
         margin-bottom: 10px;
@@ -124,14 +124,14 @@ $lightblack: rgb(055,055,055);
         background: $blue;
         background: none;
         padding: 0;
-        width: 49px;
-        height: 49px;
+        width: 57px;
+        height: 57px;
 
         &::after {
             background: none;
-            border-left: 45px solid transparent;
+            border-left: 53px solid transparent;
             border-right: 0 solid transparent;
-            border-bottom: 45px solid rgba(255,255,255,.05);
+            border-bottom: 53px solid rgba(250,240,230,.05);
             width: 0;
             height: 0;
         }
@@ -157,14 +157,14 @@ $lightblack: rgb(055,055,055);
             background: $blue;
             background: none;
             padding: 0;
-            width: 49px;
-            height: 49px;
+            width: 57px;
+            height: 57px;
 
             &::after {
                 background: none;
-                border-left: 45px solid transparent;
+                border-left: 53px solid transparent;
                 border-right: 0 solid transparent;
-                border-bottom: 45px solid rgba(255,255,255,.05);
+                border-bottom: 53px solid rgba(250,240,230,.05);
                 width: 0;
                 height: 0;
             }
@@ -176,13 +176,23 @@ $lightblack: rgb(055,055,055);
 //     IMAGE     //
 // ───────────── //
 
-.add-image {
-    color: color(beige, base);
-    font-size: 25px;
-    background: rgba(250,240,230,.025);
-    border: 1px solid rgba(250,240,230,.35);
-    border-radius: 2px;
-    outline: none;
-    padding: 25px;
-    margin-left: 25px;
+.images {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+
+    .add {
+        color: color(beige, base);
+        font-size: 25px;
+        background: rgba(250,240,230,.05);
+        border: 1px solid rgba(250,240,230,.25);
+        border-radius: 2px;
+        outline: none;
+        padding: 25px;
+        transition: .25s;
+
+        &:active {
+            background: rgba(250,240,230,.25);
+        }
+    }
 }

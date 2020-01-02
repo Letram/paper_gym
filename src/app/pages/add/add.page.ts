@@ -46,15 +46,19 @@ export class AddPage implements OnInit {
 
   constructor( private _router: Router, private _route: ActivatedRoute, private _imagePicker: ImagePicker, private _exerciseService: ExerciseService, private _imageService: ImageServiceService ) {
     this.dayNames    = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
-    this.muscleGroup = '';
     this.newExercise = new Exercise();
+    this.muscleGroup = '';
   }
 
   ngOnInit() {
-    console.log("Add exercise page init...");
+    
+    // console.log("Add exercise page init...");
+    
     this.newExercise = new Exercise();
-    console.log(this.newExercise);
-    console.log({arr: this.newExercise.days, length: this.newExercise.days.length});
+    
+    // console.log(this.newExercise);
+    // console.log({arr: this.newExercise.days, length: this.newExercise.days.length});
+
     this.muscleGroup = "";
     this._exerciseService.getMuscleGroups().subscribe(
       userMuscleGroupsObject => {
@@ -68,11 +72,11 @@ export class AddPage implements OnInit {
       error =>
         console.log(`[ADD PAGE ERR {RETRIEVING USER MUSCLEGROUPS}] => ${error}`)
     );
-    this._route.queryParams.subscribe(_ => {
-      if (
-        this._router.getCurrentNavigation().extras.state &&
-        this._router.getCurrentNavigation().extras.state.edit
-      ) {
+
+    this._route.queryParams.subscribe( _ => {
+      
+      if ( this._router.getCurrentNavigation().extras.state && this._router.getCurrentNavigation().extras.state.edit ) {
+        
         let navigationExercise = this._router.getCurrentNavigation().extras.state.exercise;
 
         this._isEdited = this._router.getCurrentNavigation().extras.state.edit;
@@ -84,6 +88,7 @@ export class AddPage implements OnInit {
         this.imagesPicked = this.newExercise.images;
       }
     });
+
     this._exerciseService.getExercises().subscribe(
       response => {
         this._userExercises = [];
@@ -101,6 +106,42 @@ export class AddPage implements OnInit {
       }
     );
   }
+
+  async onAddExercise() {
+
+    if ( this.checkEmptyFields( this.newExercise.name, '.required', true )) {
+      return;
+    }
+
+    this.disabledButton = true;
+
+    // Creation of a new exercise
+    if ( !this._isEdited ) {
+
+      await this._exerciseService.createExercise( this.newExercise, this._imagesPicked)
+        .then(() => {
+          this.muscleGroup = '';
+          this.newExercise = new Exercise();
+          this._router.navigate([ 'home' ]);
+        });
+
+    // Updating existing exercise
+    } else {
+
+      await this._exerciseService.updateExercise( this.newExercise, this._editingId)
+        .then(() => {
+          this._router.navigate([ 'home' ]);
+        });
+
+    }
+
+    this.disabledButton = false;
+
+  }
+
+  // ──────────────────── //
+  //     MUSCLE GROUP     //
+  // ──────────────────── //
 
   addMuscleGroup() {
 
@@ -137,6 +178,10 @@ export class AddPage implements OnInit {
       )
     }
   }
+
+  // ────────────── //
+  //     IMAGES     //
+  // ────────────── //
 
   //https://stackoverflow.com/questions/55853879/convert-image-uri-to-file-or-blob/55858622#55858622
 
@@ -201,6 +246,17 @@ export class AddPage implements OnInit {
     );
   }
 
+  removeImage(imageIndex) {
+    let imageId = this.newExercise.images[imageIndex].id;
+    this._imageService.removeImage(imageId).then(() => {
+      this.newExercise.images.splice(imageIndex, 1);
+    });
+  }
+
+  imagePicked( event: any ) {
+    this._imagePicked = event.target.files[0];
+  }
+
   private getBlob(
     b64Data: string,
     contentType: string,
@@ -227,50 +283,9 @@ export class AddPage implements OnInit {
     return blob;
   }
 
-  removeImage(imageIndex) {
-    let imageId = this.newExercise.images[imageIndex].id;
-    this._imageService.removeImage(imageId).then(() => {
-      this.newExercise.images.splice(imageIndex, 1);
-    });
-  }
-
-  imagePicked( event: any ) {
-    this._imagePicked = event.target.files[0];
-  }
-
-  async onAddExercise() {
-
-    if ( this.checkEmptyFields( this.newExercise.name, '.required', true ) ) {
-      return;
-    }
-
-    this.disabledButton = true;
-
-    // Creation of a new exercise
-    if ( !this._isEdited ) {
-
-      await this._exerciseService.createExercise(this.newExercise, this._imagesPicked)
-        .then(() => {
-          this.muscleGroup = '';
-          this.newExercise = new Exercise();
-          this._router.navigate([ 'home' ]);
-        });
-
-    // Updating existing exercise
-    } else {
-
-      await this._exerciseService.updateExercise(this.newExercise, this._editingId)
-        .then(() => { this._router.navigate([ 'home' ]); });
-
-    }
-
-    this.disabledButton = false;
-
-  }
-
-  // ──────────────── //
-  //     AUXILIAR     //
-  // ──────────────── //
+  // ─────────────────── //
+  //     VALIDATIONS     //
+  // ─────────────────── //
 
   checkEmptyFields( text: string, selector: string, isSubmit: boolean = false ): boolean {
 

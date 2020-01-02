@@ -22,7 +22,7 @@
       <h2 class="title">Muscle group</h2>
 
       <div class="muscle-group">
-        <input  class="input"  type="text"   [(ngModel)]="muscleGroup" name="muscleGroup" placeholder="Muscle group" autocomplete="off">
+        <input  class="input"  type="text" [(ngModel)]="muscleGroup" name="muscleGroup" placeholder="Muscle group" autocomplete="off">
         <button class="button" type="button" (click)="addMuscleGroup()">
           <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
@@ -37,15 +37,28 @@
         </div>
       </div>
 
+      <!-- ──────────────── -->
+      <!--     PROGRESS     -->
+      <!-- ──────────────── -->
+
+      <h2 class="title">Progress</h2>
+
+      <input class="input" type="number" [(ngModel)]="newExercise.series"   name="series"      placeholder="Series">
+      <input class="input" type="number" [(ngModel)]="newExercise.reps"     name="repetitions" placeholder="Repetitions">
+      <input class="input" type="number" [(ngModel)]="newExercise.weight"   name="weight"      placeholder="Weight (Kg)">
+      <input class="input" type="number" [(ngModel)]="newExercise.restTime" name="rest-time"   placeholder="Rest time (seconds))">
+      
       <!-- ────────────── -->
       <!--     IMAGES     -->
       <!-- ────────────── -->
 
       <h2 class="title">Images</h2>
       
-      <button class="add-image" type="button" (click)="pickImages()">
-        <i class="fa fa-file-image-o" aria-hidden="true"></i>
-      </button>
+      <div class="images">
+        <button class="add" type="button" (click)="pickImages()">
+          <i class="fa fa-file-image-o" aria-hidden="true"></i>
+        </button>
+      </div>
 
       <div class="images" *ngIf="newExercise.images">
         <div class="image" *ngFor="let image of newExercise.images; let imageIndex = index">
@@ -61,7 +74,7 @@
 
       <h2 class="title">Video</h2>
 
-      <input class="input" [(ngModel)]="newExercise.video" name="video" placeholder="Video URL">
+      <input class="input" [(ngModel)]="newExercise.video" name="video" placeholder="YouTube URL">
 
       <!-- ──────────── -->
       <!--     DAYS     -->
