@@ -82,7 +82,7 @@ export class HomePage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: {
         exercise: exerciseToEdit,
-        edit:true
+        edit: true
       }
     };
 
@@ -108,11 +108,10 @@ export class HomePage implements OnInit {
       .then(
         () => {
           this.getExercisesList();
-          console.log( 'Exercise removed successfully' )
         }
       )
       .catch(
-        ( error ) => console.log(` REMOVE EXERCISE ERR ] => ${ error }` )
+        ( error ) => console.log(`[ REMOVE EXERCISE ERROR ] » ${ error }` )
       );
     }
 
@@ -172,6 +171,9 @@ export class HomePage implements OnInit {
 
     let exercise: Exercise;
 
+    // Vaciamos el listado de ejercicios para evitar la aparición de duplicados tras eliminar un ejercicio
+    this.exercises = [];
+
     this._exerciseService.getExercises().subscribe(
       response => {
 
@@ -184,13 +186,12 @@ export class HomePage implements OnInit {
 
         }
 
-        // this.generateSchedule();
         this.getTodayRoutine( this.selectedDay );
 
       }, exception => {
 
         this.exercises = [];
-        console.log(`[ ERROR MESSAGE] » ${ exception }`);
+        console.log(`[ ERROR MESSAGE ] » ${ exception }`);
 
       }
     );
@@ -213,9 +214,8 @@ export class HomePage implements OnInit {
       this.exercisesToday[ this.musclesToday.length - 1 ] = todaysExercises.filter( exercise => exercise.muscleGroups.length === 0 );
     }
 
-    console.log( 'Músculos today:', this.musclesToday );
-
-    console.log( 'Ejercicios today:', this.exercisesToday );
+    console.log( 'Grupos musculares:', this.musclesToday );
+    console.log( 'Listado de ejercicios:', this.exercisesToday );
 
   }
 

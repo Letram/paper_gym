@@ -13,12 +13,11 @@ export class Exercise {
   images: any[];
   video: string;
 
-
   // Parameters
-  series  : number;
-  reps    : number;
-  restTime: number;
-  weight  : number;
+  series  : string;
+  reps    : string;
+  restTime: string;
+  weight  : string;
   
   constructor() {
     this.id           = '';
@@ -29,9 +28,9 @@ export class Exercise {
     this.days         = [ false, false, false, false, false, false, false ];
     this.images       = [];
     this.video        = '';
-    // this.series   = 0;
-    // this.reps     = 0;
-    // this.weight   = 0;
-    // this.restTime = 0;
+    this.series       = '';
+    this.reps         = '';
+    this.weight       = '';
+    this.restTime     = '';
   }
 }
