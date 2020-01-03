@@ -178,7 +178,7 @@ $lightblack: rgb(055,055,055);
 
 .images {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 0 15px;
 
     .add {
@@ -188,11 +188,24 @@ $lightblack: rgb(055,055,055);
         border: 1px solid rgba(250,240,230,.25);
         border-radius: 2px;
         outline: none;
-        padding: 25px;
+        padding: 0;
+        width: 25%;
         transition: .25s;
 
         &:active {
             background: rgba(250,240,230,.25);
+        }
+    }
+
+    .image {
+        background-position: center;;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 25%;
+        margin: 0 5px 15px 0;
+
+        &:last-child {
+            margin-right: 0;
         }
     }
 }
