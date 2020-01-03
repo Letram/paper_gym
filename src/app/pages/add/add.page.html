@@ -83,14 +83,14 @@
       <h2 class="title">Days to be done</h2>
       
       <div class="days" *ngIf="newExercise.days !== undefined">
-        <div class="day" *ngFor="let dayName of dayNames; let i = index">
+        <div class="day" *ngFor="let dayName of dayNames; let i = index" (click)="selectDay(i)">
           <input class="checkbox" type="checkbox" [(ngModel)]="newExercise.days[i]" name="{{ dayNames[i] }}">
           <span class="name">{{ dayNames[i] }}</span>
         </div>
       </div>
 
       <div class="is-relative">
-        <button id="submit_btn" class="button width-100 margin-0" type="submit">Save changes</button>
+        <button id="submit_btn" class="button width-100 margin-0" type="submit" [disabled]="disabledSubmitButton">Save changes</button>
         <span class="error-message">{{ errorMessage }}</span>
       </div>
 

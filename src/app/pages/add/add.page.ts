@@ -31,7 +31,7 @@ export class AddPage implements OnInit {
   public imagesPicked: string[];
   public userMuscleGroups: string[];
 
-  private disabledButton = false;
+  private disabledSubmitButton = false;
 
   private _editingId: string = "";
   private _isEdited: boolean = false;
@@ -118,7 +118,7 @@ export class AddPage implements OnInit {
     }
 
     // Bloqueamos el botón para evitar que el usuario haga clic repetidamente y se inserte más de una vez el mismo ejercicio
-    this.disabledButton = true;
+    this.disabledSubmitButton = true;
 
     // Creation of a new exercise
     if ( !this._isEdited ) {
@@ -141,8 +141,12 @@ export class AddPage implements OnInit {
     }
 
     // Desbloqueamos el botón tras haberse insertado el ejercicio
-    this.disabledButton = false;
+    this.disabledSubmitButton = false;
 
+  }
+
+  selectDay( day: number ) {
+    this.newExercise.days[ day ] = !this.newExercise.days[ day ];
   }
 
   // ──────────────────── //
