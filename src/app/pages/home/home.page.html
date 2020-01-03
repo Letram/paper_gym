@@ -30,7 +30,7 @@
               <div class="information">
                 {{ exercise.name }}
               </div>
-              <div class="parameters">
+              <div class="parameters" *ngIf="exercise.series != 0 || exercise.reps != 0 || exercise.weight != 0">
                 {{ exercise.series }}&nbsp;×&nbsp;{{ exercise.reps }}&nbsp;,&nbsp;{{ exercise.weight }}&nbsp;kg
               </div>
             </div>
