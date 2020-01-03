@@ -67,7 +67,7 @@ export class AddPage implements OnInit {
             this.userMuscleGroups = userMuscleGroupsObject.MUSCLEGROUPS;
           }
         }
-        console.log(this.userMuscleGroups);
+        // console.log(this.userMuscleGroups);
       },
       error =>
         console.log(`[ADD PAGE ERR {RETRIEVING USER MUSCLEGROUPS}] => ${error}`)
@@ -95,14 +95,18 @@ export class AddPage implements OnInit {
         for (let i = 0; i < response.length; i++) {
           let exerciseAux = response[i].payload.doc.data();
           exerciseAux.id = response[i].payload.doc.id;
-          console.log({ exerciseAux, id: response[i].payload.doc.id });
+          // console.log({ exerciseAux, id: response[i].payload.doc.id });
           this._userExercises.push(exerciseAux);
         }
-        console.log(this._userExercises);
-        if (!response) console.log("No exercises available yet...");
+        // console.log(this._userExercises);
+        if ( !response ) {
+          console.log("No exercises available yet...");
+        }
+
+        // console.log( this._userExercises );
       },
       error => {
-        console.log(`[ADD PAGE ERR] => ${error}`);
+        console.log(`[ ADD PAGE ERROR ] » ${ error }`);
       }
     );
   }
@@ -113,6 +117,7 @@ export class AddPage implements OnInit {
       return;
     }
 
+    // Bloqueamos el botón para evitar que el usuario haga clic repetidamente y se inserte más de una vez el mismo ejercicio
     this.disabledButton = true;
 
     // Creation of a new exercise
@@ -128,13 +133,14 @@ export class AddPage implements OnInit {
     // Updating existing exercise
     } else {
 
-      await this._exerciseService.updateExercise( this.newExercise, this._editingId)
+      await this._exerciseService.updateExercise( this.newExercise, this._editingId )
         .then(() => {
           this._router.navigate([ 'home' ]);
         });
 
     }
 
+    // Desbloqueamos el botón tras haberse insertado el ejercicio
     this.disabledButton = false;
 
   }
@@ -145,12 +151,13 @@ export class AddPage implements OnInit {
 
   addMuscleGroup() {
 
-    if ( this.checkEmptyFields( this.muscleGroup, '.muscle-group .input' ) ) {
+    if ( this.checkEmptyFields( this.muscleGroup, '.muscle-group .input' )) {
       return;
     }
 
     this.newExercise.muscleGroups.push( this.muscleGroup );
 
+    // ¿?
     if ( this.userMuscleGroups && this.userMuscleGroups.indexOf( this.muscleGroup ) === -1 ) {
       this.userMuscleGroups.push( this.muscleGroup );
       this._exerciseService.updateMuscleGroup( this.userMuscleGroups );
@@ -161,21 +168,15 @@ export class AddPage implements OnInit {
 
   }
 
-  removeMuscleGroup(muscleGroupToRemove: string): void {
-    this.newExercise.muscleGroups.splice(
-      this.newExercise.muscleGroups.findIndex(
-        exerciseMuscleGroup => exerciseMuscleGroup == muscleGroupToRemove
-      ),
-      1
-    );
-    if (
-      this._userExercises.filter(userExercise => userExercise.muscleGroups.indexOf(muscleGroupToRemove) !== -1).length <= 1
-    ){
-      this.userMuscleGroups.splice(this.userMuscleGroups.indexOf(muscleGroupToRemove),1);
-      this._exerciseService.updateMuscleGroup(this.userMuscleGroups);
-    } else {
-      console.log(this._userExercises.filter(userExercise => userExercise.muscleGroups.indexOf(muscleGroupToRemove) !== -1)
-      )
+  removeMuscleGroup( muscleGroupToRemove: string ): void {
+
+    // Eliminamos el grupo muscular
+    this.newExercise.muscleGroups.splice( this.newExercise.muscleGroups.findIndex( exerciseMuscleGroup => exerciseMuscleGroup == muscleGroupToRemove ), 1 );
+
+    // ¿?
+    if ( this._userExercises.filter( userExercise => userExercise.muscleGroups.indexOf( muscleGroupToRemove ) !== -1 ).length <= 1 ) {
+      this.userMuscleGroups.splice( this.userMuscleGroups.indexOf( muscleGroupToRemove ), 1);
+      this._exerciseService.updateMuscleGroup( this.userMuscleGroups );
     }
   }
 
