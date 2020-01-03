@@ -27,11 +27,6 @@ $lightblack: rgb(055,055,055);
         padding: 15px;
         opacity: .75;
 
-        // &.first {
-        //     border-top: none;;
-        //     padding-top: 0;
-        // }
-
         &.separate {
             display: flex;
             justify-content: space-between;
@@ -50,7 +45,7 @@ $lightblack: rgb(055,055,055);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: color(beige, base);
     font-size: 20px;
     font-weight: 900;
     text-decoration: none;
@@ -60,6 +55,7 @@ $lightblack: rgb(055,055,055);
     position: fixed;
     right: 25px;
     bottom: 25px;
+    z-index: 100;
     width: 55px;
     height: 55px;
 }
@@ -105,5 +101,45 @@ $lightblack: rgb(055,055,055);
     .image {
         border-radius: 2px;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
+    }
+}
+
+// Timer
+
+.timer {
+
+    .time-left {
+        color: color(beige, base);
+        font-size: 100px;
+        font-weight: lighter;
+        text-align: center;
+        margin: 0 auto 25px;
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 50px;
+    
+        .control {
+            color: color(beige, base);
+            background: $blue;
+            box-shadow: 0 0 0 4px rgb(055,055,055), 0 0 0 15px rgba(35,110,150,.5);
+            border-radius: 50%;
+            outline: none;
+            margin-right: 35px;
+            width: 42px;
+            height: 42px;
+            transition: .25s ease-out;
+    
+            &.clicked {
+                box-shadow: inset 4px 4px 8px $lightblack, 0 0 0 4px rgb(055,055,055), 0 0 0 15px rgba(35,110,150,.5);
+            }
+
+            &:last-child {
+                margin: 0;
+            }
+        }
     }
 }

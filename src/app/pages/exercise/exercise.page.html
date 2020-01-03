@@ -3,6 +3,11 @@
 
     <app-navbar [returnButton]="true"></app-navbar>
 
+    <!-- Edit Exercise Button -->
+    <a class="edit" (click)="editExercise()">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+    </a>
+
     <div class="form">
 
       <h2 class="title margin-top-0">Information</h2>
@@ -23,7 +28,11 @@
         <ng-container *ngFor="let muscleGroup of exercise.muscleGroups; let i = index">
           {{ muscleGroup }}{{ i == exercise.muscleGroups.length - 1 ? '' : ', ' }}
         </ng-container>
-      </div>      
+      </div>
+
+      <!-- ──────────────── -->
+      <!--     PROGRESS     -->
+      <!-- ──────────────── -->
 
       <h2 class="title" *ngIf="exercise.series != '' || exercise.reps != '' || exercise.weight != '' || exercise.restTime != ''">Progress</h2>
 
@@ -47,6 +56,34 @@
         <span>{{ exercise.restTime }}&nbsp;seconds</span>
       </div>
 
+      <!-- ───────────── -->
+      <!--     TIMER     -->
+      <!-- ───────────── -->
+
+      <div class="timer" *ngIf="exercise.restTime != ''">
+
+        <h2 class="title" *ngIf="exercise.restTime != ''">Timer</h2>
+
+        <div class="time-left">{{ timeLeft }}</div>
+  
+        <div class="controls">
+          <button class="control play" (click)='startTimer( exercise.restTime )'>
+            <i class="fa fa-play" aria-hidden="true"></i>
+          </button>
+          <button class="control pause" (click)='pauseTimer()'>
+            <i class="fa fa-pause" aria-hidden="true"></i>
+          </button>
+          <button class="control stop" (click)='stopTimer()'>
+            <i class="fa fa-stop" aria-hidden="true"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ────────────────── -->
+      <!--     MULTIMEDIA     -->
+      <!-- ────────────────── -->
+
       <h2 class="title" *ngIf="exercise.images.length > 0 || exercise.video">Multimedia</h2>
 
       <div class="machine-images" *ngIf="exercise.images.length > 0">
@@ -57,12 +94,6 @@
         <iframe #youtubeVideo width="100%" [ngStyle]="{ 'height.px': youtubeVideo.offsetWidth / 1.8 }" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
       </div>
 
-      <!-- Edit Exercise Button -->
-      <a class="edit" (click)="editExercise()">
-        <i class="fa fa-pencil" aria-hidden="true"></i>
-      </a>
-
-      <!--  -->
       <div class="zoomed-image" (click)="closeZoomedImage()">
         <img class="image" alt="Zoomed Image">
       </div>
