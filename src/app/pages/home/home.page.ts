@@ -145,7 +145,7 @@ export class HomePage implements OnInit {
 
   private today() {
 
-    let today = new Date().getDay() -1;
+    let today = new Date().getDay() - 1;
 
     return today === -1 ? 6 : today;
 
@@ -171,11 +171,11 @@ export class HomePage implements OnInit {
 
     let exercise: Exercise;
 
-    // Vaciamos el listado de ejercicios para evitar la aparición de duplicados tras eliminar un ejercicio
-    this.exercises = [];
-
     this._exerciseService.getExercises().subscribe(
       response => {
+
+        // Vaciamos el listado de ejercicios para evitar la aparición de duplicados tras eliminar un ejercicio (no cambies esta instrucción de sitio, debe estar dentro de la promesa para surtir efecto)
+        this.exercises = [];
 
         for( let i = 0; i < response.length; i++ ) {
 
@@ -202,9 +202,10 @@ export class HomePage implements OnInit {
     // Almacenamos los grupos musculares asignados al día seleccionado
     this.musclesToday = this.getMusclesFromSpecificDay( today );
 
+    // Almacenamos los ejercicios asignados al día seleccionado
     let todaysExercises = today === 7 ? this.exercises : this.exercises.filter( exercise => exercise.days[today] );
 
-    // Almacenamos los ejercicios correspondientes al día seleccionado, clasificados por grupos musculares
+    // Agrupamos dichos ejercicios por grupos musculares
     for ( let i = 0; i < this.musclesToday.length; i++ ) {
       this.exercisesToday[i] = todaysExercises.filter( exercise => exercise.muscleGroups.find( muscle => muscle === this.musclesToday[i] ));
     }
@@ -214,8 +215,8 @@ export class HomePage implements OnInit {
       this.exercisesToday[ this.musclesToday.length - 1 ] = todaysExercises.filter( exercise => exercise.muscleGroups.length === 0 );
     }
 
-    console.log( 'Grupos musculares:', this.musclesToday );
-    console.log( 'Listado de ejercicios:', this.exercisesToday );
+    // console.log( 'Grupos musculares:', this.musclesToday );
+    // console.log( 'Listado de ejercicios:', this.exercisesToday );
 
   }
 
