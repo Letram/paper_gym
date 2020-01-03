@@ -25,26 +25,26 @@
         </ng-container>
       </div>      
 
-      <h2 class="title">Progress</h2>
+      <h2 class="title" *ngIf="exercise.series != '' || exercise.reps != '' || exercise.weight != '' || exercise.restTime != ''">Progress</h2>
 
-      <div class="item separate first">
-        <span>Número de series</span>
+      <div class="item separate first" *ngIf="exercise.series != ''">
+        <span>Number of series</span>
         <span>{{ exercise.series }}</span>
       </div>
 
-      <div class="item separate">
-        <span>Número de repeticiones</span>
+      <div class="item separate" *ngIf="exercise.reps != ''">
+        <span>Number of repetitions</span>
         <span>{{ exercise.reps }}</span>
       </div>
 
-      <div class="item separate">
-        <span>Peso</span>
-        <span>{{ exercise.weight }}&nbsp;K</span>
+      <div class="item separate" *ngIf="exercise.weight != ''">
+        <span>Weight</span>
+        <span>{{ exercise.weight }}&nbsp;Kg</span>
       </div>
 
-      <div class="item separate">
-        <span>Tiempo de descanso</span>
-        <span>{{ exercise.restTime }&nbsp;s</span>
+      <div class="item separate" *ngIf="exercise.restTime != ''">
+        <span>Rest time</span>
+        <span>{{ exercise.restTime }}&nbsp;seconds</span>
       </div>
 
       <h2 class="title" *ngIf="exercise.images.length > 0 || exercise.video">Multimedia</h2>
