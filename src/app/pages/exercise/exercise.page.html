@@ -20,18 +20,14 @@
       </div>
 
       <div class="item" *ngIf="exercise.muscleGroups">
-        <ng-container *ngFor="let mg of exercise.muscleGroups">
-          {{ mg }},&nbsp;
+        <ng-container *ngFor="let muscleGroup of exercise.muscleGroups; let i = index">
+          {{ muscleGroup }}{{ i == exercise.muscleGroups.length - 1 ? '' : ', ' }}
         </ng-container>
       </div>      
 
       <h2 class="title">Progress</h2>
 
       <div class="item separate first">
-        <span>Peso</span>
-      </div>
-
-      <div class="item separate">
         <span>Número de series</span>
         <span>{{ exercise.series }}</span>
       </div>
@@ -42,8 +38,13 @@
       </div>
 
       <div class="item separate">
+        <span>Peso</span>
+        <span>{{ exercise.weight }}&nbsp;K</span>
+      </div>
+
+      <div class="item separate">
         <span>Tiempo de descanso</span>
-        <span>{{ exercise.restTime }}</span>
+        <span>{{ exercise.restTime }&nbsp;s</span>
       </div>
 
       <h2 class="title" *ngIf="exercise.images.length > 0 || exercise.video">Multimedia</h2>
