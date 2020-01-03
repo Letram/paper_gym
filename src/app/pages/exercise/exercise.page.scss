@@ -27,16 +27,21 @@ $lightblack: rgb(055,055,055);
         padding: 15px;
         opacity: .75;
 
-        &.first {
-            border-top: none;;
-            padding-top: 0;
-        }
+        // &.first {
+        //     border-top: none;;
+        //     padding-top: 0;
+        // }
 
         &.separate {
             display: flex;
             justify-content: space-between;
         }
     }
+}
+
+.title + .item {
+    border-top: none;;
+    padding-top: 0;
 }
 
 // Edit excersice

@@ -7,7 +7,7 @@
 
       <h2 class="title margin-top-0">Information</h2>
 
-      <div class="item first" *ngIf="exercise.name">
+      <div class="item" *ngIf="exercise.name">
         {{ exercise.name }}
       </div>
 
@@ -19,7 +19,7 @@
         {{ exercise.description }}
       </div>
 
-      <div class="item" *ngIf="exercise.muscleGroups">
+      <div class="item" *ngIf="exercise.muscleGroups.length > 0">
         <ng-container *ngFor="let muscleGroup of exercise.muscleGroups; let i = index">
           {{ muscleGroup }}{{ i == exercise.muscleGroups.length - 1 ? '' : ', ' }}
         </ng-container>
@@ -27,7 +27,7 @@
 
       <h2 class="title" *ngIf="exercise.series != '' || exercise.reps != '' || exercise.weight != '' || exercise.restTime != ''">Progress</h2>
 
-      <div class="item separate first" *ngIf="exercise.series != ''">
+      <div class="item separate" *ngIf="exercise.series != ''">
         <span>Number of series</span>
         <span>{{ exercise.series }}</span>
       </div>
