@@ -185,25 +185,9 @@ export class HomePage implements OnInit {
           this.exercises.push( exercise );
 
         }
-        let exercisesByDays = [];
-        for (var i = 0; i <= 7; i++){
-          let exercisesOfDay: any = {};
-          exercisesOfDay.day = this.days[i];
-          exercisesOfDay.exercises = this.getTodayRoutine_2( i );
-          exercisesByDays.push(exercisesOfDay);
-        }
-        console.log({exercisesByDays, exercises: this.exercises});
-        
+
         this.getTodayRoutine( this.selectedDay );
-        let aux = this.getTodayRoutine_2( this.selectedDay );
-
-        console.log({
-          todayRoutine: this.exercisesToday,
-          todayRoutine_2: aux 
-        })
-
-        console.log(this.getMusclesFromDay( this.selectedDay ));
-        
+        this.getTodayRoutine_2( this.selectedDay );
       }, exception => {
 
         this.exercises = [];
@@ -215,19 +199,16 @@ export class HomePage implements OnInit {
 
   private getTodayRoutine_2( today: number = this.today()){
     // Almacenamos los grupos musculares asignados al día seleccionado
-    this.musclesToday = this.getMusclesFromDay( today );
+    this.musclesToday = this.getMusclesFromSpecificDay( today );
 
     // Almacenamos los ejercicios asignados al día seleccionado
     let todaysExercises = today === 7 ? this.exercises : this.exercises.filter( exercise => exercise.days[today] );
-    let exercisesByMuscles = [];
+    let exercisesByMuscles = {};
 
-    this.musclesToday.forEach( function(muscleGroup, index){
-      exercisesByMuscles[index] = {};
-      if(muscleGroup === "all") exercisesByMuscles[index].exercises = todaysExercises.filter(exercise => exercise.muscleGroups.length === 0);
-      else exercisesByMuscles[index].exercises = todaysExercises.filter(exercise => exercise.muscleGroups.includes(muscleGroup));
-      exercisesByMuscles[index].muscleGroupName = muscleGroup;
+    this.musclesToday.forEach( function(muscleGroup){
+      if(muscleGroup === "all") exercisesByMuscles[muscleGroup] = todaysExercises.filter(exercise => exercise.muscleGroups.length === 0);
+      else exercisesByMuscles[muscleGroup] = todaysExercises.filter(exercise => exercise.muscleGroups.includes(muscleGroup));
     });
-    console.log(exercisesByMuscles);
     return exercisesByMuscles;
   }
   private getTodayRoutine( today: number = this.today() ) {
@@ -251,17 +232,6 @@ export class HomePage implements OnInit {
     // console.log( 'Grupos musculares:', this.musclesToday );
     // console.log( 'Listado de ejercicios:', this.exercisesToday );
 
-  }
-
-  private getMusclesFromDay( day: number ){
-
-    let todaysExercises = this.getExercisesFromSpecificDay( day );
-    let exerciseMuscles = todaysExercises.map(exercise => exercise.muscleGroups);
-    let distinctExercises = [... new Set([].concat(... exerciseMuscles))];
-
-    if(todaysExercises.find(exercise => exercise.muscleGroups.length === 0))
-    distinctExercises.push("all");
-    return distinctExercises;
   }
 
   private getMusclesFromSpecificDay( day: number ) {

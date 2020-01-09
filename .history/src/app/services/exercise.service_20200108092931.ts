@@ -42,7 +42,7 @@ export class ExerciseService {
       .snapshotChanges();
   }
 
-  getExercisesOfDay(index: number): Promise<any>{
+  getExercisesOfDay(index: number){
     let currentUser = this._authService.getUserStored();
     var exerciseRef = this._afs
     .collection("USERS")

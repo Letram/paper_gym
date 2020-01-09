@@ -219,13 +219,13 @@ export class HomePage implements OnInit {
 
     // Almacenamos los ejercicios asignados al día seleccionado
     let todaysExercises = today === 7 ? this.exercises : this.exercises.filter( exercise => exercise.days[today] );
-    let exercisesByMuscles = [];
+    let exercisesByMuscles = {};
 
-    this.musclesToday.forEach( function(muscleGroup, index){
-      exercisesByMuscles[index] = {};
-      if(muscleGroup === "all") exercisesByMuscles[index].exercises = todaysExercises.filter(exercise => exercise.muscleGroups.length === 0);
-      else exercisesByMuscles[index].exercises = todaysExercises.filter(exercise => exercise.muscleGroups.includes(muscleGroup));
-      exercisesByMuscles[index].muscleGroupName = muscleGroup;
+    this.musclesToday.forEach( function(muscleGroup){
+      exercisesByMuscles[muscleGroup] = {};
+      if(muscleGroup === "all") exercisesByMuscles[muscleGroup].exercises = todaysExercises.filter(exercise => exercise.muscleGroups.length === 0);
+      else exercisesByMuscles[muscleGroup].exercises = todaysExercises.filter(exercise => exercise.muscleGroups.includes(muscleGroup));
+      exercisesByMuscles[muscleGroup].muscleGroupName = muscleGroup;
     });
     console.log(exercisesByMuscles);
     return exercisesByMuscles;
