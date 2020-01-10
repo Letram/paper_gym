@@ -56,7 +56,7 @@
       
       <div class="images">
         <ng-container *ngIf="imagesPickedAux.length > 0">
-          <div #squaredImage class="image" *ngFor="let image of imagesPickedAux; let imageIndex = index" (click)="removeImage(imageIndex)" [style.backgroundImage]="'url(' + ( image.url ) + ')'" [ngStyle]="{ 'height.px': squaredImage.offsetWidth }"></div>
+          <div #squaredImage class="image" *ngFor="let image of imagesPickedAux.images; let imageIndex = index" (click)="removeImage(imageIndex)" [style.backgroundImage]="'url(' + ( image.url ) + ')'" [ngStyle]="{ 'height.px': squaredImage.offsetWidth }"></div>
         </ng-container>
         <ng-container *ngIf="imagesPickedAux.length < 4">
           <button #squaredButton class="add" type="button" (click)="pickImages()" [ngStyle]="{ 'height.px': squaredButton.offsetWidth }">

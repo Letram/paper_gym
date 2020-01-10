@@ -186,16 +186,14 @@ export class HomePage implements OnInit {
           this.exercises.push( exercise );
 
         }
-        /* 
         for (var i = 0; i <= 7; i++){
           let exercisesOfDay: any = {};
           exercisesOfDay.day = this.days[i];
           exercisesOfDay.exercises = this.getTodayRoutine_2( i );
           this.exerciseByDays.push(exercisesOfDay);
         }
-        console.log({exerciseByDays: this.exerciseByDays, exercises: this.exercises}); 
-        */
-        this.getTodayRoutine( this.selectedDay )
+        console.log({exerciseByDays: this.exerciseByDays, exercises: this.exercises});
+        
       }, exception => {
 
         this.exercises = [];
@@ -219,6 +217,7 @@ export class HomePage implements OnInit {
       else exercisesByMuscles[index].exercises = todaysExercises.filter(exercise => exercise.muscleGroups.includes(muscleGroup));
       exercisesByMuscles[index].muscleGroupName = muscleGroup;
     });
+    console.log(exercisesByMuscles);
     return exercisesByMuscles;
   }
 

@@ -55,10 +55,10 @@
       <h2 class="title">Images</h2>
       
       <div class="images">
-        <ng-container *ngIf="imagesPickedAux.length > 0">
-          <div #squaredImage class="image" *ngFor="let image of imagesPickedAux; let imageIndex = index" (click)="removeImage(imageIndex)" [style.backgroundImage]="'url(' + ( image.url ) + ')'" [ngStyle]="{ 'height.px': squaredImage.offsetWidth }"></div>
+        <ng-container *ngIf="newExercise.images.length > 0">
+          <div #squaredImage class="image" *ngFor="let image of newExercise.images; let imageIndex = index" (click)="removeImage(imageIndex)" [style.backgroundImage]="'url(' + ( image.url ) + ')'" [ngStyle]="{ 'height.px': squaredImage.offsetWidth }"></div>
         </ng-container>
-        <ng-container *ngIf="imagesPickedAux.length < 4">
+        <ng-container *ngIf="newExercise.images.length < 4">
           <button #squaredButton class="add" type="button" (click)="pickImages()" [ngStyle]="{ 'height.px': squaredButton.offsetWidth }">
             <i class="fa fa-file-image-o" aria-hidden="true"></i>
           </button>

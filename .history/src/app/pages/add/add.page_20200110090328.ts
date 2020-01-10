@@ -139,7 +139,6 @@ export class AddPage implements OnInit {
         if(!this.imagesPickedAux.find(image => image.id == element.id))
           this._imageService.removeImage(element.id).then();
       });
-      this.newExercise.images = [... this.imagesPickedAux];
       await this._exerciseService.updateExercise( this.newExercise, this._editingId )
         .then(() => {
           this._router.navigate([ 'home' ]);
@@ -265,7 +264,6 @@ export class AddPage implements OnInit {
 
   removeImage(imageIndex) {
     this.imagesPickedAux.splice(imageIndex, 1);
-    console.log(this.imagesPickedAux);
     /*
     let imageId = this.newExercise.images[imageIndex].id;
     this._imageService.removeImage(imageId).then(() => {

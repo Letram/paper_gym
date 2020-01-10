@@ -186,16 +186,13 @@ export class HomePage implements OnInit {
           this.exercises.push( exercise );
 
         }
-        /* 
         for (var i = 0; i <= 7; i++){
           let exercisesOfDay: any = {};
           exercisesOfDay.day = this.days[i];
           exercisesOfDay.exercises = this.getTodayRoutine_2( i );
           this.exerciseByDays.push(exercisesOfDay);
         }
-        console.log({exerciseByDays: this.exerciseByDays, exercises: this.exercises}); 
-        */
-        this.getTodayRoutine( this.selectedDay )
+        console.log({exerciseByDays: this.exerciseByDays, exercises: this.exercises});
       }, exception => {
 
         this.exercises = [];

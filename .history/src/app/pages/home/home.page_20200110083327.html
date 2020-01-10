@@ -1,0 +1,74 @@
+<ion-content>
+  <section class="dark-bg">
+
+    <app-navbar></app-navbar>
+
+    <!-- Days Selector -->
+    <div class="tabs">
+      <ion-slides class="days" [options]="configuracion">
+        <ion-slide class="day" *ngFor="let day of days; let i = index" [ngClass]="{ 'active' : i == selectedDay }" (click)="changeDay( i )">
+          {{ day }}
+        </ion-slide>
+      </ion-slides>
+    </div>
+    
+    <!-- List of Exercises -->
+    <div class="routine" *ngIf=" musclesToday.length > 0">
+      <ng-container *ngFor="let muscleToday of musclesToday; let j = index">
+        
+        <!-- Title -->
+        <h2 [id]="'title-' + j" class="title" (click)="collapseExercisesList( j )">
+          {{ muscleToday }}
+          <i class="caret fa fa-angle-down"></i>
+        </h2>
+
+        <!-- Card -->
+        <div [id]="'exercises-list-' + j" class="exercises-list">
+          <div class="wrapper" *ngFor="let exercise of exercisesToday[j]; let i = index">
+            <div [id]="'card' + muscleToday + i" class="card" (tap)="openExercise( exercise )" (press)="showOptions( muscleToday, i )">
+              <div class="thumbnail" [style.backgroundImage]="'url(' + ( exercise.images | defaultImage ) + ')'"></div>
+              <div class="information">
+                {{ exercise.name }}
+              </div>
+              <div class="parameters" *ngIf="exercise.series > 0 || exercise.reps > 0 || exercise.weight > 0">
+                {{ exercise.series }}&nbsp;×&nbsp;{{ exercise.reps }}&nbsp;,&nbsp;{{ exercise.weight }}&nbsp;kg
+              </div>
+            </div>
+            <div class="operations">
+              <span class="edit" (tap)="editExercise( exercise )" (press)="showOptions( muscleToday, i )">
+                <i class="icon fa fa-pencil"></i>
+              </span>
+              <span class="delete" (tap)="showConfirmBox( exercise.id )" (press)="showOptions( muscleToday, i )">
+                <i class="icon fa fa-trash"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  
+    <!-- Warning when no exercises -->
+    <div class="no-routine" *ngIf=" musclesToday.length === 0">
+      No exercises available yet...
+    </div>
+  
+    <!-- Add Exercise Button -->
+    <a class="add" [routerLink]="'/add'">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+
+    <!-- Confirm Box -->
+    <div class="confirm-overlay">
+      <div class="confirm-box">
+        <div class="confirm-message">
+          ¿Are you sure?<br>This action cannot be undone
+        </div>
+        <div class="confirm-buttons">
+          <button class="button" (click)="removeExercise('yes')">Yes</button>
+          <button class="button" (click)="removeExercise('no')">No</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</ion-content>
