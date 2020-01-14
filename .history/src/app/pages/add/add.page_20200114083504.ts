@@ -33,7 +33,7 @@ export class AddPage implements OnInit {
   
   public dayNames: string[];
   public imagesPicked: string[];
-  public imagesPickedAux: any[] = [];
+  public imagesPickedAux: any = [];
   public userMuscleGroups: string[];
 
   private disabledSubmitButton = false;
@@ -285,7 +285,6 @@ export class AddPage implements OnInit {
     // Prevent the user to upload the same exercise more than one time disabling the button
     $("#submit_btn").attr("disabled", true);
 
-    this._imagePickerOptions = this.getImagePickerOptions();
     // Step 1.
     this._imagePicker.getPictures(this._imagePickerOptions).then(
       results => {
@@ -293,7 +292,6 @@ export class AddPage implements OnInit {
           //this.imagesPicked.push(`data:image/jpeg;base64,${results[i]}`);
 
           // Step 2.
-          
           let blob: Blob;
           try{
             blob = this.getBlob(results[i], ".jpg");
@@ -338,23 +336,6 @@ export class AddPage implements OnInit {
       this.newExercise.images.splice(imageIndex, 1);
     });
     */
-  }
-
-  private getImagePickerOptions() : ImagePickerOptions{
-    let imagesLeft = 4- this.imagesPickedAux.length
-    return {
-        //only works on android => maximum pictures to be picked
-        maximumImagesCount: imagesLeft,
-        //maximum width of the image. this will keep aspect-ratio no matter what
-        width: 300,
-        // quality of resized image, defaults to 100
-        quality: 50,
-        // output type, defaults to FILE_URIs.
-        // available options are
-        // window.imagePicker.OutputType.FILE_URI (0) or
-        // window.imagePicker.OutputType.BASE64_STRING (1)
-        outputType: 1
-      }
   }
 
   imagePicked( event: any ) {

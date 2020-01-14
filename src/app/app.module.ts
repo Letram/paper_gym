@@ -18,6 +18,9 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 // Image Picker
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 
+// Camera
+import { Camera } from "@ionic-native/camera/ngx"
+
 // Gesture config
 import { LongPressModule    } from "ionic-long-press";
 import { IonicGestureConfig } from "./utils/IonicGestureConfig";
@@ -42,6 +45,7 @@ import { IonicGestureConfig } from "./utils/IonicGestureConfig";
     StatusBar,
     ImagePicker,
     SplashScreen,
+    Camera,
     { provide: RouteReuseStrategy,    useClass: IonicRouteStrategy },
     { provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig }
   ],
